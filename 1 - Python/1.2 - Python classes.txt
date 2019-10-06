@@ -1,0 +1,65 @@
+Explanationa bout classes:
+https://www.youtube.com/watch?v=ZDa-Z5JzLYM
+
+Defining a class
+	class NameClass:
+					->  Defines the class 'NameClass' (Note: add 'pass' if we want
+						to define the methods later on)
+		def __init__(self, first, second,...)
+					->  'initializes' the Class with the instance variables 
+						'first', 'second', etc, specified in the input. By 
+						convention, 'self' is the instance itself. The args added
+						in the __init__ are the ones required for the class to
+						initialize
+					->  setting one instance equal to something in the argument
+						sets the default for it.
+						ex: __init__(self,first = None, second = 0) sets the
+						first argument equal to None by default, and the second
+						equal to zero.
+			self.method1 = first * second
+					->  defines the method1 as the multiplication of the 
+						two parameters added
+			name1.NameClass(first1, second1, ...)
+					->  creates an instance 'name1' of the class 'NameClass'
+		def function(self):
+			return function(self, first.method1,...)
+					->  creates function using the methods (if required)
+					->  name1.function(): calls the function on instance 'name1'
+Class inheritance
+	class SecondClass(NameClass):
+		-> creates a SecondClass with the same attributes as the NameClass defined earlier
+		   SecondClass inherits the definitions of NameClass
+	super().__init__(first, third)
+		-> inherits the same attributes 'first', 'third' defined in the parent class NameClass
+
+
+GENERATORS: objects used to compute iterations without having to store the whole data
+			in the memory. Generators will compute and keep in memory one iteration 
+			at a time. Each iteration will be called using the function next()
+	Defining: generators are defined using 'yield'
+		def square_generator(list):
+			for i in list:
+				yield (i*i)
+		gener = square_generator(numbers)
+			-> creates a generator that iterates through the list 'numbers', but gives
+			   one element at a time
+		
+		gener = (i*i for i in numbers)
+			-> does the same thing as creating the for loop with the yield: creates a
+			   generator that iterates through the list 'numbers', but gives one element
+			   at a time 
+			-> list = [i*i for i in numbers] creates a list
+
+	Computing numbers
+		result_iter = square_generator([1,2,3,4,5])
+			-> creates a generator object with the data specified
+		next(result_iter)
+			-> returns one iteration (starts from the beginning)
+			-> each time the next() function is called, a further iteration is
+			   computed and returned
+	
+Functions
+	isinstance(Class1, inst)
+		-> returns True if inst is an instance of Class1
+	issubclass(Class1, Class2)
+		-> returns True if Class2 is a subclass of (created based on) Class1

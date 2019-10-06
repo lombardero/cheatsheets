@@ -1,0 +1,125 @@
+	->>>  MATPLOTLIB LIBRARY  <<<-
+
+Check out: https://matplotlib.org/gallery/
+https://github.com/rougier/matplotlib-cheatsheet
+
+For more info: 
+
+import matplotlib.pyplot as plt
+%matplotlib inline (this line of code allows to see the plots in the Jupyter Notebook)
+
+Plotting
+	General
+		Plots are created defining the elements in different lines
+		plt.show(): Plots the graph. Needs to be put at the end of any plot defined to
+					make the program show it
+	Functional plotting
+		plt.plot(xf,yf): creates a 2D plot, where xf and yf are arrays the same size,
+						 other arguments can be added to modify color and line type
+		df['colnum'].plot(): creates a linear 2D plot of the column 'colnum' of dataframe df.
+							 -arguments accepted inside plot():
+							 	· figsize = (a,b): sets the figure size
+							 	· label = 'name' (or list of 'names') sets the label name for
+							 	  each figure in the legent
+		plt.subplot(r,c,plot no): allows to create a matrix of plots with r rows and c
+								  columns of subplots. Each subplot is defined after 
+								  stating each number.
+								  ex: plt.subplot(1,2,1)
+								      plt.plot(x1,y1)
+									  plt.subplot(1,2,2)
+									  plt.plot(x2,y2)
+		plt.xlabel('X name'): adds the label "X name" to the x axis
+		plt.ylabel('Y name'): adds the label "Y name" to the y axis
+		plt.title('Title'): adds the title "Title"
+
+	Object oriented plotting (more useful)
+				We create "figure" objects that are like "white canvases" that will be filled
+			    with as many plots as we want.
+		Defining parameters
+			fig = plt.figure(): creates a blank figure object named "fig"
+				fig = plt.figure(figsize=(w,h)): Specifies the width w and height h of the 
+												 figure
+			axes = fig.add_axes([xs,ys,xe,ye]): creates a new figure element 'axes' based on
+											    'fig', adding a set of axes, starting 
+												from xs to xe in the x axis and ys to ye
+												in the y axis. x's and y's are the per-
+												centage of the total canvas the axis will
+												occupy: they must be between 0 and 1.
+												As much plot elements can be added in one
+												canvas as we want (just need to define)
+				Note: after adding the axes, the figure element is now an array of two 
+				matplotlib.axes objects, each axis for one variable (x and y). These axes
+				can be called many times and are used to plot a figure in them. The axis
+				are defined once, plotting a function on them does not change the axis object
+			axes.plot(xf,yf): plots function f in figure element 'axes' where xf and yf are arrays
+							  of the same size. As much functions can be added in one 'axes' element
+							  as we want. We specify axes.plot(x2,y2) and done
+			axes.set_xlabel('X name'): adds the label "X name" to the x axis
+			axes.set_ylabel('Y name'): adds the label "Y name" to the y axis
+			axes.set_title('Title'): adds the title "Title"
+		Subplots
+			fig,axes = plt.subplots(nrows=n,ncols=m): creates a matrix of n*m subplots 
+													   using fig and axes. The axis ele-
+													   ment created is a list of n*m axis
+													   elements. the fig element now
+													   is updated and contains the plot
+				fig,axes = plt.subplots(nrows=n,ncols=m,figsize=(w,h)): creates a subplot
+					with width w and height h
+			for element in axes
+				element.plot(whatever): can be used to define each function of the subplot
+			axes[k]: outputs the k-th element of a multiple axis element created with sub-
+				     plots. Used to set each plot to each axis
+					 example: axes[k].plot(xf,yf)
+			plt.tight_layout(): separates a bit overlapping axis (useful to use after using
+								subplot
+Axis appearance and range
+	axes.set_xlim([xmin,xmax]): sets the range of the x axis from xmin to xmax
+	axes.set_ylim([ymin,ymax]): sets the range of the y axis from ymin to ymax
+Modifying linetypes and colors
+	Color
+		axes.plot(x,y,color='string'): sets the color to the one mentioned in the string,
+									   which can be a preset color such as 'orange' or
+									   'green' or a RGB Hex Color Code after a hashtag
+									   like this: '#hexcode', ex: '#FF8C00'
+									   https://www.rapidtables.com/web/color/RGB_Color.html
+	Linetype
+		axes.plot(x,y,lw=n): sets the width of the line to n (1 being the default). Function
+							 also work saying "linewidth=n"
+		axes.plot(x,y,alpha=n): sets the transparency n of the line (n is between 0 and 1)
+		axes.plot(x,y,ls='string'): sets the linestyle of the line to the one specified.
+									(typical styles being:'-',':''--','-.','steps'...). 
+									Function also works saying "linestyle='string'"
+	Marker (https://matplotlib.org/api/markers_api.html)
+		axes.plot(x,y,marker='string'): marks the dots specified in the entry array
+										(typical markers:'+','o','s','1',*')
+		axes.plot(x,y,marker='string',markersize=n): sets the size of the marker to n
+													 (1 being default)
+		axes.plot(x,y,marker='string',markeredgewidth=n): sets the width of the marker to
+														  n (1 being default)
+		axes.plot(x,y,marker='string',markerfacecolor='string'): sets the color of the
+																 inside of the marker
+																 (same string as colors)
+		axes.plot(x,y,marker='string',markeredgecolor='string'): sets the color of the
+																 edge of the marker
+																 (same string as colors)
+	Adding legends
+		A 'label' needs to be defined for each figure element. 
+		Example:
+			axes.plot(x,x**2,label='X Squared'): defines label for first plot
+			axes.plot(x,x**3,label='X Cubed'): defines label for second plot
+			axes.legend(): command to plot the labels stated for each plot. If no label is
+						   stated, a warning will appear
+						   We can specify the location of the location of the legend by 
+						   adding:
+						   axes.legend(loc=k): k being a natural number each specifying one
+											   location (ex: 0: best, 1: upper right...)
+											   Specifying 0 is usually a good method
+											   A tuple can be specified instead of the number
+											   to specifically state the location
+						   https://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.legend
+Other plots
+	Matplotlib is a good library for x-y plots, but can also be used for statistical plotting,
+	however, Seaborn is much better for that.
+	
+Saving figures
+	fig.savefig('name.xxx'): saves the plot in the format specified (.jpg, .png...)

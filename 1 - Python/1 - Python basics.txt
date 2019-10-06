@@ -1,0 +1,242 @@
+Python coding codes:
+https://docs.python.org/3/reference/index.html#reference-index
+
+Note on Jupyter notebook: Shift + Tab to see the function arguments
+
+Variables 
+	- integer (Z), 
+	- floating comma number (R), 
+		If you want to keep a floating comma number, yu shoulf write the comma even if the
+		number is an integer. (meaning 7.0 instead of 7)
+	- boolean (True/False)
+		A boolean can be defined by stating "True" of "False" or indicating a true or false
+		comparison. ex: bool = 3<5 is the same as saying bool = True 
+	- string (Any string of symbols, syntaxis should start with single '' or double quotes "" 
+	(to place an apostrophe inside the string, need to place a counterslash 'There\'s a
+	solution')
+		- Strings can be added with the operator '+'. 
+		- Strings can be combined using the '.format' command
+
+	- Lists (One dimensional vector of any kind of dvariable -str'General syntax
+	- single line comment on python starts with "#", and multiple line ones start with
+	  tripple commas """Blabla"""
+	- White spaces
+		They mark a "category" of code line. Means if you start an "IF",
+		all consequences of that "IF" need to be in the same "column". Same is applicable
+		for arguments in a Function. Example:
+
+		IF manu=clever:
+		  grade=10
+		ELSE:
+  		  grade=0
+	Variables: cannot start with a lower case letters (no numbers or weird symbols 1var is not
+		   OK, var1 is OK)
+
+Variables 
+	integer (Z), 
+	floating comma number (R), 
+		If you want to keep a floating comma number, yu should write the comma even if the
+		number is an integer. (meaning 7.0 instead of 7)
+	boolean (True/False)
+		A boolean can be defined by stating "True" of "False" or indicating a true or false
+		comparison. ex: bool = 3<5 is the same as saying bool = True 
+	string (Any string of symbols, syntaxis should start with single '' or double quotes "" 
+	(to place an apostrophe inside the string, need to place a counterslash 'There\'s a
+	solution')
+		- Strings can be added with the operator '+'. 
+		- Strings can be combined using the '.format' command
+		
+	Datetime (must command: 'from datetime import datetime')
+		Datetime objects are a specific obeject types in python that design a date and a time
+			- from this data type, we can take any of its characteristics by calling the functions
+			  .hour, .month, .year, .dayofweek
+			  - dt.year: outputs the year of the datetime object dt
+
+	Lists (One dimensional vector of any kind of dvariable -strig, number, list-)
+		ex: mylist = ['hello',1,[1,2]]
+	Array (series of numbers, ex: matrices)
+	
+	Dictionaries (variables that store all kinds of variables associated with strings, syntax
+		      shown in example)
+		ex: dict = {'one':[1,2],'two':'jijujeje'}
+		    dict['one']
+		    -> [1,2,3]
+	Tuples (lists of variables that cannot be modified, defined by '()')
+		ex: tup = (1,'three')
+	Sets (collection of unique elements defined by '{}')
+		ex: {1,1,1,2,2,2,2,2,3,3,3,3}
+		    -> {1,2,3}
+White spaces
+	They mark a "category" of code line. Means if you start an "IF",
+	all consequences of that "IF" need to be in the same "column". Same is applicable
+	for arguments in a Function. Example:
+
+	IF manu=clever:
+	  grade=10
+	ELSE:
+  	  grade=0
+
+Operators
+	Scalar
+		= variable definition
+		* multiplication
+		** exponent
+		/ division
+		// returns whole units in division (ex: 3/2 = 1.5, but 3//2 = 1 (without the 0.5))
+		% gives remainder from a division - 3 % 2 = 1 (remainder of 3//2)
+		+= used to add some value iteratively in a for loop
+			ex: 'iter = iter + 1' can be written 'iter += 1'
+
+	Comparators
+		== equal to (different from = which defines the value of a variable)
+		!= not equal to
+		< less than (<= less than or equal to)
+		> greater than (>= greater than or equal to)
+
+	Boolean operators (They are boolean functions, arguments and results are booleans)
+		and: verifies if both statements are true (gives true if both args are true)
+		or: verifies if one of both are true (gives true if one of 2 args are true)
+		not: Gives opposite statement (returns opposite boolean)
+		Order of preference (without "()") not>and>or
+
+	List operators
+		list[v]: gives whichever elements from the list, stated on the vector v (can
+		         be single value or complete, can also be used for updating parts of
+			 the list
+		list[n:]: gives nth element until the end of the list
+		list[:n]: gives 1st element up to nth of the list
+		list[n:m]: give nth to mth element of the list
+		list[-n:-m]: gives the nth element (starting from the end)
+		list*n: creates a new list with n times list
+			ex: [1,2,3]*2
+		    ->  [1,2,3,1,2,3]	
+		mylist.append(var): adds variable var at the end of the list 'mylist'
+		    ex: [1,2,3].append(4)
+		    ->  [1,2,3,4]
+		list.insert(idx,var): adds variable var at the index idx specified in
+							  the list. If idx == 0, it adds the number at the
+							  beginning.
+		list.pop(idx): removes the number specified in the index from the list
+					   and returns it		
+		in: checks if an element is in a list, returns boolean value 
+		    ex: 'x' in [1,2,3]
+			-> False
+	Tuple operators
+		tuple unpacking: use a for loop to take out the values from a list of tuples l
+		[(1,2),(3,4)]
+		ex: for a,b in t:
+		       print(a)
+		       print(b)
+		    -> 1
+		    -> 2
+		    -> 3
+		    -> 4
+		zip(list1,list2): Creates a list of tuples with indexes of list1 and list2
+						  (note that len(list1) = len(list2))
+	Set operators
+		set.add(var): adds variable var to the set
+	For loop for creating a list
+		[f(iter) for iter in seq]: creates a vector of function f() for elements in 
+		list seq
+
+Dictionary operators
+	Iterating through elements
+		for element in dict: iterates for all keys in dictionary
+		for element in dict.values(): iterates for all values in dict
+		for element1, element2 in x.items(): iterates through all items of dict
+	Adding / Modifying / updating elements
+		dict.update({new_key:new_value}): adds new key and value associated to
+										  the dictionnary
+		dict.update(key = new_value): updates the value associated to the key
+									  specified with new_value
+
+
+Functions
+	Defining a function (params can be any type of variable)
+		def my_function(param1, param2):
+			print (param1 + param2) (or return (param1 + param2))
+		-to set 'default values for each parameter (in this case [1,0]), we set 
+		def function(param1 = 1, param2 = 0)
+		-to make the function give back a number following a certain function, we 
+		 must use the 'return' statement (ex: return x**2), that way we can store it
+		 in a variable
+		 -we can use triple """ """ to set comments, that way if we are going to call
+		  a function and press Shift+Tab, the comments will appear
+	Lambda expression (define a function in 1 line of code)
+		to define function:
+		fun = lambda var:fun(var) (var is the input variable)
+		Syntax: (lambda variable: f(variable))
+	General
+		input(): asks the console to input variable 
+			     ex: numberA = input("What is the A number?")
+		type(var): outputs the data type of the variable var (string, list...)
+	Random
+		import random
+		random.randint(min,max): outputs a random number between min and max
+	String functions
+		print(): prints the string without the quote marks
+		-	-.format(v): prints the values of the list of variables v in the printed
+			  screen, placing {} inside of the printed string
+				ex: a = 'move it', b ='move', c = 'it'
+				print("I like to {}, {}".format(a,'move it')) OR
+				print("I like to {one} {two}, {one} {two}".format(one=b,two=c))
+			-	> I like to move it, move it
+		len(): gives the number of characters in the string or list
+		str(): turns a non string value in a string
+		.lower(): lowers down all caps in the string
+		.upper(): puts all letters in caps
+		.split('#'): splits a string into a list of each element separated with a the element
+			   in the argument '#'. If nothing in argument it separates by white spaces
+			   (i.e. creates a list with the separate words from a sentence)
+		isalpha(): function that returns False if the string contains any other character
+			   than a letter
+		"string"[array]: gives the characters situated in the indicated array (first
+				   letter is 0)
+				   ex: letters = "carpet"[2:4]
+				       letters = "rp"
+List functions
+		len(l): gives the lenght of the list l
+		set(list): transforms list into a set
+		range(s:e): creates 'range' of a starting number s until number e (list from s to e)
+		list(range): transfors range into a list
+		map(func,l): applies the function func to each element of the list l. (use list() to
+			     actually get the list (use lambda expression to define function directly)
+		filter(boolean function,list): filters out the elements of the list l (creating a smal-
+					       ler list) that verify the boolean function - elements 
+					       that are True (use
+		
+Loops
+	FOR loops
+		For loops will iterate through all elements in a list, tuple, set, array, etc.
+		Syntax is as follows
+		
+		list = [1,2,3] or ['Banana','Apple','Cherry'] or whatever element
+		
+		for x in list:
+			function(x)
+
+		Note: easy lists for FOR loops can be created using the following:
+				->  listrange(1:n)
+
+		for loop in reversed order:
+			for x in reversed(range(0,n)): starts by element n down to zero
+
+	WHILE loops
+
+		while (boolean condition):
+			action if true
+		action if false
+
+Files
+	Basic
+		open('file.xx','mode'): opens file specified in the mode entered (modes: 
+								'r' read, 'w': write, 'a': appending, 'r+')
+								File is opened as a 'file' object
+	With statements
+		->  with allows you to open a file, do something with it, then close it
+		with open('hello.txt','w') as f: #opens 'hello.txt' and calls it f
+			f.write('add this line')	 #does opperations in f
+		->  this with statement does the things he has to do with the file,
+			then actually closes it
+		
+

@@ -1,0 +1,42 @@
+---> PYTHON FUNCTIONS OBJECTS <---
+https://www.youtube.com/watch?v=FsAPt_9Bf3U
+
+Functions are python objects taking a set of arguments (or none), and
+performing a set of operations. They can be held un-executed.
+Functions are  first-class citizens in python, meaning they can be 
+passed as arguments in other functions, returned by other functions,
+and even assigned to variables.
+
+Example 1:
+    def square (x):
+        return x*x
+    
+    f = square(5)
+        -> will set f to 25
+    f = square
+        -> will set f as a function object equal to the function called
+           'square'
+        -> if f(5) is ran, it will return 25
+
+Example 2: function as an argument
+    def map_f (fun, array):
+        result = []
+        for i in array:
+            result.append(fun(i))
+        return result
+    
+    map_f(square, [1,2,3,4])
+        -> will return [1,4,9,16]
+
+Example 3:
+    def html_tag_msg(tag):
+        def wrap_msg(msg):
+            print ('<{0}>{1}</{0}>').format((tag, msg))
+        return wrap_msg
+    
+    print_h1 = html_tag_msg('h1')
+        -> will create a new function wrap_msg with the tag 'h1' (waiting
+           for a message to return a string).
+    print_h1('hello world')
+        -> will return <h1>hello world</h1>
+

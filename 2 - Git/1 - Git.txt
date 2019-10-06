@@ -1,0 +1,157 @@
+--> GIT COMMANDS <--
+https://www.git-tower.com/learn/git/ebook/en/command-line/appendix/command-line-101
+
+BASIC
+	command --help
+		-> gets help of any command
+
+FOLDER NAVIGATION
+	Move through folders
+		cd Desktop/
+			-> "Change directory":goes to 'Desktop' folder on the current directory
+		cd ..
+			-> moves to the upwards directory
+		pwd
+			-> "Print Working Directory": returns current directory
+	Show contents
+		ls
+			-> lists current directory contents
+		ls -l
+			-> lists contents in a better format
+		ls -a
+		ls -la
+			-> lists all files in current repository including hidden ones (add 'l' to make the format nicer)
+	Move/Remove/Create
+		rm directory/file.txt
+			-> removes file.txt in directory 
+		rm -r directory1/directory2
+			-> removes directory2 in directory1 (-r : "Recursive")
+		mv directory_old/file.txt directory_new/file.txt
+			-> moves file.txt from directory_old to directory_new
+		mv file_old.txt file_new.txt
+			-> renames file_old.txt into file_new.txt
+		mkdir new_directory
+			-> creates new_directory in current location
+		code filename
+			-> opens the file in the text editor (VS code)
+
+GIT - LOCAL DATA
+	Initializing
+		git init
+			-> creates an empty Git repository ('.git')
+		   	   (to gather all committed files from the working document)
+	Adding files from Git repository
+		git add file.py
+			-> adds snapshot of file.py to the staging area
+			   (Snapshot of file is taken, and will be added to the Git repository next time we "commit)
+			   (Note that if you modify 'file.py' again before committing, only the version before the "add"
+			   will be considered. To update the modified version, run the add command again with the same file)
+		git add -A
+			-> adds all files of the current folder in the Staging area
+		git rm file.py
+			-> Gives the order to Git to not keep track of changes in 'file.py' anymore
+		git commit
+		git commit -m 'comment for this commit'
+			-> Copies all "snapshots" of the files in the staging area, and sends it to the local Git repository
+			   (The snapshot is the way Git stores the data. It verifies the things you changed and updates
+			   them. All unchanged files (or parts of files?) will not be copied again, a reference to the
+			   previous version will be created.
+			-> -m lets you add a comment to the commit (so you can keep track of what you did in that commit)
+	Removing/changing data from Git repository
+		git rm file.py
+			-> Gives the order to Git to not keep track of changes in 'file.py' anymore
+			   (file.py was in previous versions, but now it is not required)
+		git mv file_v1.py file_v2.py
+			-> Updates the name of the file from v1 to v2 (and keeps the track of the changes)
+			   (note that if you remove a file and add it again with another name, Git will
+			   figure it out anyways, but this is the explicit way of doing so)
+	Ignoring data (.gitignore file)
+		.gitignore
+			-> a file stating all ignored files by Git (not listed in status or added to the staging area)
+			ex: ignore all files ending in '.a'
+			*.a
+			ex2: ignore all files in directory 'folder'
+			folder/
+	Getting info
+		git status
+			-> shows status of files in your current directory
+			   (will tell you which branch are you in,
+			   which files are on staging area: "Changes to be committed",
+			   and which files have been modified since the last commit: "Changes not staged for commit")
+		git diff
+			-> tells you the files you've changed but not yet staged
+	Commit History
+		git log
+			-> displays the commit history of the repository
+		git log --pretty=oneline
+			-> displays the info in one line
+		git log --pretty=format:"%h %s" --graph
+			-> displays the info demanded ("%h" prints the commit hash, "%s" prints the subject) in a 
+			   visual way showing the branch and merge history
+
+GIT - REMOTE REPOSITORIES
+	Cloning files
+		git clone [URL]
+			-> creates a new folder in current directory, and copies all information of the specified URL
+		git clone [URL] name
+			-> adding 'name' creates a folder with named 'name', and clones the content of the URL
+	Adding/checking remote repositories
+		git remote
+			-> tells you the names of the remote repositories you have configured
+			-> adding -v (verbose) will tell you the URL
+			   (origin is the default name of the repository you cloned your local file from)
+		git remote show [remote repository name]
+			-> gives you info about the remote repository specified
+		git remote add [shortname] [URL]
+		ex: git remote add origin https://github....
+			-> adds a new remote repository in the URL specified, with the shortname typed
+			   (shortname can be changed)
+		git remote rename [oldname] [newname]
+			-> changes the name of the remote file from old to new name
+	Pulling data from remote repositories
+		git fetch [remote repository name] [branchname]
+		ex: git fetch origin master
+			-> updates the 'origin/master' local Git folder from the data of the 'master' remote repository
+			   (Github). Only the .git file is changed, not the working directory
+		git merge [repository name] [branchname]
+		ex: git merge origin master
+			-> takes the data from the 'origin/master' local .git folder to the 'master' local working folder 
+			   (merging might bring discrepancies - i.e. a line modified in the .git folder & locally, they 
+			   must be resolved before being able to end the merge command)
+		git pull [repository name] [branchname]
+		ex: git pull origin maser
+			-> the pull command is equivalent of (fetch & merge)
+	Pushing data upstream
+		git push [remote repository name] [branchname]
+			-> "pushes" or updates the local data to the virtual repository.
+			   (will only work if you have access and if nobody has pushed since the last time you pulled code.
+			   If the code has been updated, you'll need to pull the code, change it, and then push it.)
+			-> '-u' creates a bond between 'origin/master' (local Git repository) and the virtual 'master'
+			   on Github. '-u' needs to be called one time only to do the bonding
+	Tagging
+		git tag -a [tag] -m [tag message]
+		ex: git tag -a v1.1 -m 'This is the 1.1 version'
+			-> sets up an annotated tag that will be associated with a specific commit
+BRANCHING & MERGING
+https://git-scm.com/book/en/v1/Git-Branching-Basic-Branching-and-Merging
+Branching allows you to work in multiple tasks at the same time. For example: you are building some feature
+for an app. You create a branch "feature 1", and start working on it; the main "production" branch (Master) is
+unchanged. Then, you need to start working on another urgent feature. You create a branch from the master 
+and start working on it.
+	git branch [newbranch]
+		-> creates a new branch named 'newbranch' from the last commit of the current branch you are in
+		   (if you are not in Master and want to make a branch FROM master, switch back to Master and 
+		   THEN create the new branch)
+	git checkout [namebranch]
+		-> changes the pointer of the HEAD object, and all commits done from now on will go on the branch
+		   specified
+		   (note that if you have uncommitted changes that clash with the branch you are switching to,
+		   Git will not allow you to do the switch)
+	git checkout -b [newbranch]
+		-> adding -b to the checkout command creates a new branch from the current branch AND changes the
+		   pointer to work on it
+	git merge [branchname]
+		-> merges the specified branch with the branch you are currently in (ex: to merge with master you
+		   need to checkout to master then merge)
+	git branch -d [branchname]
+		-> after the branch is merged, the branch pointer can be erased as it is useless
