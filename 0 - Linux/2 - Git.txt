@@ -1,0 +1,64 @@
+--> GIT COMMANDS <--
+https://www.git-tower.com/learn/git/ebook/en/command-line/appendix/command-line-101
+
+BASIC
+	command --help
+		-> gets help of any command
+
+FOLDER NAVIGATION
+	Move through folders
+		cd Desktop/
+			-> "Change directory":goes to 'Desktop' folder on the current directory
+		cd ..
+			-> moves to the upwards directory
+		pwd
+			-> "Print Working Directory": returns current directory
+	Show contents
+		ls
+			-> lists current directory contents
+		ls -l
+			-> lists contents in a better format
+		ls -a
+		ls -la
+			-> lists all files in current repository including hidden ones (add 'l' to make the format nicer)
+	Move/Remove/Create
+		rm directory/file.txt
+			-> removes file.txt in directory 
+		rm -r directory1/directory2
+			-> removes directory2 in directory1 (-r : "Recursive")
+		mv directory_old/file.txt directory_new/file.txt
+			-> moves file.txt from directory_old to directory_new
+		mv file_old.txt file_new.txt
+			-> renames file_old.txt into file_new.txt
+		mkdir new_directory
+			-> creates new_directory in current location
+
+GIT
+	Initializing
+		git init
+			-> creates a Git folder ('.git') with an empty repository
+		   	   (.git folder is a hidden archive for Git to do its stuff)
+		git status
+			-> shows status of current Git branch (showing added files, and branch)
+	Adding files to Git repository
+		git add file.py
+			-> adds file.py to the Git repository
+		git add -A
+			-> adds all files of the current folder in the Git folder
+		git commit
+			-> creates a "snapshot" of the current file status (that is what will be saved in the git file)
+	Updating data on Github
+		git remote add origin https://github....
+			-> creates a new connection to the remote repository specified in the URL and names it "origin" (name can be changed)
+		git remote -v
+			-> remote without anything will show you the current remote repositories, v: verbose -> tells you extra info about each of them
+		git push -u origin master
+			-> "pushes" or updates the local data to the virtual repository. 
+			-> '-u' creates a bond between 'origin/master' (local Git repository) and the virtual 'master' on Github. '-u' needs to be called one time only to do the bonding
+	Pulling data from Github
+		git fetch origin master
+			-> updates 'origin/master' local Git folder from the data of the 'master' virtual folder on Github, but does not merge it with the local 'master' folder (the actual .txt files on the PC)
+		git merge origin master
+			-> merges the data from the local 'origin/master' Git folder to the 'master' local folder (merging might bring discrepancies - i.e. a line modified on Github & locally, they must be resolved before being able to end the merge command)
+		git pull origin maser
+			-> pull command = fetch & merge
