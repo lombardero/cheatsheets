@@ -1,0 +1,12 @@
+-> LINUX <-
+
+	Basics
+		./ : current directory
+		./file.run : runs the file 'file.run'
+		sudo ./file.run : runs as administrator the file 'file.run'
+
+	Directories
+		mkdir blabla
+			->  creates a directory called 'blabla' in the current
+				location
+		
