@@ -1,0 +1,7 @@
+######################################################################
+#   FLUTTER BASICS
+
+GENERAL
+    flutter doctor
+        -> checks that all parts are installed as they should
+    
