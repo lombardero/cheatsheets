@@ -13,7 +13,15 @@ DATA TYPES
     double // 'double' or 'float' datatype
     num // dynamic 'numeric' value which accepts both 'int' and 
         // 'double'
-    void // in Dart, this means 'nothing' or 'None'
+    void // in Dart, this is a datatype that means 'empty'
+         // (not the same as 'null', which is the same as 'None' in
+         // Python)
+    List // list (with capital L) datatype
+    List<int> // list of integers
+    ['this','is','a','list',]
+    <String>['this','is','a','list',]
+        //-> the <String> allows us to tell Dart that the list
+        //   should only accept strings on it.
 
 DEFINING VARIABLES
     var new_variable;
