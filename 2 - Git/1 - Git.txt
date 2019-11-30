@@ -88,6 +88,12 @@ GIT - LOCAL DATA
 		git log --pretty=format:"%h %s" --graph
 			-> displays the info demanded ("%h" prints the commit hash, "%s" prints the subject) in a 
 			   visual way showing the branch and merge history
+	Rebase: updates the position of your branch after new changes of master
+		(while at branch different from master)
+		git rebase master
+			-> (after pulling to master last remote master changes) takes the HEADER and puts it into the 
+			   latest version of master, which updates the position of the branch to the latest of master,
+			   this will tell you if there are merge conflicts. After this, a PR can be issued.
 
 GIT - REMOTE REPOSITORIES
 	Cloning files
