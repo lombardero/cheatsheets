@@ -29,17 +29,26 @@ EXTENDING CLASSES
       // widgets from this file, which we can then use to extend our own
       // classes
   class MyWidget extends StatelessWidget {
+    @override
     Widget build(BuildContext context) {
       return MaterialApp(home: Text('Hello world!'));
     }
   }
       //-> this code allows us to create a new class 'MyWidget', built from
       //   StatelessWidget (the most basic Flutter widget).
+      // Note0: the '@override' decorator is there to make our code more
+      //   readable (good practice). It is a Flutter decorator that says
+      //   we are 'overriding' or 're-writing' any of the in-built functions
+      //   of the 'StatelessWidget' class (in this case, the 'build()'
+      //   function). Flutter actually forces us to override it, so it is
+      //   not required (code would still work); it adds readability
+      //   (make sure we are not accidentally overriding)
       // Note1: StatelessWidget needs us to define the 'build()' function
       //   to work (which is called by Flutter when the Widget is loaded).
       // Note 2: the function 'build()', expects a 'context' argument,
       //   which is a 'BuildContext' class (defined by Flutter), and
-      //   will return a 'Widget', since it will output something on the UI.
+      //   will return a 'Widget' (mentioned before the function name), since
+      //   it will output something on the UI.
       // Note 3: 'MaterialApp' is a Google pre-defined widget (accepts args),
       //   which requires us to define the argument 'home' to be run. 'home'
       //   expects a Widget too. In this case, we will put some text.
@@ -48,8 +57,11 @@ RUNNING THE WIDGETS
     void main() {
       runApp(MyWidget());
     }
-    //-> this code uses the 'runApp()' function, which is a
-    //   Flutter function that basically generates the UI from
-    //   the whole widget tree defined in the Widget 'MyApp()'.
-    // Note: it calls the 'build' method defined on the 'Widget' class,
-    //   and it builds it.
+        //-> this code uses the 'runApp()' function, which is a
+        //   Flutter function that basically generates the UI from
+        //   the whole widget tree defined in the Widget 'MyApp()'.
+        // Note: it calls the 'build' method defined on the 'Widget' class,
+        //   and it builds it.
+    void main() => runApp(MyWidget());
+        //-> does the same as the code above, in one line of code
+        //   (different and often used syntax)
