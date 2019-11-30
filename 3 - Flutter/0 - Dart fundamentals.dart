@@ -93,14 +93,13 @@ OBJECT ORIENTED PROGRAMMING (CLASSES)
       }
     }
         //-> adding '{}' to the arguments of the constructor makes them
-        //   optional, and avoids having to respect the order when creating
-        //   an instance. This is very useful when dealing with a lot of
-        //   arguments; it also allows to add default names to the arguments.
+        //   non-positional and optional. This is very useful when dealing
+        //   with a lot of arguments; it also allows to add default values.
         // Note: if the argument is required, by adding '@required' in the
         //   constructor for the argument will make it return 'Error', if
         //   it is not mentioned when the instance is created.
         //   Instances are created as follows:
-    person1 = Person(inputName: 'Manu', age: 28);
+    person1 = Person(name: 'Manu', age: 28);
         //-> since we used '{}', now we need to specify the names of the
         //   arguments of the constructor to define an instance.
     
