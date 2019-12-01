@@ -22,6 +22,9 @@ DATA TYPES
     <String>['this','is','a','list',]
         //-> the <String> allows us to tell Dart that the list
         //   should only accept strings on it.
+    list[i]
+        //-> outputs the (i-1)th element of the list (indexes start
+        //   at zero)
 
 DEFINING VARIABLES
     var new_variable;
@@ -112,7 +115,7 @@ OBJECT ORIENTED PROGRAMMING (CLASSES)
         //   arguments of the constructor to define an instance.
     
 
-BASIC FUNCTIONS
+BASIC PREDEFINED FUNCTIONS
     main()
       //-> this function will always launched at the start (we define)
     print()
@@ -120,6 +123,7 @@ BASIC FUNCTIONS
     
 
 DEFINING FUNCTIONS
+  // ------- functions with name ------
     void myfunction(int num1, int num2) {
       print(num1 + num2);
     }
@@ -140,3 +144,16 @@ DEFINING FUNCTIONS
     }
     //-> this function will return a 'float' number as a result
     
+  // ------- anonymous functions -------
+    (num1, num2) => num1 + num2
+    //-> this is called an 'anonymous' function, (similar to lambda
+    //   expressions), it generates a function object but does not
+    //   save it into memory (usable once)
+    (num1, num2) {
+      num1 + num2
+    }
+    //-> 'anonymous' function (same as above) with a different syntax
+    (num1, num2) {
+      num1 + num2
+    }()
+    //-> adding parenthesis executes the function
