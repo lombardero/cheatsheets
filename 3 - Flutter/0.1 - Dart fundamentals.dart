@@ -13,11 +13,51 @@ DATA TYPES
     double // 'double' or 'float' datatype
     num // dynamic 'numeric' value which accepts both 'int' and 
         // 'double'
-    void // in Dart, this is a datatype that means 'empty'
-         // (not the same as 'null', which is the same as 'None' in
-         // Python)
     List // list (with capital L) datatype
     List<int> // list of integers
+
+VARIABLE TYPES
+    // Dart stores all data in memory, and all declared variables are
+    // saved as pointers to the location in memory where the data is
+    // stored.
+    // It is good practice to be as explicit as possible with our
+    // intentions for variables so we do not screw up our code.
+    var a
+      //-> this variable can change during the course of our program.
+      //   the address in memory where this variable will point to can
+      //   change without problem
+    void a
+      //-> this, in Dart, indicates an 'empty' pointer to memory
+      //   (allows to tell the program that we do not need anything
+      //   to be stored in memory, such as for functions not returnin
+      //   anything)
+    final a
+      //-> this indicates the variable will not change once the part of
+      //   code depending from it gets run. (run-time constant value)
+      //   in Flutter, for example, we can use a 'final string' to generate
+      //   the content of a Stateless Widget. When the code is compiled, the
+      //   variable is unknown, but when the widget is created, the variable
+      //   gets allocated and it never changes, it is 'final'.
+    const a
+      //-> these are 'complile-time' constant variables. That means
+      //   that the variable gets allocated at compile time (does not need to
+      //   wait until the code is run). That allows Dart to raise an error if
+      //   it detects that we try to associate the name to another variable.
+    enum a {'apple', 'orange'}
+      //-> enumerations are variables that can accept a value within a set of
+      //   pre-defined ones. (on the example above, for example, the variable
+      //   can only be 'apple' or 'orange').
+      //   Enumerations are useful to be sure that the code behaves as it
+      //   should, and increase the runtime at compiling vs a single string
+      // Note: behind the scenes, enumerations map each of the values to an
+      //   integer index [0, 1, 2, ...]
+    var a = const 123
+      //-> this specific code is telling Dart that the variable '123' will be
+      //   constant at runtime, and therefore unchanged. On the other side, 
+      //   'a' is variable, and we will not see an error if 'a' is set equal
+      //   to another value.
+
+LISTS
     ['this','is','a','list',]
     <String>['this','is','a','list',]
         //-> the <String> allows us to tell Dart that the list
@@ -25,6 +65,21 @@ DATA TYPES
     list[i]
         //-> outputs the (i-1)th element of the list (indexes start
         //   at zero)
+  LIST FUNCTIONS
+      list.map(function);
+      list.map((i) {i*2});
+          //-> iterates through the list, creating an iterable  
+          //   object (same size), applying 'function' element-wise.
+      iterable.toList();
+          //-> transforms iterable into list
+      ...list
+      [a, ...[b, c], d, e]
+          //-> 'unwraps' a list (inside of a list) onto the outer one
+          //   the output from the example is: [a, b, c, d, e]
+      
+
+MAPS // same as Python Dictionaries
+    {1: 'this', 2: 'is', 3: 'a', 4:'map'}
 
 DEFINING VARIABLES
     var new_variable;
