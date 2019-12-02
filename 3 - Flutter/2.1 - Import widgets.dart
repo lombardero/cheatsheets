@@ -34,7 +34,7 @@ RUNNING THE WIDGETS
         //-> does the same as the code above, in one line of code
         //   (different and often used syntax)
 
-WIDGETS: STATEFUL vs STATELESS, EXTENDING DART CLASSES
+EXTENDING DART CLASSES
   // Extensions are used to build widgets from Flutter's pre-defined
   // objects. To define a widget we need to extend the StatelessWidget
   // or StatefulWidget class, and override its 'build' function'
@@ -45,7 +45,7 @@ WIDGETS: STATEFUL vs STATELESS, EXTENDING DART CLASSES
       // widgets from this file, which we can then use to extend our own
       // classes
 
-  ------- Stateless Widgets ------
+STATELESS WIDGETS
   // For Stateless widgets, we need to import or extend only one class
   class MyWidget extends StatelessWidget {
     'all class variables and functions used on the code go here'
@@ -80,7 +80,7 @@ WIDGETS: STATEFUL vs STATELESS, EXTENDING DART CLASSES
       //   which requires us to define the argument 'home' to be run. 'home'
       //   expects a Widget too. In this case, we will put some text.
   
-  ------ Stateful Widgets ------
+STATEFUL WIDGETS
   // For stateful widgets, we need to create and import from 'material.dart'
   // TWO defined classes: the StatefulWidget AND its State. The State class
   // will keep the state stored. We need to connect both StatefulWidget and
@@ -132,6 +132,8 @@ WIDGETS: STATEFUL vs STATELESS, EXTENDING DART CLASSES
       // Note1: it is recommended to name the State classes and variables with
       //   an '_' before its name to make them private (non-accessible by other
       //   files -> protection from bugs) 
+      // Note2: it is recommended to keep all state-depending variables on the
+      //   main dart file.
 
 IMPORTING VARIABLES FROM OTHER FILES
     import './other_widget.dart';
@@ -161,3 +163,34 @@ IMPORTING VARIABLES FROM OTHER FILES
         //   constructor (function with same name as Class) is called.
         // Note1: we need to add the property added inside the constructor
         //   of the class to 'tie' its dependency to it.
+
+IMPORTING FUNCTIONS FROM OTHER FILES 
+    //-> The same way variables can be imported, functions (if required
+    //   by other files), can also be imported by passing a pointer to the
+    //   (non-executed) function.
+    import './other_widget.dart';
+    class DependingWidget extends StatelessWidget {
+      final Function function_affecting_widgt;
+
+      DependingWidget(this.function_affecting_widgt);
+
+      @override
+      Widget build(BuildContext context) {
+        return Container(
+          child: RaisedButton(onPressed: function_affecting_widgt,)
+        )
+      }
+    }
+        //-> this code allows us to have multiple buttons with different
+        //   constructed in out 'main' folder
+        >>>>>>>>>>>>>>>>>> main folder
+        void whateverFunction1() {
+          //function
+        }
+        void whateverFunction2() {
+          //function
+        }
+        DependingWidget(whateverFunction1)
+        DependingWidget(whateverFunction1)
+          //-> will render two 'DependingWidgets' with two different
+          //   functions defined.

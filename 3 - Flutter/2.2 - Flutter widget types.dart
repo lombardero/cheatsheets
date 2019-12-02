@@ -43,15 +43,23 @@ OUTPUT & INPUT WIDGETS (BASIC, VISIBLE)
         //-> defines an 'AppBar' (top bar of the app) widget, which
         //   expects many other widgets such as 'Title', and by
         //   default will be a blue bar.
-        title:
+        title: Text(...)
           //-> expects a 'Text' widget, and will be placed in the
           //   center of the App Bar by default.
     RaisedButton(child: Text(...), onPressed: null)
         //-> is a widget to output a rectangular button (default)
-        child:
+        color: Color(hexcode) // or Color.blue
+          //-> will color the button with the indicated color, this
+          //   argument expects a Color class.
+          //   Colors.blue is a static property of the class (pre-
+          //   defined value on the class) -> does not create an
+          //   instance of the class, only an object (optimized)
+        textColor: Color(hexcode) // or Color.white
+          //-> sets the color of the text, expects a 'Color' object
+        child: Widget
           //-> will allow to add anything to the button (text,
           //   color, whatever we want)
-        onPressed:
+        onPressed: function
           //-> defines the action to be taken if the button is
           //   pressed. It expects a void function, which can be
           //   defined right on the spot, or named and re-used in
