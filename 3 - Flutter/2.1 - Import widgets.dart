@@ -12,7 +12,10 @@
 // interconnecting and adding widgets onto each other to for the
 // widget tree, which adds the complexity.
 
-// Note that widgets are classes in Dart, they need to be defined
+// Note that widgets are classes in Dart
+
+// Good practice: one widget per file. (helps performance and
+//                readability).
 
 // Reminder: press Ctlr + Space in VS code to see the arguments
 //           use Alt + Shift + F to auto-format the code
@@ -42,7 +45,7 @@ WIDGETS: STATEFUL vs STATELESS, EXTENDING DART CLASSES
       // widgets from this file, which we can then use to extend our own
       // classes
 
-  // ------- Stateless Widgets ------
+  ------- Stateless Widgets ------
   // For Stateless widgets, we need to import or extend only one class
   class MyWidget extends StatelessWidget {
     'all class variables and functions used on the code go here'
@@ -77,7 +80,7 @@ WIDGETS: STATEFUL vs STATELESS, EXTENDING DART CLASSES
       //   which requires us to define the argument 'home' to be run. 'home'
       //   expects a Widget too. In this case, we will put some text.
   
-  // ------ Stateful Widgets ------
+  ------ Stateful Widgets ------
   // For stateful widgets, we need to create and import from 'material.dart'
   // TWO defined classes: the StatefulWidget AND its State. The State class
   // will keep the state stored. We need to connect both StatefulWidget and
@@ -85,7 +88,7 @@ WIDGETS: STATEFUL vs STATELESS, EXTENDING DART CLASSES
   class MyWidget extends StatefulWidget {
     @override
     State<StatefulWidget> createState() {
-      return MyWidgetState();
+      return _MyWidgetState();
     }
   }
       //-> We first define the StatefulWidget class, and override its State
@@ -94,11 +97,15 @@ WIDGETS: STATEFUL vs STATELESS, EXTENDING DART CLASSES
       // Note: this class will return the State of the Widget, which will
       //   ask the app to be re-rendered every time the setState() function
       //   is required to be run.
-  class MyWidgetState extends State<MyWidget> {
+  class _MyWidgetState extends State<MyWidget> {
     var var_used_in_state = 0;
-    setState(() {
-      var_used_in_state = var_used_in_state + 1;
+
+    void function_modifying_state() {
+      setState(() {
+      _var_used_in_state = _var_used_in_state + 1;
     })
+    };
+
 
     @override
     Widget build(BuildContext context) {
@@ -113,97 +120,44 @@ WIDGETS: STATEFUL vs STATELESS, EXTENDING DART CLASSES
       //   re-render the App (otherwise it would be super slow, re-rendering
       //   anytime the user inputs something.
       //-> The rest of the application is kept inside the State class
-      // Note: setState() is a method that takes in a void function as an
-      //   argument, with all the State-modifying elements on it.
-      //   setState() will re-run the 'build()' method every time it is
-      //   triggered.
+      // Note0: setState() is a method that takes in a void function as an
+      //   argument, holding State-modifying variables on it. When setState()
+      //   is called, it will e-run the 'build()' method on the widget that called
+      //   it (only that one).
+      //   When a function modifying a state is required, setState() needs to be
+      //   called inside of it.
+      //   -> in our example, every time the 'function_modifying-state' is called,
+      //      the setState() function will be called too, and the widget it affects
+      //      will be re-rendered with the new state.
+      // Note1: it is recommended to name the State classes and variables with
+      //   an '_' before its name to make them private (non-accessible by other
+      //   files -> protection from bugs) 
 
-OUTPUT & INPUT WIDGETS (BASIC, VISIBLE)
-// These widgets are 'Visible', and output something on the UI, they
-// can be used as 'leaves' of the UI tree
-    Text('text goes here')
-      //-> defines a text entry (simple), expects a string
-    Title('Text goes here')
-      //-> title is a different type of Widget than text
-    AppBar(title: Text('title'),)
-      //-> defines an 'AppBar' (top bar of the app) widget, which
-      //   expects many other widgets such as 'Title', and by
-      //   default will be a blue bar.
-      title:
-        //-> expects a 'Text' widget, and will be placed in the
-        //   center of the App Bar by default.
-    RaisedButton(child: Text(...), onPressed: null)
-        //-> is a widget to output a rectangular button (default)
-        child:
-          //-> will allow to add anything to the button (text,
-          //   color, whatever we want)
-        onPressed:
-          //-> defines the action to be taken if the button is
-          //   pressed. It expects a void function, which can be
-          //   defined right on the spot, or named and re-used in
-          //   many buttons
-            onPressed: () => print('Button pressed!')
-              // 
-            onPressed: function 
-              // onPressed expects a function (which needs to be
-              // the name itself without parenthesis, since otherwise
-              // Flutter will execute it when the Widget is built, and
-              // we only want to execute it once the button is pressed
-              // Note: 'function' should be defined inside of the class
-              // where it belongs to, usually before the '@override' of
-              // the 'build' function.
-              void function() {
-                // do something
-                print('Button pressed!')
-              }
-                //-> will create a function that prints 'Button pressed!'
-                //   on the logger of the terminal (do not see in the app)
-            onPressed: () => print('Button pressed!')
-              //-> generates a nameless function directly for the button
-              //   (takes no arguments and prints something)
-            onPressed: () {
-              print('Button pressed!')
-              }
-              //-> same as preceding line (different syntax)
-            onPressed: null 
-              // will disable the button (will not do anything)
+IMPORTING VARIABLES FROM OTHER FILES
+    import './other_widget.dart';
+      //-> this allows us to import widgest from other files (note that
+      //   './' means 'current directory').
 
-    Card()
+    class DependingWidget extends StatelessWidget {
+      final String text_that_can_change;
 
-LAYOUT or 'BUILDING BLOCK' WIDGETS (NOT VISIBLE)
-// These widgets are a bit more complex than the basic ones, and 
-// allow us to assemble the basic UI components. They are
-// usually placed close to the 'root' of the UI tree, and expect
-// other widgets as arguments.
-    MaterialApp(
-      home: Scaffold(...)
-    )
-      //-> MaterialApp is a 'building block' widget in Flutter, it
-      //   usually sits at the root of the UI tree and expects many
-      //   other widgets as arguments to build the App.
-    Scaffold(
-      appBar: AppBar(...),
-      body: Text('Default text'),
-    )
-      //-> One of Flutter's classic Widgets, it accepts many other
-      //   widgets as arguments such as appBar, body, etc.
-      appBar:
-        //-> expects an 'AppBar' widget, which by default is a blue
-        //   top bar with some text on it.
-      body:
-        //-> is the remaining part of the display, by default, the
-        //   background will be white and the written text will be
-        //   dark grey.
-        // Note: 'body' only accepts one Widget as output, in case
-        //   we wanted to input more Widgets, we need to use a
-        //   layout widget
-    Container()
+      DependingWidget(this.text_that_can_change);
 
-    Row()
-
-    Column(children: <Widget>[Widget1, Widget2, Widget3,...])
-      //-> allows to put widgets on top of each other by listing them
-      children:
-        //-> expects a list of Widgets, which will be placed on top of
-        //   each other
-    ListView()
+      @override
+      Widget build(BuildContext context) {
+        return Text(text_that_can_change)
+      }
+    }
+        //-> This is a stateless widget that gets build with some out
+        //   information. This is used when dealing with user names or
+        //   tiny parts of the app that will be changed depending on one
+        //   parameter (example: 'Welcome again: <username>'). You do
+        //   not want to keep the <username> as state or re-render the
+        //   Widget many times.
+        // Note0: we need to define as properties (class variables) all
+        //   variables we will use on the class. It is good practice to
+        //   use the 'final' statement, which tells the class that the
+        //   value of that variable will not change after the class
+        //   constructor (function with same name as Class) is called.
+        // Note1: we need to add the property added inside the constructor
+        //   of the class to 'tie' its dependency to it.
