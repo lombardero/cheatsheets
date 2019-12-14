@@ -15,6 +15,18 @@ DATA TYPES
         // 'double'
     List // list (with capital L) datatype
     List<int> // list of integers
+    bool // Boolean datatype
+
+OPERATORS
+    = // 'equal to': sets a variable equal to something
+    == // 'is equal to?': boolean condition
+    != // 'is not equal to?': boolean expression
+    > // 'greater than?' boolean expression
+    < // 'smaller than?' boolean expression
+    >= // 'greater or equal than?' boolean expression
+    <= // 'smaller or equal than?' boolean expression
+    && // 'and' boolean statement
+    || // 'or' boolean statement
 
 VARIABLE TYPES
     // Dart stores all data in memory, and all declared variables are
@@ -22,6 +34,11 @@ VARIABLE TYPES
     // stored.
     // It is good practice to be as explicit as possible with our
     // intentions for variables so we do not screw up our code.
+    null
+      //-> 'null is an empty value in Dart (similar to 'None' in Python),
+      //   that means the variable does not point to any value in memory,
+      //   the variable is in an 'uninitialized state.
+
     var a
       //-> this variable can change during the course of our program.
       //   the address in memory where this variable will point to can
@@ -65,11 +82,16 @@ LISTS
     list[i]
         //-> outputs the (i-1)th element of the list (indexes start
         //   at zero)
+
   LIST FUNCTIONS
       list.map(function);
       list.map((i) {i*2});
           //-> iterates through the list, creating an iterable  
           //   object (same size), applying 'function' element-wise.
+      list.length
+        //-> returns the length of the list
+      list.add(new_element);
+        //-> adds 'new_element' at the end of the list (same as python .append())
       iterable.toList();
           //-> transforms iterable into list
       ...list
@@ -80,6 +102,9 @@ LISTS
 
 MAPS // same as Python Dictionaries
     {1: 'this', 2: 'is', 3: 'a', 4:'map'}
+    map.length
+      //-> returns the length of the map (number of keys)
+
 
 DEFINING VARIABLES
     var new_variable;
@@ -97,7 +122,7 @@ DEFINING VARIABLES
         //   the line it is defined)
 
 LOGIC STATEMENTS
-    if(boolean_expression){ 
+    if(bool){ 
       // statement(s) executed if the Boolean expression is true. 
     } else { 
       // statement(s) executed if the Boolean expression is false. 
