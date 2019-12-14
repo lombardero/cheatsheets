@@ -7,7 +7,7 @@ This document lists useful commands to be used while using `Git`: from the basic
 ```<command> --help```
 - Will output the guidelines for any command
 
-### 0.1 Basic Navigation
+### 0.1 File and folder navigation
 #### Move through folders
 ```cd <path>```
 - cd stands for "change directory", moves to the specified path. Example: `cd /folder` moves to `folder`.
@@ -28,49 +28,55 @@ Options:
 - use `ls -la` to combine above 
 
 #### Create, Update, Delete
-		rm directory/file.txt
+```rm directory/file.txt```
 			-> removes file.txt in directory 
-		rm -r directory1/directory2
+
+```rm -r directory1/directory2```
 			-> removes directory2 in directory1 (-r : "Recursive")
-		mv directory_old/file.txt directory_new/file.txt
+
+```mv directory_old/file.txt directory_new/file.txt```
 			-> moves file.txt from directory_old to directory_new
-		mv file_old.txt file_new.txt
+
+```mv file_old.txt file_new.txt```
 			-> renames file_old.txt into file_new.txt
-		mkdir new_directory
+
+```mkdir new_directory```
 			-> creates new_directory in current location
-		code filename
+
+```code filename```
 			-> opens the file in the text editor (VS code)
 
-GIT - LOCAL DATA
-	Initializing
-		git init
-			-> creates an empty Git repository ('.git')
-		   	   (to gather all committed files from the working document)
-	Adding files from Git repository
-		git add file.py
-			-> adds snapshot of file.py to the staging area
-			   (Snapshot of file is taken, and will be added to the Git repository next time we "commit)
-			   (Note that if you modify 'file.py' again before committing, only the version before the "add"
-			   will be considered. To update the modified version, run the add command again with the same file)
-		git add -A
-			-> adds all files of the current folder in the Staging area
-		git rm file.py
-			-> Gives the order to Git to not keep track of changes in 'file.py' anymore
-		git commit
-		git commit -m 'comment for this commit'
-			-> Copies all "snapshots" of the files in the staging area, and sends it to the local Git repository
-			   (The snapshot is the way Git stores the data. It verifies the things you changed and updates
-			   them. All unchanged files (or parts of files?) will not be copied again, a reference to the
-			   previous version will be created.
-			-> -m lets you add a comment to the commit (so you can keep track of what you did in that commit)
-	Removing/changing data from Git repository
-		git rm file.py
-			-> Gives the order to Git to not keep track of changes in 'file.py' anymore
-			   (file.py was in previous versions, but now it is not required)
-		git mv file_v1.py file_v2.py
-			-> Updates the name of the file from v1 to v2 (and keeps the track of the changes)
-			   (note that if you remove a file and add it again with another name, Git will
-			   figure it out anyways, but this is the explicit way of doing so)
+## 1. Git: Working in the Local Repository
+### 1.0 Initializing
+```git init```
+			-> creates an empty Git repository ('.git') (to gather all committed files from the working document)
+
+### 1.1 Adding, Removinf and Modifying files in the Staging Area
+Conceptually, the Staging Area is what `Git` calls the list of 'files to be added later to my code'. 
+The Staging Area allows us to keep track of the current changes of our code in real time. When a file added to the staging area, `Git` will save a snapshot of that file; `Git` will then be able to know if we have made changes on that file
+Once it is on the staging area, the file will be ready to be Committed (Saved on the `Git` tree, see point 1.2).
+```git status```
+- compares the current state of the local files with the files on the staging area and outputs the differences. It will also let you know the branch you are currently working on, and the files already added to the Staging area.
+
+```git add <file>```
+- adds snapshot of `file` to the staging area (Snapshot of file is taken, and will be added to the Git repository next time we run `commit`) (Note that if you modify `<file>` again before committing, only the version added to the Staging area will be considered. To update the modified version, run the add command again with the same file)
+
+```git add -A```
+- adds all files of the current folder in the Staging area
+    
+```git rm <file>```
+- Remove: Tells `Git` to not keep track of changes in `<file>` anymore (removes it from the `Git` tree)
+
+```git mv <previous_file_name> <new_file_name>```
+- Updates the name of the file from v1 to v2 (so `Git` can keep track of the changes since the beginning). 
+Note: if you remove the file (`git rm <previous_file_name>`) then add it again with another name(`git add <new_file_name>`), `Git` will still figure out the file is being renamed, but the `mv` command is the explicit way of doing so (preferred way).
+
+## 1.2 Comitting files from Staging area
+```git commit -m '<commit description>'```
+- Copies all "snapshots" of the files added in the staging area, and saves a copy in to the local Git repository (The snapshot is the way Git stores the data. Once a list of files have been committed, they can be retrieved at any point.
+Note: In the background, what `Git` does on each `commit` is saving the changes done to the files at each step in an optimized format. The files do not get copied over and over, what is saved are the changes done to the previous file. That way, files can be 're-built' following the steps of each `commit` statement, from the initial state.
+- `-m` lets you add a comment to the commit (Important, so you can keep track of what you did in that commit). Note that `Git` will force you to add the message if it is not included.
+
 	Ignoring data (.gitignore file)
 		.gitignore
 			-> a file stating all ignored files by Git (not listed in status or added to the staging area)
