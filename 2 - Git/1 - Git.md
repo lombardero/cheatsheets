@@ -1,6 +1,6 @@
 # GIT COMMANDS CHEATSHEET
 
-https://www.git-tower.com/learn/git/ebook/en/command-line/appendix/command-line-101
+This document lists useful commands to be used while using `Git`: from the basic Unix commands to work with branches and pushing code to GitHub. This file assumes no previous background.
 
 ## 0 - Basic navigation (Unix commands)
 ### 0.0 Get help
@@ -12,20 +12,22 @@ https://www.git-tower.com/learn/git/ebook/en/command-line/appendix/command-line-
 ```cd <path>```
 - cd stands for "change directory", moves to the specified path. Example: `cd /folder` moves to `folder`.
 Note: use `cd `, and press `Tab` to jump to possible options
+
 ```cd ..```
 - moves to the upwards (or 'preceding') directory
+
 ```pwd```
 - stands for "print Working Directory": returns address of current directory
 
 #### Show folder contents
-		ls
-			-> lists current directory contents
-		ls -l
-			-> lists contents in a better format
-		ls -a
-		ls -la
-			-> lists all files in current repository including hidden ones (add 'l' to make the format nicer)
-	Move/Remove/Create
+```ls```
+- lists current directory contents (prints the filenames)
+Options:
+- use `ls -l` to output the file details. `-l` stands for 'long' listing format.
+- use `ls -a` to print all files (normal files and hidden ones). `-a` stands for 'all'
+- use `ls -la` to combine above 
+
+#### Create, Update, Delete
 		rm directory/file.txt
 			-> removes file.txt in directory 
 		rm -r directory1/directory2
