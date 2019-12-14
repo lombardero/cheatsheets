@@ -10,11 +10,8 @@ This document lists useful commands to be used while using `Git`: from the basic
 ### 0.1 File and folder navigation
 #### Move through folders
 ```cd <path>```
-- cd stands for "change directory", moves to the specified path. Example: `cd /folder` moves to `folder`.
-Note: use `cd `, and press `Tab` to jump to possible options
-
-```cd ..```
-- moves to the upwards (or 'preceding') directory
+- cd stands for "change directory", moves to the specified path. Example: `cd /folder` moves to `folder`. Note: use `cd `, and press `Tab` to jump to possible options
+- `cd ..` moves to the upwards (or 'preceding') directory
 
 ```pwd```
 - stands for "print Working Directory": returns address of current directory
@@ -28,23 +25,12 @@ Options:
 - use `ls -la` to combine above 
 
 #### Create, Update, Delete
-```rm directory/file.txt```
-			-> removes file.txt in directory 
+- `rm <directory>/file.txt` removes file.txt in directory 
+- `rm -r <directory>` deletes `<directory>` and its contents. Note: this command needs `-r` (Recursive), since the OS will need to recursively enter every folder and file in the directory to completely erase it.
+- `mv <old_directory>/<file> <new_directory>/<file>` moves `<file>` from a directory to another
+- `mv <old-file-name> <new-file-name>` renames file
+- `mkdir <new-directory-name>` creates a new directory in current path
 
-```rm -r directory1/directory2```
-			-> removes directory2 in directory1 (-r : "Recursive")
-
-```mv directory_old/file.txt directory_new/file.txt```
-			-> moves file.txt from directory_old to directory_new
-
-```mv file_old.txt file_new.txt```
-			-> renames file_old.txt into file_new.txt
-
-```mkdir new_directory```
-			-> creates new_directory in current location
-
-```code filename```
-			-> opens the file in the text editor (VS code)
 
 ## 1. Git: Working in the Local Repository
 ### 1.0 Initializing
@@ -57,6 +43,8 @@ The file contains a list of all terminations, folders, files to be ignored. The 
 - use `*.<extension>` to ignore all files ended up in the `<extension>` specified
 - use `<folder>/` to ignore all files inside a folder
 - use `<folder>/<filename>` to ignore a specific file
+
+Example of `.gitignore` file: https://gist.github.com/octocat/9257657
 
 ### 1.1 Adding, Removing and Modifying files in the Staging Area
 Conceptually, the Staging Area is what `Git` calls the list of 'files to be added later to my code'. 
@@ -91,23 +79,23 @@ Once the local changes have been sent to Staging area (git has taken a 'snapshot
 
 ### Adding files to the Local Repository
 ```git commit -m '<commit description>'```
-- Copies all "snapshots" of the files added in the staging area, and saves a copy in to the local Git repository 
-Note: In the background, what `Git` does on each `commit` statement is saving the changes done to the files at each step in an optimized format. The files do not get copied over and over, what is saved are the changes done to the previous file. That way, files can be 're-built' following the steps of each `commit` statement, from the initial state. Each `commit` statement receives a code, which will allow us to identify it, and retrieve it if we wish so.
+- Copies all "snapshots" of the files added in the staging area, and saves a copy in to the local Git repository.
+
+Note: In the background, what `Git` does on each `commit` statement is saving the changes done to the files at each step in an optimized format. The files do not get copied over and over, what is saved are only the lines of code that were deleted, and the new lines added from the previous version. That way, files can be 're-built' following any of the steps of each `commit` statement, from the initial state. Each `commit` statement receives a hash code, which will allow us to identify it, and retrieve it anytime we wish so.
 - `-m` lets you add a comment to the commit (Important, so you can keep track of what you did in that commit). Note that `Git` will force you to add the message if it is not included.
 
 ### Retrieving commit history
 ```git log```
 - Outputs the history of commit statement done in the local repository. This command is very useful to understand where we are in the `Git` tree history; it can be used to retrieve the `commit` code and understand the branch tree.
 Useful options: 
-..* `git log --pretty=oneline` displays all the information in one line
-..* `git log --pretty=format:" %s" --graph` displays the info demanded ("%h" prints the commit hash, "%s" prints the subject) in a visual way showing the branch and merge history.
+- `git log --pretty=oneline` displays all the information in one line
+- `git log --pretty=format:" %s" --graph` displays the info demanded ("%h" prints the commit hash, "%s" prints the subject) in a visual way showing the branch and merge history.
 
 ## 2. Working with Remote Repositories
 ### 2.0 Cloning remote repositories
 ```git clone [URL]```
 - Creates a new folder in current directory, and copies all information of the specified URL
-git clone [URL] name
-..* Adding 'name' creates a folder with named 'name', and clones the content of the URL
+- `git clone [URL] name`: adding 'name' creates a folder with named 'name', and clones the content of the URL
 
 ### 2.1 Adding/checking remote repositories
 ```git remote```
