@@ -48,7 +48,8 @@ Example of `.gitignore` file: https://gist.github.com/octocat/9257657
 
 ### 1.1 Adding, Removing and Modifying files in the Staging Area
 Conceptually, the Staging Area is what `Git` calls the list of 'files to be added later to my code'. 
-The Staging Area allows us to keep track of the current changes of our code in real time. When a file added to the staging area, `Git` will save a snapshot of that file; `Git` will then be able to know if we have made changes on that file
+The Staging Area allows us to keep track of the current changes of our code in real time. When a file added to the staging area, `Git` will save a snapshot of that file; `Git` will then be able to know if we have made changes on that file.
+
 Once it is on the staging area, the file will be ready to be Committed (Saved on the `Git` tree, see point 1.2).
 
 #### Checking status
@@ -75,7 +76,7 @@ Once it is on the staging area, the file will be ready to be Committed (Saved on
 Note: if you remove the file (`git rm <previous_file_name>`) then add it again with another name(`git add <new_file_name>`), `Git` will still figure out the file is being renamed, but the `mv` command is the explicit way of doing so (preferred way).
 
 ## 1.2 Comitting files from Staging area to Local Repository
-Once the local changes have been sent to Staging area (git has taken a 'snapshot' of the files), these snapshots are ready to be saved in the local git repository. In the local repository, files will be retrievable at any time.
+Once the local changes have been sent to Staging area (git has taken a 'snapshot' of the files), these snapshots are ready to be saved in the local git repository. Once in the local repository, any saved state will be retrievable at any time.
 
 ### Adding files to the Local Repository
 ```git commit -m '<commit description>'```
@@ -106,9 +107,8 @@ Useful options:
 - gives you info about the remote repository specified
 
 ```git remote add [shortname] [URL]```
-		ex: git remote add origin https://github....
 - adds a new remote repository in the URL specified, with the shortname typed (shortname can be changed) 
-ex: `git remote add origin https://github....``
+example: `git remote add origin https://github....`
 
 ```git remote rename [oldname] [newname]```
 - changes the name of the remote file from old to new name
@@ -130,7 +130,10 @@ ex: `git pull origin maser`
 ### 2.3 Pushing data upstream
 ```git push [remote repository name] [branchname]```
 - "pushes" or updates the local data to the virtual repository. (will only work if you have access and if nobody has pushed since the last time you pulled code. If the code has been updated, you'll need to pull the code, change it, and then push it.)
-- '-u' creates a bond between 'origin/master' (local Git repository) and the virtual 'master' on Github. '-u' needs to be called one time only to do the bonding.
+- Adding `-u` creates a bond between 'origin/master' (local Git repository) and the virtual 'master' on Github. `-u` needs to be called one time only to do the bonding.
+
+#### Force-pushing (Use very carefully)
+In the cases we are sure
 
 ### 2.4 Tagging
 ```git tag -a [tag] -m [tag message]```
@@ -160,3 +163,5 @@ Useful link: https://git-scm.com/book/en/v1/Git-Branching-Basic-Branching-and-Me
 
 ```git rebase master```
 - after pulling to master last remote master changes) takes the `HEADER` and puts it into the latest version of master, which updates the position of the branch to the latest of master, this will tell you if there are merge conflicts. After this, a PR can be issued.
+
+(To be added: `git stash`, `git pop`)
