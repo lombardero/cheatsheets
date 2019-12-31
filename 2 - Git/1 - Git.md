@@ -1,36 +1,6 @@
 # GIT COMMANDS CHEATSHEET
 
-This document lists useful commands to be used while using `Git`: from the basic Unix commands to work with branches and pushing code to GitHub. This file assumes no previous background.
-
-## 0 - Basic navigation (Unix commands)
-### 0.0 Get help
-```<command> --help```
-- Will output the guidelines for any command
-
-### 0.1 File and folder navigation
-#### Move through folders
-```cd <path>```
-- cd stands for "change directory", moves to the specified path. Example: `cd /folder` moves to `folder`. Note: use `cd `, and press `Tab` to jump to possible options
-- `cd ..` moves to the upwards (or 'preceding') directory
-
-```pwd```
-- stands for "print Working Directory": returns address of current directory
-
-#### Show folder contents
-```ls```
-- lists current directory contents (prints the filenames)
-Options:
-- use `ls -l` to output the file details. `-l` stands for 'long' listing format.
-- use `ls -a` to print all files (normal files and hidden ones). `-a` stands for 'all'
-- use `ls -la` to combine above 
-
-#### Create, Update, Delete
-- `rm <directory>/file.txt` removes file.txt in directory 
-- `rm -r <directory>` deletes `<directory>` and its contents. Note: this command needs `-r` (Recursive), since the OS will need to recursively enter every folder and file in the directory to completely erase it.
-- `mv <old_directory>/<file> <new_directory>/<file>` moves `<file>` from a directory to another
-- `mv <old-file-name> <new-file-name>` renames file
-- `mkdir <new-directory-name>` creates a new directory in current path
-
+This document lists useful commands to be used while using `Git`: from initializing the project to work with branches and pushing code to GitHub. This file assumes no previous background.
 
 ## 1. Git: Working in the Local Repository
 ### 1.0 Initializing
@@ -152,6 +122,7 @@ Useful link: https://git-scm.com/book/en/v1/Git-Branching-Basic-Branching-and-Me
 
 ```git checkout -b [newbranch]```
 - adding -b to the checkout command creates a new branch from the current branch AND changes the pointer to work on it
+
 ```git merge [branchname]```
 - merges the specified branch with the branch you are currently in (ex: to merge with master you need to checkout to master then merge)
 
