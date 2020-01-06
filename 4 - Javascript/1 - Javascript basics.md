@@ -1,9 +1,9 @@
-# 1.1 - JAVASCRIPT BASICS
+# 1 - JAVASCRIPT BASICS
 
 This document is a quick introduction the Javascript very basics, such as defining variables, computing simple operations, and simple syntax such as defining functions and logic statements.
 
-## 1.1.1 The Javascript Very Basics
-### 1.1.1.1 Variables
+## 1.1 The Javascript Very Basics
+### 1.1.1 Variables
 Javascript has two groups of variable types, primitive values and reference values.
 
 #### Primitive value types
@@ -43,7 +43,7 @@ var obj = {
                 }
 ```
 
-### 1.1.1.2 Basic syntax
+### 1.1.2 Basic syntax
 #### Comments
 - `//`: single line Comment
 - `/*` multi line Comment (needs to be closed with the mirror operator `*/`)
@@ -71,15 +71,23 @@ The basic syntax to define a variable in Javascript is:
 var variable_name = 'variable_value';
 ```
 
-#### Defining global variables
-Global variables will be accessible in the whole code (even inside functions), and considered a 'Global constant' in all the code. They are defined using the `const` statement. Note that the convention states that global variable names are in caps, and use underscores as separations.
+#### Defining local variables
+`let` will work very similarly as `var`, but will define a variable locally, in the scope of a block (`{...}`) instead of globally.
+
+Syntax:
+```Javascript 
+let local_variable_name = 'i_am_a_local_variable';
+```
+
+#### Defining constants
+Global constants will be accessible in the whole code (even inside functions), and are used to be explicit about what we plan to do with variables defined. `const` should be used for any variable that will not change throughout our script: if we try to change the value initially set to a constant, we will get an error. Note that the convention states that global constant names are in caps, and use underscores as separations.
 
 The basic syntax to define a Global variable in Javascript is:
 ```Javascript 
-const GLOBAL_VARIABLE = 'variable_value';
+const GLOBAL_CONSTANT = 'variable_value';
 ```
 
-### 1.1.1.3 Basic operations
+### 1.1.3 Basic operations
 #### Querying data type
 ```Javascript 
 typeof variable_name;
@@ -130,6 +138,20 @@ Number('34');
 ```
 - returns the numeric string as a number data type
 
+```Javascript 
+const text1 = 'Paul';
+const text2 = 'McCartney';
+console.log(text1 + text2);
+```
+- Will return the complete string.
+
+```Javascript 
+const text1 = 'Jude';
+const text2 = 'make';
+console.log(`Hey ${text1}, don't ${text2} it bad`);
+```
+- Will log in the console the complete text. Note that for the above text to work the `\`\`` (open accent) characters need to be used.
+
 #### Array operations
 ```Javascript
 array[n_idx];
@@ -149,10 +171,10 @@ obj['key1'];
 - retrieves the data stored in `'key1'` of the dictionnary `obj`.
 
 
-## 1.1.2 Conditional statements in Javascript
+## 1.2 Conditional statements in Javascript
 To define conditional statements in Javascript, we us what in Javascript is defined a 'block', which delimits the code affected by a statement. Blocks are used to delimit the code of functions as well. Blocks are delimited by brackets: `{...}`.
 
-### 1.1.2.1 `if` statements
+### 1.2.1 `if` statements
 #### Basic `if` statements
 If statements are defined with a boolean condition, and perform a series of computations if that statement is true.
 ```Javascript
@@ -184,7 +206,7 @@ switch(a){
     break;
     }
 ```
-### 1.1.2.1 `while` statements
+### 1.2.2 `while` statements
 While statements have two syntaxes in Javascript, depending on how we want our code to behave.
 
 If we want to first verify a condition, and then do a computation, we must use the `while` statement at the beginning as shown below:
@@ -202,7 +224,7 @@ do {
 } while (<Bool> condition)
 ```
 
-### 1.1.2.1 `for` statements
+### 1.2.3 `for` statements
 `for` loops require three arguments to run: the start of the iteration, a boolean condition ('do another iteration until the condition is `False`), and the step definition. An example is shown below:
 ```Javascript
 for (var i=0, i<=9, i +=1) {
@@ -210,16 +232,19 @@ for (var i=0, i<=9, i +=1) {
 }
 ```
 
-## 1.1.3 Defining Functions in Javascript
+## 1.3 Defining Functions in Javascript
 Functions are objects that perform a series of isolated computations whenever they are called. They can take (or not) variables as inputs, which will then be used inside of the function to compute a result.
 
 Notes on functions:
-- functions are 'isolated' statements, meaning that once run, they will make a copy of their input variables, perform the computations stated, and return something if asked.
+- functions are 'isolated' statements, meaning that once run, they will make a copy of their input variables, perform the computations stated, and return something if asked. The variables will be then erased from memory
 - functions can only access their input variables. The variable names used as inputs will be valid only within the function
 - global variables (defined with `const`) are an exception of the above statement; they can be accessed by functions without needing to be inserted as arguments.
 - functions defined inside another function can access any variable defined in the first function.
 
-Example 1:
+### 1.3.1 Standard Syntax
+The standard syntax uses the `function` keyboard followed by the name of the function to define it.
+
+Example1:
 ```Javascript
 function newFunction() {
     var function_variable = 1; // this will belong only to the function
@@ -231,6 +256,23 @@ Example 2:
 ```Javascript
 function newFunction(input_variable) {
     computation;
-    return input_variable; // this will be returned by the function
+    return computation_result; // this will be returned by the function
 }
 ```
+
+### 1.3.2 Arrow functions
+Arrow functions are a symplified way of defining functions. Instead of using the `function` keyword, we create a constant with the name of the function, and set it equal to an anonymous function (function with no name). The function is defined using the statement `=>` (or 'arrow') as shown below.
+
+First syntax for Arrow functions:
+```Javascript
+const newFunction = (input_variables) => {
+    computation;
+    return computation_result;
+}
+```
+
+Arrow function syntax allows to symplify functions that use the `return` statement as well. Instead of using the syntax above, we can use the symplified version below:
+```Javascript
+const newFunction = (input_variables) => computation_result;
+```
+Note: in the case there is only one input variable, the parenthesis can be removed.
