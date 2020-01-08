@@ -87,6 +87,21 @@ The basic syntax to define a Global variable in Javascript is:
 const GLOBAL_CONSTANT = 'variable_value';
 ```
 
+#### Importing modules
+Javacript uses the `require()` keyword to import modules or libraries. We can import JS pre-built modules or files we have created.
+
+The syntax is as follows:
+```Javascript
+const module_name = require('prebuilt_module_name');
+```
+- In the code above, we import `prebuilt_module_name`, and name it `module_name` on the current script. That will allow us to access its functionalities using the name we have given it. (Not specifying a path will look for any prebuilt library)
+
+To import a file from our folder:
+```Javascript
+const module_name = require('./imported_module.js');
+```
+- The code above will import `imported_module.js` from the current folder (`./` indicates relative path, `/` would work for absolute path). Note that the import would still work without stating `.js` (Javascript looks for `.js` files only)
+
 ### 1.1.3 Basic operations
 #### Querying data type
 ```Javascript 
@@ -152,6 +167,12 @@ console.log(`Hey ${text1}, don't ${text2} it bad`);
 ```
 - Will log in the console the complete text. Note that for the above text to work the `\`\`` (open accent) characters need to be used.
 
+```Javascript 
+const text = 'Hello-darkness';
+text.split('-');
+```
+- `split()` will return an array of strings, 'splitting' it from all points where the character in the argument appears. (In the above example, the console will return `['Hello','darkness'])`.
+
 #### Array operations
 ```Javascript
 array[n_idx];
@@ -162,6 +183,11 @@ array[n_idx];
 array.length;
 ```
 - returns the length (number of elements) of the array
+
+```Javascript
+array.push(new_element);
+```
+- Adds a `new_element` at the end of the string (same as Python `append()`)
 
 #### Dictionnary operations
 ```Javascript
