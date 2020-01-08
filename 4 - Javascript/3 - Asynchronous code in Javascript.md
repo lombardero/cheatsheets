@@ -11,7 +11,26 @@ computation2
 
 Note: Only the computation inside `setTimeout()` will wait `t_ms` to be executed: Javascript will run `computation2` wthout waiting for `computation1` to be finished (in this case, `computation2` will run before `computation1`).
 
-### 3.1.2 Callbacks and Promises
+### 3.1.2 Writing files
+Files can be written synchonously (code gets blocked until file is created) or asynchonously (code continues to run during the file creation).
+
+```Javascript
+const fs = require('fs');
+
+fs.writeFileSync('<file_name>.<extension>', content)
+```
+- Writes a file synchronously (code below this line goes not gets executed until the file is created). This can be problematic with big files.
+
+```Javascript
+const fs = require('fs');
+
+fs.writeFile('<file_name>.<extension>', content, err => {
+    code_run_after_file_created;
+})
+```
+- The `writeFile()` function will
+
+### 3.2 Callbacks and Promises
 #### Callbacks
 Callbacks are functions passed as arguments of other functions, and used in asynchronous code to state the 'dependent' functions.
 
