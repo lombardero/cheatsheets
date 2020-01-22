@@ -1,6 +1,6 @@
 # Folders
 /Resources.*
-/1-python/.ipynb_checkpoints*
+1-python/.ipynb_checkpoints.*
 
 # Formats
 *.pdf
