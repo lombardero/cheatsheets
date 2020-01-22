@@ -1,15 +1,5 @@
 # Folders
-/data.*
-/Coursera.*
-/google.*
-/Python.*
-/data
-/Data\ science\ librarie/
-/1\ -\ Python/.ipynb_checkpoints/
-/1\ -\ Python/Coursera\ -\ Michigan/
-/1\ -\ Python/Python\ for\ Data\ Science\ -\ Udemy/
-/0\ -\ Linux/Code/
-/1\ -\ Python/google-python-exercises/
+/Resources.*
 
 # Formats
 *.pdf
