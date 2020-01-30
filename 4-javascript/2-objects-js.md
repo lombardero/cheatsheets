@@ -95,9 +95,7 @@ const function = ({property1}) => {
 ## 2.3 The `this` statement
 `this` stands for 'whatever called the function', and is a variable that has two uses. 
 
-More info: 
-https://academind.com/learn/javascript/this-keyword-function-references/
-https://www.youtube.com/watch?time_continue=1&v=Pv9flm-80vM&feature=emb_logo
+More info on [this post of Academind](https://academind.com/learn/javascript/this-keyword-function-references/), and [this video](https://www.youtube.com/watch?time_continue=1&v=Pv9flm-80vM&feature=emb_logo).
 
 ### 2.3.1 First use: binding variables to a class
 When defining a variable in the constructor of a Class, it will tell it to 'bind it' to the class, that way, that variable will be accessible at any point in the class (for example, as an argument for any of the methods of the class). On top of that, that variable will be accessible when an instace of the class is created.
