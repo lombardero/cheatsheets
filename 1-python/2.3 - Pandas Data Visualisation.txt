@@ -1,0 +1,90 @@
+	->>>  PANDAS DATA VISUALISATION  <<<-
+
+To do great plots, Seaborn is better. But for 'quick' plots these formulas can be used
+
+import numpy as np
+import pandas as pd
+import seaborn as sns (allows the plots to look like the ones in Seaborn - prettier)
+%matplotlib inline (to see the visualisations in Jupyter Notebook)
+
+General (MatplotLib arguments can be used)
+	df.plot.line(x='colnum1',y='colnum2',figsize=(h,v),lw=n): adjusts the visualization with
+															  Matplotlib arguments	
+		Other arguments: color='string'
+						 cmap='string'
+						 ls='--' (linestlyle)
+
+Styles
+	plt.style.use('ggplot'):sets the style of the plot (background as 'ggplot' - grey
+						    background with white lines. One time is enough for the full
+							notebook.
+		Other styles: 'dark_background', 'bmh', 'fivethrityeight'
+	plt.figure(figsize(w,h)): modifies the width and height of the figure (applied to all plts)
+		->  Note: two plots can be add to the same axes in Jupyter Notebook (same line)
+Legend
+	plt.legend(loc='center left'): sets the location of the legend
+	plt.legend(loc='center left',bbox_to_anchor=(1.0,0.5)): sets an offset of 1 horizontally
+														    and 0.5 vertically of the legend
+															from the position specified
+	
+Histogram
+	df['colnum'].plot(kind='hist'): calls Matplotlib to create a histogram of the numerical
+									data in the numerical column 'colnum' of dataframe df
+	df['colnum'].plot(kind='hist',bins=n): Sets the number of bins to n
+	OR
+	
+	df['colnum'].plot.hist(): calls Matplotlib to create a histogram of the numerical data
+						 in the numerical column 'colnum' of dataframe df
+	df['colnum'].plot.hist(bins=n): Sets the number of bins to n.
+	
+Area plot
+	df.plot.area(): creates an area plot of all columns in the dataframe df (same as AoE
+					military plot), all columns should be in the same units
+	df.plot.area(alpha=t): Adds transparency t to the plot (t b/w 0 and 1)
+	
+Bar plot
+	df.plot.bar(): a barplot with all rowns of df on the x axis, each column counted
+				   as a cathegory, and the numerical values of the columns in the y
+				   axis (columns should be numerical)
+	df.plot.bar(stacked=True): Stacks each bar on top of each other (similar to areaplot)
+
+Line plot
+	df.plot.line(x='colnum1',y='colnum2'): Plots an x-y linear plot with the numerical 
+										   values in the columns specified
+										   Note: x can be a time series 'YYYY-MM-DD
+	df.plot.line(x='colnum1',y='colnum2',figsize=(h,v),lw=n): adjusts the visualization with
+															  Matplotlib arguments
+
+Scatter plot
+	df.plot.scatter(x='colnum1',y='colnum2'): creates a scatter of the data in the numerical
+											  columns specified for c and y
+	df.plot.scatter(x='colnum1',y='colnum2',c='colnum3'): adds a color code in the scatter
+														  based on the numerical data of
+														  'colnum3'
+	df.plot.scatter(x='colnum1',y='colnum2',c='colnum3',cmap='coolwarm'): changes the color
+																		  code for the 3rd
+																		  value
+	df.plot.scatter(x='colnum1',y='colnum2',s=df['colnum3']*100): adds the value on 'colnum3'
+																  as the size of each point
+																  in the scatter (it is multiplied
+																  by 100 (arbitrary) to make the 
+																  points visible, but will depend
+																  upon the data on 'colnum3')
+
+Box plot
+	df.plot.box(): creates a box plot (showing the quartiles of the data) for each numerical column
+				   inside df
+	
+Hexagonal bins
+	df.plot.hexbin(x='colnum1',y='colnum2'): creates a hexagona bin distribution plot (showing
+											 the density of the scatter points in hexagons)
+	df.plot.hexbin(x='colnum1',y='colnum2',gridsize=25): sets the size of the hexagons to 25 (easier to
+														 visualize)
+	df.plot.hexbin(x='colnum1',y='colnum2',cmap='coolwarm'): changes the color code of the plot tp
+															 the one specified)
+
+Kernel distribution plots
+	df['colnum'].plot.kde(): plots the kde curve of the data in 'colnum' of dataframe df
+	df.plot.kde(): plots the kde curve of all numerical columns of df
+	
+	df.plot.density(): does the same as df.plot.kde()

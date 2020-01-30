@@ -1,0 +1,7 @@
+Os library
+
+import os
+
+	os.getcwd(): returns the current working directory
+	os.chdir('C:\\...\...'): changes current working directory to indicated string
+			note: use '\\' after 'C:' and '\' between folders

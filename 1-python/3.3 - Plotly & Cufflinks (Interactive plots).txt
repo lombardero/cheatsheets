@@ -1,0 +1,113 @@
+	->>>  PLOTLY & CUFFLINKS LIBRARY  <<<-
+
+Plotly is an open source library allowing to make interactive visualisations.
+Cufflinks connects Plotly to Pandas. 
+
+Plotly cheat sheet:
+https://images.plot.ly/plotly-documentation/images/python_cheat_sheet.pdf
+
+Links for Plotly:
+https://plot.ly/pandas/getting-started/
+https://github.com/plotly/plotly.py/blob/master/README.md
+
+Links for Cufflinks:
+https://github.com/santosjorge/cufflinks
+
+Install
+	pip install plotly
+	pip install cufflinks
+	%matplotlib inline (to automatically plot in Jupyter notebook)
+	
+Initialization
+	import pandas as pd
+	import numpy as np
+	
+	from plotly import __version__
+	import cufflinks as cf
+	
+	from plotly.offline import download_plotlyjs,init_notebook_mode,plot,iplot
+		(imports the offline (free) elements to the notebook)
+		
+	init_notebook_mode(connected=True)
+		(connects python and Pandas to the original Javascript library that Plotly
+		is based on)
+
+	cf.go_offline()
+		(allows to use Cufflinks offline)
+
+	-> for more options check out: https://plot.ly/python/offline/
+
+Standard linear plot
+	df.plot(): creates a line plot of all numerical values on df
+	
+Interactive linear plot
+	df.iplot(): creates an interactive line plot of all numerical values in df (it
+				allows to check the values for each point, zoom in, remove columns...)
+
+Interactive scatter plot
+	df.iplot(kind='scatter',x='colnum1',y='colnum2',mode='markers'): creates a scatter plot
+												with the numerical data in 'colnum1' and 
+												'colnum2' in the x and y axis, setting markers
+												as the element for plotting (because Plotly plots
+												a line by default)
+
+	df.iplot(kind='scatter',x='colnum1',y='colnum2',mode='markers',size=n): sets the size of
+																			the marker as n
+
+Interactive bar plot
+	df.iplot(kind='bar',x='colcat',y='colnum'): creates a bar of the numerical data of 'colnum' for
+												each category in 'colcat'
+	
+	df.sum().iplot(kind='bar'): plots the sum of all rows (in a fully numerical dataframe) for
+								each index column (can be used with other functions, and groupby)
+								
+Interactive box plots
+	df.iplot(kind='box'): shows box plots of all numerical columns of df, for each index column
+				
+3D surface plot
+	df.iplot(kind='surface'): creates a 3D surface plot of the numerical data in df (note that
+							  there should be 3 numerical columns only).
+							  
+	df.iplot(kind='surface',colorscale='rdylbu'): changes the color scale of the surface to the 
+												  one specified (in this case red-yellow-blue)
+												  For more info, check documentation
+
+Histogram
+	df['colnum'].iplot(kind='hist'): creates a histogram of the data inside 'colnum'
+	df['colnum'].iplot(kind='hist',bins=n): sets the number of bins to n
+	
+	df.iplot(kind='hist'): creates overlapping histograms of all numerical columns of df
+	
+Spread (stock visualisations)
+	df['colnum1','colnum2'].iplot(kind='spread'): plots the line distributions of both variables
+												  in 'colnum1' & 'colnum2', adding a 'spread' plot
+												  underneath (showing how one variable changes
+												  respectively to the other)
+	
+Bubble plot
+	df.iplot(kind='scatter',x='colnum1',y='colnum2',size='colnum3'): plots a scatter of the numerical
+												  data in 'colnum1' & 'colnum2' in x and y, adding
+												  the data in 'colnum3' as the size of each point,
+												  or each 'bubble'
+
+Scatter matrix plot (similar to Seaborn's pairplot)
+	df.scatter_matrix(): creates a matrix of plots comparing all numerical data by pairs. In the diagonal
+						 the histogram of each variable is shown.
+						 Note: all data inside df must be numerical
+
+Candlestick plot (financial)
+	df.iplot(kind='candle'): plots a candlestick plot (stock plot) of any dataframe with indexes
+							 'open','close','high','low', and datetime on its row indexes
+
+Moving average plot
+	df['col'].ta_plot(study='sma'): plots a 2D plot with a moving average on the data (default
+									makes an average with 14 values)
+									-additional arguments:
+										· period = n: makes the moveable average of n values
+Bollinger plot
+	df['col'].ta_plot(study='boll'): plots a 2D plot with the data, the moving average and the
+									 lower and upper standar deviation curves
+									 -again, additional arguments:
+										· period = n: selects the number of data to use in the 
+										  study of each point
+

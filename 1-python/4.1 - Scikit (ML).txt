@@ -1,0 +1,413 @@
+	->>>  SCIKIT LEARN  <<<-
+
+
+Installation
+	 pip install scikit-learn
+(or) conda install scikit-learn
+
+
+Pre-built models
+	Example: linear regression
+		A) First, we need to import the model:
+			-> from sklearn.linear_model import LinearRegression
+
+		B) Then, we create an 'estimator' object with the data
+		   (namede 'model')
+			-> model = LinearRegression(normalize = True)
+			-> print(model)
+
+		C) The 'estimator' object is then modified and trained with	
+		   the training data (only 1 input in unsuperv learning: X)
+			-> model.fit(X_train,y_train)
+
+		D) We can create a 'predicitons' data (array) from the 
+		   'estimator' object
+			-> predictions = model.predict(X_test) 	(superv. learn.)
+			-> model.predict(X_new)					(unsup. learn.)
+
+SUPERVISED LEARNING
+·Define the algorithm
+	estim = LinearRegression()
+		-> selects the estimator to be 'Linear Regression'
+·Training
+	estim.fit(X,y)
+		-> uses X (input) and y (labelled) to train the estimator, 
+		   updating it 
+·Predict (model is trained)
+	estim.predict(X)
+		-> gives a prediction for the input data X (with the current
+		   update, which is trained)
+	estim.predict_proba(X)
+		-> for classification problems, gives the probability that the
+		   example X falls onto each category (the one with most proba)
+		   is the one predicted by .predit
+	estim.score()
+		-> returns a number from 0 to 1 measuring how well the estimator
+		   fits the data
+UNSUPERVISED LEARNING
+	estim.transform()
+		-> transforms new data into the new basis (?)
+	estim.fit_transform()
+		-> (?)
+
+DATA TREATMENTS
+	Split the data into X and y train and test data:
+		X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
+			-> Splits the input data X into X_train and X_test and
+			   output y into y_train and y_test (randomly?) with 
+			   0.3 test data and 0.7 train data
+
+-------------------------------------------------------------------------
+LINEAR REGRESSION (step by step)
+	1) Split the dataframe into an X data with the training data,
+	   and a y data with the column we want to predict
+			->  X = df[['predcol1','predcol2',...'predcoln']]
+			->  y = df['colpredict']
+				(hint: use df.columns to print the column name)
+	2) Split the data into training data and test data 
+	   (create X_tr, X_tst, y_tr, y_tst)
+			->  from sklearn.model_selection import train_test_split
+			->  X_tr, X_tst, y_tr, y_tst = train_test_split(X,y,
+										   test_size = 0.4,
+										   random_state = 101)
+				· test_size: is the percentage of the data that we
+				  want the test data to be
+				· random_state: defines which 'random' selection we
+				  want our data to be sorted in test and training 
+				  data (all are permutations 'randomized', but they
+				  calling two times the same number will make the 
+				  same permutations happen)
+	3) Create an estimator object using linear regression
+			->  from sklearn.linear_model import LinearRegression
+			->  lm = LinearRegression(): creates the estimator (empty)
+			->  lm.fit(X_tr, y_tr): trains the linear regression model
+				with X_tr and ytr, updating lm obect (no need to set lm=...)
+			->  print(lm.intercept_): prints the intercept with the 
+				linear regression line and the x axis
+			->  lm.coef_ : prints the coefficient (thetas) of the
+				trained model
+		   (->  we can create a dataframe with the coefficients calling
+		   		df = pd.DataFrame(lm.coeff_,X.columns,columns = 'coefficients'))
+	4) Evaluate the model with the test data
+			->  pred = lm.predict(X_tst): creates an array of pre-
+				dictions for the test data named pred
+		    ->  plt.scatter(y_test, pred): illustrates the accuracy of
+		   		our model, the closer they are to the y=x curve, the better
+		   	->  sns.distplot(y_tst-pred): create a histogram of the
+		   		residuals (linear error), allows to see the distribution
+		   		of the errors (if normal distr, model seems Ok)
+		  Note: as a quantifiable parameter, we can use the Mean Absolute
+		  		Error (MAE), the Mean Squared Error (MSE), or the Root 
+		  		Means Squared Error (RMSE), which is the square root of MSE
+		  		(MSE is popular because it tends to punish harsher longer
+		  		distances, RMSE even more popular because the number has
+		  		mathematical value, it is understandeable)
+		  	->  from sklearn import metrics: imports the metrics
+		  		· metrics.mean_absolute_error(y_tst,pred)
+		  		· metrics.mean_squared_error(y_tst,pred)
+		  		· np.sqrt(metrics.mean_squared_error(y_tst,pred))
+
+--------------------------------------------------------------------------
+LOGISTIC REGRESSION
+->  Use sigmoid function to linear regression to "compress" the whole
+	spectrum of R numbers to a number b/w 0 and 1 (decide category)
+->  Confusion Matrix: evaluates the performance of the model (false pos,
+	true neg):  	predictions 	(n=165)
+					NO 		YES
+			NO 		50		10
+	Actual	YES 	5		100
+
+->  Accuracy (TP+FN)/n (TP = true positive. FN = false negatives)
+->  Type 1 error: false positives (FP) -> telling a man: "you're pregnant"
+->  Type 2 error: true negatives  (FN)
+
+LOGISTIC REGRESSION WITH PYTHON
+	1)  Split the data frame into X and y, then into training and
+		test data (Check Linear Regression steps 1 and 2)
+	1') Visualize the data to understand it better
+			->  sns.heatmap(X.isnull()): creates a heatmap showing
+					which values inside our X are NaN
+					·Note: X.isnull(): creates a boolean with all
+					 NaN values
+					·Note2: add uticklabels=False to avoid a lot
+					 of empty data in the squares of the heatmap
+			->  sns.countplot(x='predict label', data = df): will show
+				us the distribution between each category (useful in
+				classification). To further understand it, we can
+				add a hue and change it to the countplot to check the 
+				distribution depending on a categorical feature
+			->  sns.distplot(df['idxnum']): helps us understand a
+				numeric distribution of an input 
+	2)  Clean the missing data
+			·   imputation: data cleaning method consisting in adding
+							the mean of the dsitribution of that feature
+							in all spots where the data is missing (NaN)
+			·  imputation^2 (clever): add the mean of that feature 
+							DEPENDING of another category (ex: age data
+							is missing, we can make the mean of all the
+							ages and add it in all NaNs, OR, take the
+							average age depending upon the class (1,2 or
+							3)), and then add it in all NaN data, 
+							depending on the class. (use sns.boxplot())
+			->  To perform imputation we define a function that applies
+				what we want (ex imputes missing age depending upon
+				average of social class: 1st, 2nd or 3rd)
+				ex: · def impute_age(datafr):
+						Age = datafr[0]
+						Class = datafr[1]
+
+						if pd.isnull(Age)
+							if Class == 1:
+								return 37
+							elif Class == 2:
+								return 29
+							else:
+								return 24
+						else:
+							return Age
+					(takes a nx2 df, spits out a nx1 df with the Age
+					imputed)
+					· treated_data['Age'] = df[['Age','Class']].apply(
+					  impute_age,axis=1)
+			->  We can remove the columns with too much missing data
+				df.drop('idkmissing')
+	2') Convert the categorical data into numbers (dummy variable)
+		(ex: converting 'female' and 'male' into 0 and 1)
+			->  pd.get_dummies(df['colcat']): will convert the
+				categorical data in the 'colcat' column to a dataframe
+				with column indexes as each original category,
+				whereas the data will be converted to Boolean
+				(ex:   Sex
+					0	F
+					1	M
+				pd.get_dummies(df['Sex'])
+				->  	F 	M
+					0	1	0
+					1	0	1)
+			->  Problem with this: one of the columns is a perfect predictor of
+				the other columns (Messes up algorithms)
+				To avoid that, we can add the parameter drop_first = True so the first
+				column is removed, and the categorical data is not redundant (we do
+				that will all dimensions of categorical data, works with 2, 3... n
+				categories)
+				pd.get_dummies(df['colcat'], drop_first=True)
+				->  	M
+					0	0
+					1	1)
+			->  We add the newly defined columns in the dataframe:
+				· dfnew = pd.concat([df,dummynew1, dummynew2],axis=1)
+			->  Feature-engineer new features (such as the title of someone's name
+				Mr. / Dr. / Mrs., the first letter of a code, etc...)
+			->  Remove useless / categorical columns: dfnew.drop(['colcat1','colcatn'],
+				axis = 1, inplace = True) (all data should be numerical)
+			->  Note: convert categorical classes with numerical categories too
+				(ex: Class: 1, 2, 3 -> they shall be converted to dummy values!
+	3)  Split the data into features (X) and element to predict (y)
+			-> X = data.drop('datatopredict', axis=1): drops the one column
+				we want to predict (assuming we dropped all useless data already)
+			-> y = data('datatopredict')
+	4) Split the data into training data and test data (Same as linear reg.)
+	   (create X_tr, X_tst, y_tr, y_tst)
+			->  from sklearn.model_selection import train_test_split
+			->  X_tr, X_tst, y_tr, y_tst = train_test_split(X,y,
+										   test_size = 0.3,
+										   random_state = 101)
+				· test_size: is the percentage of the data that we
+				  want the test data to be
+				· random_state: defines which 'random' selection we
+				  want our data to be sorted in test and training 
+				  data (all are permutations 'randomized', but they
+				  calling two times the same number will make the 
+				  same permutations happen)
+	5)  Train the Logistic regression estimator
+			->  from sklearn.linear_model import LogisticRegression
+			->  lr = LogisticRegression(): creates the estimator named 
+			'lr' as a Logistic Regression type
+			->  lr.fit(X_t, y_t): trains the logistic regression with the
+					data inserted
+	6)  Evaluate the model with the test data
+			->  pred = lr.predict(X_tst): creates a prediction for all test
+					data
+			->  from sklearn.metrics import classification_report: the
+					classification report is a built in logistic regression
+					evaluator to check the precision and recall of the model
+			 ·  print(classification_report(y_tst,pred)): returns the
+					precision and recall of the model along with some details
+			->  from sklearn.metrics import confusion_matrix: imports the 
+					built in method to check out the confusion matrix (TP, TN,
+					FP, FN)
+			 ·  confusion_matrix(y_tst,pred): returns an array with the total
+			 		number of FN, FP, TP, TN
+
+--------------------------------------------------------------------------
+K NEAREST NEIGHBOURS (KNN)
+->  Check the category of the k (selected by user) closest points tho the Xi
+	we are trying to determine. Selects the most frequent one
+->  Will need to define k, and the way the distance is penalized (squared?)
+->  Pros: easy to train, trivial, easy to add data
+->  Cons: High prediction cost, not great with high dimension data, cate-
+	gotical data do not work well
+
+KNN WITH PYTHON
+	1)  Normalize the input data (key to measure the distance)
+		->  from sklearn.preprocessing import StandardScaler (import)
+		->  norm = StandardScaler(): we create a normalizer object 'norm'
+		->  norm.fit(df.drop('predictdata',axis = 1)): updates the nroma-
+				lization parameter with the data we want, note that we 
+				remove the data we want to predict(col 'predictdata')
+		->  norm_feat = norm.transform(df.drop('predictdata',axis = 1)):
+				creates an array of norm_feat with the nomalized features
+		->  df_norm = pd.Dataframe(norm_feat,
+								   columns=df.drop('predictdata'
+								   				    axis=1).columns)
+				creates a new dataframe with the new normalized features
+				and the original column indexes
+	2) We create the X and y DataFrames from the data
+		->  X = df_norm
+		->  y = df['predictdata']
+	3) Split the data into training data and test data (Same as linear reg.)
+	   (create X_tr, X_tst, y_tr, y_tst)
+			->  from sklearn.model_selection import train_test_split
+			->  X_tr, X_tst, y_tr, y_tst = train_test_split(X,y,
+										   test_size = 0.3,
+										   random_state = 101)
+				· test_size: is the percentage of the data that we
+				  want the test data to be
+				· random_state: defines which 'random' selection we
+				  want our data to be sorted in test and training 
+				  data (all are permutations 'randomized', but they
+				  calling two times the same number will make the 
+				  same permutations happen)
+	4)  Iterate to find the optimal K value
+		a)  Try an initial value of K
+			->  from sklearn.neighbors import KNeighborsClassifier
+			->  knn = KNeighborsClassifier(n_neighbors=1): we create our
+					first knn estimator with k=1
+			->  knn.fit(X_tr,y_tr): updates knn considering the estimator
+					inputs we threw to it
+		b)  Test the data
+			->  pred = knn.predict(X_tst): create a set of predictions 
+					'pred' with the test data
+			->  print(confusion_matrix(y_tst,pred))
+			->  print(clessifications_report(y_tst, pred))
+		c)  Iterate with a for to find the best K value
+			->  error_rate=[]: we create a blank error_rate feature (we want
+					to optimize)
+			->  for i in range(1,n)
+					knn = KNeighborsClassifier(n_neighbors = i)
+					knn.fit(X_tr,y_tr)
+					pred_i=knn.predict(X_test)
+					error_rate.append(np.mean(pred_i != y_tst))
+						trains n models and calculates the error rate (how
+						many times we predict wrong) for each value of K
+			->  plt.plot(range(1,n),error_rate,color='blue',linestyle='dashed',
+						 marker='o',markerfacecolor='red',markersize=10))
+				plt.title('Error Rate vs K')
+							plots the Error rate for all tested values of K
+			->  We keep the K value where it seems that the error stops
+					converging.
+	5)  Retrain the model with the new K, computing the confusion matrix
+			->  knn = KNeighborsClassifier(n_neighbors=K)
+			->  knn.fit(X_tr,y_tr)
+			->  pred = knn.predict(X_tst)
+			->  from sklearn.metrics import confusion_matrix
+				· print(confusion_matrix(y_tst,pred))
+			->  print('\n') : prints in a new line
+			->  from sklearn.metrics import classification_report
+				· print(classification_report(y_tst, pred))
+
+--------------------------------------------------------------------------
+TREE METHODS
+
+->  Dividee the problem into the prediction of outcomes based on
+	conditions (features). If X1 condition is satisfied, and X2 is
+	also, THEN outcome A (etc)
+	Intuition:
+	https://towardsdatascience.com/enchanted-random-forest-b08d418cb411
+
+->  Method to get a single tree:
+	a)  We partition the data successively into two sub-sets (each
+		division is chosen to be the one reducting the most
+		the uncertainty, or having the hightes information gain),
+		until all data is sorted or the minimum size of the sample
+		in one "leaf" is reached. This step will give us the 
+		"unpruned" tree T (our objective now will be  to remove some
+		of its "branches" or partitions, to get the most optimal
+		tree)
+	b)  For that, we add a parameter lambda*|T| (|T| being the number
+		of "leaves" at the end) penalizing the number of branches of
+		our trees. Each value of lambda will give us a sub-tree Ti.
+	c)  Calculating the total error for the test data obtained 
+		for each lambda value will allow us to choose the optimal
+		value of lambda and the most efficient tree Tk for the minimum
+		final error.
+	
+->  Information gain: concept used to select the partition that 
+	reduces the most uncertainty (or has the most info. gain) for 
+	the data at each point. Used at step 1).
+	Info gain intuition:
+	https://www.youtube.com/watch?v=LDRbO9a6XPU
+
+->  Random forests: we use "bootstraping" (taking m samples from our
+	original data WITH replacement) to create k new "random" samples
+	of data from our original data. For each new subset of samples,
+	we create a new decision tree (total of k decision trees). Once
+	we have a unlabeled example that we want to predict, we let EACH
+	tree to predict its own category, and at the end, the category
+	with most votes (?) wins.
+
+DECISION TREES & RANDOM FORESTS WITH PYTHON
+· Note: decision trees admit strings as input data
+
+	1)  Visualize the data to understand it better
+		->  sns.pairplot(df,hue='predictdata'): Make a pairplot of the
+				data with the feature to predict as the 'hue'.
+	2) We create the X and y DataFrames from the data
+		->  X = df.drop('predictdata',axis=1)
+		->  y = df['predictdata']
+	3) Split the data into training data and test data (Same as lin. reg.)
+	   (create X_tr, X_tst, y_tr, y_tst)
+			->  from sklearn.model_selection import train_test_split
+			->  X_tr, X_tst, y_tr, y_tst = train_test_split(X,y,
+										   test_size = 0.3,
+										   random_state = 101)
+				· test_size: is the percentage of the data that we
+				  want the test data to be
+				· random_state: defines which 'random' selection we
+				  want our data to be sorted in test and training 
+				  data (all are permutations 'randomized', but they
+				  calling two times the same number will make the 
+				  same permutations happen)
+	4A) Train a single decision tree
+		->  from sklearn.tree import DecisionTreeClassifier
+		->  dtree = DecisionTreeClassifier(): creates a Decision Tree
+				type estimator
+		->  dtree.fit(X_tr,y_tr): trains the decision tree with the
+				training data
+	4B) Train a random forest classifier model
+		->  from sklearn.ensemble import RandomForestClassifier
+		->  rf= RandomForestClassifier(n_estimators=n): creates an
+				estimator object of Random Forests with a sample
+				size of n elements
+		->  pred = rf.fit(X_tr,y_tr): trains the data
+
+	5)  Assess the results from the training with the test data
+		->  pred = dtree.predict(X_test):  creates the set of predictions
+		->  from sklearn.metrics import calssification_report,
+										confusion_matrix
+		->  print(confusion_matrix(y_tst,pred))
+		->  print('\n')
+		->  print(Calssification_report(y_tst,pred))
+
+	6)  Visualize the decision tree
+		 ·  pip install pydot (library required)
+		(·  graphviz library is required too:  www.graphviz.com and click
+			Download, quite 'tedious' to do)
+		->  dot_data = StringIO()
+			export_graphviz(dtree,Out_file=dot_data,
+							feature_names=features,
+							filled=True, rounded= True)
+			graph=pydo.grap_from_dot_data(dot_data.getvalue())
+			Image(graph[0].create_png())
+
+			->  Creates a visualization of the full tree

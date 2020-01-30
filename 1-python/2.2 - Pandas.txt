@@ -1,0 +1,301 @@
+	->>>  PANDAS LIBRARY  <<<-
+	
+-> Pandas documentation:
+	https://pandas.pydata.org/pandas-docs/stable/reference/index.html
+
+
+import numpy as np
+import pandas as pd
+
+Variables
+	Series: n x 2 Matrix of 'labels' (1st column) and a column
+			vector with the data
+			ex: pd.Series(vec_data,vect_labels)
+				-> a  10 
+				   b  20  
+				   c  30 
+	DataFrames: matrices of data with labels for rows and cols
+			ex: pd.DataFrame(mat_data,lab_r,lab_c)
+				->     x  y  z
+				   a  10  1  18
+				   b  20  2  21 
+				   c  30  3  24
+Operators
+	Create
+		pd.Series(dat,lab): defines a serie of vector dat with labels
+						    lab (if lab is not specified, will take 
+							vector with 0,1,2...)
+							(data stored can be anything, strings,
+							functions...)
+		pd.Series(dict): creates a n*2 matrix from a dictionnary dict
+						 with the keys as labels and the data as 2n col
+		pd.DataFrame(mat,lab_r,lab_c): creates a DataFrame with data 
+									   stored in matrix mat, with lab_r & lab_c
+									   as labels for rows and cols (these
+									   elements shall be lists of strings).
+									   Note: len(mat)=(len(lab_r),len(lab_c))
+		pd.Dataframe(dict): creates a DataFrame from a dictionnary. Each
+							label of the dictionnary is pupt as column index,
+							values associated with index must be lists
+											
+	Select data
+		ser[idx]: gives the data associated to an index label idx
+		ser1 + ser 2: adds data stored for each index. If indexes do not
+					  match, output will be NaN (ser1 has 'c', ser2 not)
+		df['ic1']: outputs the series col corresponding to index ic1 with
+				   row indicators of the dataframe df
+				  (Other method not recommended: df.ic1)
+		df[['ic1','ic2']]: outputs vectors cols as a df corresp to i1 & i2
+						 (note that input should be a list)
+		df.loc['ir1']: outputs serie with row vector corresp to ir1 and col
+					   indicators
+		df.iloc[n]: outputs the serie in the numerical based index n 
+					(same as for arrays)
+		df.loc['ir','ic']: returns value in index row ir and index column ic
+		df.loc[['ir1','ir2'],['ic1','ic2']]: returns smaller dataframe of
+											 data in indeces indicated
+											 (input should be lists)
+		df.loc['rn':'rm','ck':'ch']: gives dataframe rows n to m and cols k to h
+		df['new'] = blabla: defines a new column of the dataframe (blabla should
+							 have the same number elements than rows of the df)
+		df.drop('i',axis=0->r,1->c): returns DataFrame df without row or col
+									 with index i (does not change df)
+									 Note: use inplace=True to modify df 
+										   directly
+										   df.drop('i',axis=0,inplace=True)
+		df.transpose(): transposes DataFrame
+	
+	Boolean
+		Basic 
+			(boolse1)&(boolser2): returns serie of 'and' conditions param by param
+			(boolse1)|(boolser2): returns serie of 'or' conditions param by param: 
+		df >0(or boolean condition): gives back a boolean DataFrame with Trues 
+									 and Falses
+		df[booldf]: returns a DataFrame with the True values of booldf corresp
+					to df, and NaN in the False
+		df[boolser]: returns DataFrame with subset of rows that are True in the
+					 boolean serie boolser
+		df[(boolser1) & (boolser2)]: returns subset of rows that are True in both
+									 boolean series ('and' operator only works for
+									 single boolean values, not boolean series)
+		ser >0(or boolean condition): return boolean serie of Trues & Falses
+		ser[boolser]: returns smaller serie with the corresponding True values
+					  in boolser from serie ser (boolse & ser same length
+		df.isnull(): returns a boolean dataframe with same indexes and size with
+					 True values where the null values are
+		pd.get_dummies(df['colcat']): takes the categorical data in the 'colcat' and
+									  returns a dataframe with as much columns
+									  as category types, with the rows data converted
+									  to a boolean argument for each of the categories
+					· adding 'drop_first = True' as an argument will remove the first
+					  column of data (useful in ML algorithms)
+										(ex:   Sex
+											0	F
+											1	M
+										pd.get_dummies(df['Sex'])
+										->  	F 	M
+											0	1	0
+											1	0	1
+										pd.get_dummies(df['Sex'],drop_first = True)
+										->  	M
+											0	0
+											1	1)
+Functions
+Functions
+	General
+		df.head(n): returns the n first rows of the DataFrame df
+		df.info(): returns the information of df (index, variable types, memory...)
+		df.describe(): gives the 'typical' functions of each
+					   column such as count, mean, min, max,
+					   std...
+		df.shape: gives back tuple (r,c) with rows and cols numbers (index vectors are counted)
+		df.dtypes: outputs a series with the data type for each column of the dataframe
+		df.columns: returns a list with the column names
+
+	Numeric
+		df.mean(): returns the mean of each column of df
+		df.std(): returns the standard deviation of each column of the df
+		df.max(): returns the max of each column of df (the df becomes a series)
+		df.pct_change(): returns a df of the same dimension with the pct
+						 change
+		df.rolling(window=n): provides 'rolling' functions to data on a column (same as excel, with 
+							  multiple values, following them), for example, to make local averages.
+							  n is the size of the window, or data that will used for each new cell
+					  			· ex: df.rolling(window=25).mean()
+									  creates a new df with a moveable mean of 25 values
+		df['col'].apply(function/lambda expression): applies the function to the column of the df
+		df.corr(): returns variance matrix of df indexes by cols
+		df['col'].map(dict): applies a dictionnary to all the column 'col' of the dataframe
+							 (ex: for changing numbers to weekdays 0 to Mon, 1 to Tue, etc.)
+		
+	Indexes
+		df.reset_index(): Sets the column 'index' as the first column of the dataframe,
+						  and creates a new index with indexes going from 0, 1, 2...
+		df.set_index('ic'): sets the elements of the colum with col index 'ic' as
+						    new row indexes. (Note that function will create by
+							default a new blank row with 'ic' as an index and erase
+							the current row indexes, this can be changed)
+		df.index.names : retuns 'names' of each indexes
+						 can be used to define the names of each row index
+		df.ix[n:m]: returns the rows n to m of dataframe df
+		df['newcol'] = list : if the 'newcol' col argument does not exist, creates a new
+							  column with the index 'newcol' and the data in the list
+		df.inster(n, 'newcol', list, True) : adds the new column 'newcol' with the data
+												on list. The new column will be placed as
+												the new n column
+	
+	Multi Index (create multiple levels of index)
+	-> Reference: http://pandas.pydata.org/pandas-docs/stable/user_guide/advanced.html
+		pd.MultiIndex(array,indexrow_tuple,indexcol): defines a Data Frame with two
+					  row indexes (Acts like a Dataframe (indexrow1) made out of
+					  equally sized Dataframes (indexrow2))
+					  Note: indexrow_tuple is a list of tuples with indexes of each 
+					        row
+							ex: [('G1',1),('G1',2),('G1',3),('G2',1),('G2',2),('G2',3)]
+			-> Reference: http://pandas.pydata.org/pandas-docs/stable/user_guide/advanced.html
+		df.xs(indexrow, level=Nameindex): 'cross-section'. Useful for multi level
+		                                   DataFrames, allows to grab data from any index 
+										   (even if it is the second priority one).
+										   Creates a DataFrame out of xs with the rows
+										   that have indexrow as index. First priority
+										   indexes are kept
+		df.xs(('rowprio1','rowprior2')): grabs the data from the two indexes mentioned (one 
+										 of each category
+		df.xs('idxcol',axis = 1,level = 'colcatname')): grabs the data of the 'idxcol' column
+														(axis = 1 means columns); we need to
+														specify the name of the column index,
+														'colcatname'
+			ex: df = month	jan			feb 		-> df.xs('Maur',axis=1,level='name)
+					 name	Man	Maur	Man	Maur					jan feb
+					 perf	7	9		2	4				perf	9	4
+
+			-> Reference: http://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.xs.html
+		df.columns: returns multiple lists with the index names of all column indexes of 
+					the df
+		df.columns.names: returns the row index given to each column index of the df
+						  (ex: a the index of a df with col indexes [Mon, Tue, Wed, Thu,
+						  Fri, Sat, Sun] can be called 'days of the week' by stating
+						  df.columns.names = 'days of the week'
+		df.index: Returns the row index star, end and step size
+										   
+	Missing Data
+		df.dropna(): drops (removes) rows that have any (one ore more) missing data (NaN)
+			df.dropna(axis=1): drops any cols having any NaN
+			df.dropna(thresh=n): drops any rows that have at least n missing (NaN) values
+		df.fillna(value=AEA): fills missing data in df with value AEA
+		
+	Groupby
+		-> Groupby groups together rows of a DataFrame based on the info of a single col,
+		   performing aggregate functions on the values of the other cols
+		   ex:  1  160  ->  1 240
+				1  80		2 100
+				2  100
+		df.groupby('indxcol'): creates a groupby element grouping by colum with indexcol
+							  -> Regular functions can be then applied to this element to
+								 return as function of all the data with the same value in
+								 column with colindex
+		df.groupby('idxcol').mean(): returns a 'compressed' Dataframe putting all columns of
+									 idxcol together, and performing the mean average of the 
+									 many values of the next columns (note that string cols
+									 will be dropped if a scalar function is called)
+									 -> .sum(), std(), max(), min()... can also be used
+		df.groupby('idxcol').count(): counts how many 'instances' or numbers of different rows
+									  have the same value in the idxcol column
+		df.groupby('idxcol').describe(): gives 'typical' functions for each row category in the
+										 idxcol column (mean, count, std, min, max, q25, q50...)
+		df.groupby(by = ['idxcol1','idxcol2']).count() : groups by two index columns, 'idxcol1',
+														 placed as the primary row group, and
+														 'idxcol2' placed as the seccondary group
+														 (data is classified by these two elemts)
+	Unstack
+		-> Unstack is ussed to chang the data disposition in a dataframe, it is used to swap
+		   one element that is on the rows to the columns (and vice-versa)
+		   ex:										  a   b
+		   s = one a 1.0  -> s.unstack(level=-1) = one 1.0 2.0
+				   b 2.0                           two 3.0 4.0
+			   two a 3.0
+			       b 4.0		   
+		df.unstack(leve=-1): pivots the level -1 of the df (one after the rows index), and places it	
+							 as the columns index
+	
+	Merge/Concatenate/Join/Pivot
+		pd.concat([df1,df2,df3]): returns a concatenated (merged) dataframe with all rows of df1,
+								  df2 & df3 (by defaul joins rows). Inputs shall have same column
+								  indexes & length.
+								  Note: all missing data will be labelled 'NaN'
+						-> Additional arguments:
+							- index = 1: will make the concatenation done in columns
+							- keys = list: will add the elements of the least as indexes of each
+										   dataframe we are adding (the length of the list should
+										   equal the number of dataframes added)
+		pd.merge(left,right,how='inner',on='col'): Merges left & rigth dataframes to give another
+												   dataframe. 'Inner' opt is a default (how refers
+												   to the way of joining the dfs), but activating
+												   on='col' will keep only one 'col' index column
+												   on the output ('col' index should be present in
+												   both df1 & df2)
+												   Note: if more than one column are repeated, on should
+												   be equal to a list of strings.
+												   Note2: 'inner', 'outer', 'right', 'left' refer to the
+												   type of merging
+												   -> Inner takes the rows that match for same 'col' value
+												   -> Outer takes all rows of rigt and left
+												   -> Right keeps right data and completes with left data
+												   matching (left does same but opposite)
+		df1.join(df2): Takes the rows of df2 and completes the data with df1 info (adding columns if
+					   data available)
+		Pivot table: allows the data to be sorted differently (changing row or/and column index)
+			df.pivot_table(values='col1',index='col2',columns='col3'): creates a new dataframe with the data
+																	   in df, using only the values in 'col1'
+																	   placing the data in'col2' as the new row
+																	   indexes, and the data in 'col3' as the new
+																	   column indexes. If data is missing, it will
+																	   return NaN.
+			df.pivot_table(values='v',index=['A','B'],columns='C'): returns a new dataframe with the value of
+																'v' column in the dataframe. Srings in cols 
+																'A' and 'B' are used as new indexes for rows
+																and strings in col 'C' are used now as index
+																for the columns
+																(Might get NaN when no data is available)
+		
+	Detecting elements
+		df['col'].unique(): returns an array of the unique values in the DataFrame (df should be one only column)
+		df['col'].nunique(): returns the number of unique values in df
+		df['col'].value_counts(): returns serie with number of instances in the df 'col' and the number of times they
+								appear (from most to least)
+		df['col'].idxmax(): returns row index (as default) where the max occurrence
+							is find
+	
+	Sort 
+		df.sort_values('col'): sorts values of column 'col' (sorts from low to high as default)
+		df.insull(): returns a boolean dataframe with same indexes and size with True values where the null
+					 values are
+					 
+Import data
+	Libraries to work with CSV, Excel, HTML & SQL data:
+		 conda install sqlalchemy
+		 conda install lxml
+		 conda install html5lib
+		 conda install BeautifulSoup4
+		 conda install xlrd (excel)
+	Functions
+		pd.read_csv('filename.csv')
+				->  opens csv file as a dataframe, assigns a row index by default (0, 1..)
+		pd.read_csv('filename.csv', sep='\t')
+				->  imports csv file as a dataframe, putting elemtens separated by '\t'in different columns
+		df.to_csv('ouput.csv',index=False)
+				->  Converts df into a CSV file (index=False avoids saving the row indexes)
+		
+		pd.read_excel('excelfile.xlsx',sheetname='Sheet1'): opens excel data in Sheet1 as a df
+		df.to_excel('excelfile.xlsx',sheet_name='NewSheet'): Creates NewSheet in excelfile with data in the df
+															 Note that sheet_name has an underscore here
+		
+		pd.read_html('https://www.link.com/blabla'): outputs a list of all the table data elements on the html link 
+													 (creates a list of dataframes, to open the wanted dataframe we
+													  must call the wanted element as pd.read_html[n])
+		
+		SQL: from sqlalchemy import create_engine
+			 engine = create_engine('sqlite:///:memory:'): creates a sqlite engine stored in memory
+			 df.tosql('myDataFrame',engine): saves the df into the sqlite engine
+			 pd.read_sql('myDataFrame',con=engine): imports myDataFrame from engine
+		

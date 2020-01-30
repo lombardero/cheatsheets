@@ -1,8 +1,0 @@
-	->>>  DATAREADER  <<<-
-
--> Datareader is a tool to get stock market data easily from available sources
-
--> Pandas datareader - get stock info: (pip install pandas-datareader)
-	https://github.com/pydata/pandas-datareader
-	https://pydata.github.io/pandas-datareader/stable/
-	
