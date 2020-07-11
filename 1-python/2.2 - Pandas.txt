@@ -286,7 +286,7 @@ Import data
 		df.to_csv('ouput.csv',index=False)
 				->  Converts df into a CSV file (index=False avoids saving the row indexes)
 		
-		pd.read_excel('excelfile.xlsx',sheetname='Sheet1'): opens excel data in Sheet1 as a df
+		pd.read_excel('excelfile.xlsx',sheet_name='Sheet1'): opens excel data in Sheet1 as a df
 		df.to_excel('excelfile.xlsx',sheet_name='NewSheet'): Creates NewSheet in excelfile with data in the df
 															 Note that sheet_name has an underscore here
 		

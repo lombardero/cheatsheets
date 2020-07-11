@@ -122,9 +122,7 @@ LOGISTIC REGRESSION
 ->  Type 2 error: true negatives  (FN)
 
 LOGISTIC REGRESSION WITH PYTHON
-	1)  Split the data frame into X and y, then into training and
-		test data (Check Linear Regression steps 1 and 2)
-	1') Visualize the data to understand it better
+	1) Visualize the data to understand it better
 			->  sns.heatmap(X.isnull()): creates a heatmap showing
 					which values inside our X are NaN
 					·Note: X.isnull(): creates a boolean with all
@@ -223,7 +221,7 @@ LOGISTIC REGRESSION WITH PYTHON
 			->  from sklearn.linear_model import LogisticRegression
 			->  lr = LogisticRegression(): creates the estimator named 
 			'lr' as a Logistic Regression type
-			->  lr.fit(X_t, y_t): trains the logistic regression with the
+			->  lr.fit(X_tr, y_tr): trains the logistic regression with the
 					data inserted
 	6)  Evaluate the model with the test data
 			->  pred = lr.predict(X_tst): creates a prediction for all test
