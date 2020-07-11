@@ -61,7 +61,7 @@ SYNTAX: PyTorch recommends creating a Model class for each neural network,
 
 LOSS FUNCTIONS
     MSE Loss
-        loss_fn = toorch.nn.MSELoss()
+        loss_fn = torch.nn.MSELoss()
             -> creates the loss function specified; the loss function will
             then require the user to input the predicted y ypred and
             the real y
