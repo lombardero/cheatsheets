@@ -34,9 +34,24 @@ A shell script is an executable file containing multiple shell commands that are
 * Statements (`if`, `while`, `for`…)
 
 > Note: a shell script needs to have executable permissions. Command to give executing permissions to everyone: `chmod a+x <filename>`  
-> Note2: a shell script can only be called using an absolute path, or using a dot and the relative path  
+> Note2: a shell script can only be called using an absolute path, or using a dot and the relative path
+
+## 1.0 Good practices
+It is good practice to start all bash scripts by running the `set` command at the start of the script:
+```
+set -euo pipefail
+```
 
 ## 1.1 Basic scripts
+### 1.1.0 Basic operators
+#### The "pipe": `|`
+`|` is one of the most used operators in shell scripting, it takes the standard output from a command and redirects it as the standard input of another. It can be used, for example, to filter results from `ls -la` using `grep`:
+```
+$ ls -la | grep <keyword>
+```
+* will output all files in the current folder containing `<keyword>` on its name.
+
+
 ### 1.1.1 Basic syntax
 Simple script printing “hello world”. We create a file with `vi`:
 ```
@@ -230,8 +245,50 @@ done
 * Verifies all IPs inside the file specified (file must contain one IP address per line)
 * `$(cat $iplist)` reads each line of the file as an element of the for loop.
 
+# 2 - Other scripts
+## 2.1 Finding files
+The `find`  command is a useful tool that allows us to find relative or absolute paths of files and directories.
 
+### Querying files
+The basic syntax for the `find` command is:
+```
+$ find <path> <options>
+```
+* Will find all objects in the mentioned path, that satisfy the conditions mentioned in the options
+* Useful options:
+  * `-type`: will filter by file type, `f` for regular file, `d` for directory
+  * `-name`: will filter by name, `"<filename>"`. Wildcards such as `*` are very useful for this part of the command.
+  * `-iname`: will behave like `-name`  but will ignore uppercase-lowercase differences
+  * `-size <int>`: will filter by filesize. Can use with `+` and `-` for "more than" and "less than", and `k` for KB, `M` for MB, and `G` for GB. (ex: `-size +15MB` are files of more than 15MB)
+  * `-mmin <int>`: ("modified minutes") will find files that have been modified in the last minutes. Use `+` to indicate "more than", and `-`  for "less than" (ex: `-mmin -10`  are files modified less than 10 min ago). Use two `-mmin` statements to set up a time bracket. Can also use `-amin` for "access minutes" (minutes since last access)
+  * `-mtime <int>`: ("modified time") will act like `-mmin` but with days. Can also use `-atime` ("access time")
+  * `-empty`: will show only files that are empty
+  * `-perm <permission number code>`: filters files by permission type (ex: `-perm 777`)
 
+### Executing commands in filtered files
+It is possible to execute a command in all files `find` filters by running the `-exec` option:
+```
+$ find <path> <options> -exec <command to execute> {} +
+```
+* executes the selected command in al filtered files
+> Note: `{}` is a placeholder for the filename of the file (find will recursively add the file path in this position); this is the place where the name of the file would go if the command was run normally
+> Note2: `+` is the "end-of-command" statement; alternatively we can use `\;`.
 
+Example: changing username and group in all files of a directory:
+```
+$ find test-folder -exec chown paulmccartney:beatles {} +
+```
+* Takes all files inside "test-folder", and changes its ownership to user "paulmccartney" and to group "beatles"
 
+## 2.2 `xargs`: iterating through stin
+`xargs` reads through a list of standard input (separated by blanks), and performs some action. These commands can be run in parallel.
+
+Syntax of the command:
+```
+$ xargs <options> <command>
+```
+* takes a list of standard input, and performs some command individually
+  * Options:
+    * `-P <number of threads>`: paralellizes the operations for each standard input
+    * 
 
