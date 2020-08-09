@@ -10,33 +10,33 @@ We can define a container by a build context or an image.
 
 ### Defining a container from a build context
 In this case we will need to add two pieces of information: the context (which folder we want to build from), and the path to the Dockerfile:
-```yaml
+```yml
 container_name:
-	build:
-		context: ..
-		dockerfile: <path-to>/Dockerfile
+  build:
+    context: ..
+    dockerfile: <path-to>/Dockerfile
 ```
 
 ### Defining a container from an image
 In this case we will require simply the name of the image (possibly matching the one in dockerhub if we took it from there)
 ```yaml
 container_name:
-	image: <image-name>
+  image: <image-name>
 ```
 
 ### Defining the hostname
 The hostname is simply the name the container will have (such as “Manuel’s Macbook”). (In a linux system it will be shown as `user@hostname`
 ```yaml
 container_name:
-	hostname: <hostname>
+  hostname: <hostname>
 ```
 
 ### Forwarding ports
 Port forwarding is important if we want to communicate with components outside the container (such as making our browser display some service running on the container)
 ```yaml
 container_name:
-	ports:
-		- <local-port>:<container-port>
+  ports:
+    - <local-port>:<container-port>
 ```
 > Note: with this syntax, the traffic from the `local-port`  (ex: 8080) to the `container-port`  (ex:80) will be forwarded.  
 
@@ -45,25 +45,25 @@ By default, Docker cannot write on our local machine. All the data created by th
 Volumes are the way to allow that data to persist in our local machine: they “bind” a local folder to a folder inside of the container, keeping both contents in sync (will copy all the contents of the shared folder from the local file to the container, and vice-versa).
 ```yaml
 container_name:
-	volumes:
-		- <path-in-local>:<path-in-container>
+ volumes:
+    - <path-in-local>:<path-in-container>
 ```
 > Note: with this syntax, the contents from the folder in `<path-in-local>`  will be bind to `<path-in-container>` . We can create bindings to single files.  
 
 Example:
 ```yaml
 container_name:
-	volumes:
-		-  ~/.gitconfig:/home/devops/.gitconfig
-      - ..:/workspace
+  volumes:
+    -  ~/.gitconfig:/home/devops/.gitconfig
+    - ..:/workspace
 ```
 
 ### Defining environment variables
 If our code needs environment variables to run, we can set them up with:
 ```yaml
 container_name:
-	environment:
-		- VARIABLE_NAME: <variable_value>
+  environment:
+    - VARIABLE_NAME: <variable_value>
 ```
 Note: sometimes values need quotation marks
 
