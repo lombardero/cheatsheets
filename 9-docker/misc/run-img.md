@@ -1,7 +1,10 @@
-# Running containers
+# Running Docker containers
 
+# Basic concepts
+## Image vs containers
+An image is the binaries, source code, and files that make up an application, and a container is a running instance of that image. An image is the "template" from which a container is created.
 
-# Run an image
+# Run a container
 Will look for an image locally, if not available, will look if it exists on Dockerhub, download it, and run it
 ```
 docker run <name>
