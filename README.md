@@ -12,4 +12,4 @@ This repository contains CLI commands, coding syntaxes, and technical explanatio
 6. R
 7. SQL
 8. Swift
-9. [Docker](9-docker/misc/basic-concepts.md)
+9. [Docker](9-docker/misc/basic-cmd.md)
