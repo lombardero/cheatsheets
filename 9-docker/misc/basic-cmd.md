@@ -20,6 +20,11 @@
   - [2.3 Listing containers](#23-listing-containers)
     - [Listing running containers](#listing-running-containers)
     - [Listing all containers](#listing-all-containers)
+- [3 - Images](#3---images)
+- [4 - Networks](#4---networks)
+  - [4.1 Getting data from containers](#41-getting-data-from-containers)
+    - [Show open ports](#show-open-ports)
+    - [Get container IP address](#get-container-ip-address)
 
 # 1 - Basic commands
 ## 1.0 Basic structure
@@ -47,7 +52,7 @@ $ docker info
 
 ### Start a container
 
-To run a container:
+To run a container from an image for the first time:
 
 ```
 $ docker container run <options> <image name>:<tag>
@@ -55,16 +60,37 @@ $ docker container run <options> <image name>:<tag>
 
 * Looks for a local image matching the name insterted, otherwise looks in Dockerhub for it, and then runs it
 * Options:
-  * `--publish <local port>:<container port>`: binds the traffic from the local host port to the container.
-  * `--detach`: runs the container as a daemon.
+  * `-p <local port>:<container port>` (or alternatively `--publish`): binds local and container ports (container is accessible through local port). Many options can be specified, such as the IP where the container runs. If no IP address is specified, they will run on `127.0.0.1`.
+  * `-d` (or alternatively, `--detach`): runs the container as a daemon.
   * `--name <container name>`: defines the container name (otherwise it is randomly generated)
-  * `-p <local port>:<container port>`: binds local and container ports (container is accessible through local port). Many options can be specified, such as the IP where the container runs. If no IP address is specified, they will run on `127.0.0.1`.
-  * `-e EXAMPLE_ENV_VARIABLE=dummy`: defined an environment variable inside of the container. (Optionally, `--env` can be also used).
-
+  * `-e EXAMPLE_ENV_VARIABLE=dummy` (or alternatively `--env`): defined an environment variable inside of the container.
+  * `-t`: allocates a "pseudo-tty", simulates a pairing between a pair of devices (one giving orders, the other receiving them), similar to SSH. It allows to run a command inside the container (usually used along `-i`, which keeps the session open, allowing for multiple commands to be ran)
+  * `-i`: interactive (used usually alongside `-t`), keeps the session open to receive terminal input.
 
 > Note: if no `<tag>` is specified, Docker will pull the latest version from Dockerhub
 
 > Note 2: Docker gives each running container a virtual IP inside the docker engine
+
+Running optional commands: apart from `<options>`, the `run` command allows to run
+alternative commands inside the container with the below syntax:
+
+```sh
+$ docker container run <options> <image name>:<tag> <command>
+```
+* Will run the container and execute a command inside of it.
+* (Optional) commands:
+  * `bash`: runs a bash terminal on the container (useful if used along `-it`, to get
+  a terminal inside the container).
+  * `sh`: runs the default shell of the container (some distributions of linux such as
+  Alpine do not have bash to save space).
+
+Alternatvely to `run`, the `start` command can be used to run a stopped container (it must have
+been started already with `run`):
+
+```sh
+$ docker container start <options> <container name>
+```
+- Will start the stopped container requested
 
 ### Stop a container
 
@@ -153,3 +179,49 @@ $ docker container ls <options>
 * lists all running containers
   * Options:
     * `-a`: lists all containers (stopped, and running)
+
+# 3 - Images
+
+(To be done)
+
+# 4 - Networks
+
+Networks are abstractions that allow traffic between containers. The best
+way of connecting two containers is to put them in the same network; once
+that is done, both containers can talk to each other and will live in a
+"containerized" network.
+
+That way, two containers will be able to talk to each other if they expose
+their ports, AND are in the same network.
+
+> Note: Docker has a "Batteries included, but removable" philosophy, where
+> defaults work, but are customizeable. (everything works without specifying
+> a network)
+
+By default, all containers are connected to a network called "bridge", which
+is used by docker to connect to an Ethernet interface (so the traffic can reach the host machine -> otherwise it would be rejected).
+
+> Note: two containers cannot be exposed on the same port at the Host.
+
+## 4.1 Getting data from containers
+
+### Show open ports
+
+Use the below command to show the open ports of a specific container:
+
+```sh
+$ docker container port <container name>
+```
+
+- Shows which containers are forwarding its trafic from the host to the
+  container.
+
+### Get container IP address
+
+```sh
+$ docker container inspect --format '{{ .NetworkSettings.IPAddress }}' <container name>
+```
+
+- Returns the IP address of the container.
+
+> Note: `--format` can be used for get many other data from the container.
