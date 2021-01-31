@@ -37,3 +37,15 @@ Delete all images:
 ```shell
 docker image prune -a
 ```
+
+# Prune volumes
+
+List volumes:
+```shell
+docker volume ls
+```
+
+Prune volumes:
+```shell
+docker volume prune
+```
