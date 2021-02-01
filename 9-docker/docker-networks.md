@@ -1,7 +1,6 @@
 # Docker networks
 
-# 1 - Basic concepts
-
+# 1 - Concepts
 ## What are networks used for in docker
 
 Networks are abstractions that allow traffic between containers. The best
@@ -58,6 +57,20 @@ By default, containers are never exposed to the host, their traffic is only conn
 via the docker networks. If a Docker must be accessed from the outside, it must be
 exposed explicitely with `-p`.
 
+## Docker DNS naming
+
+Docker uses IP addresses dynamically for containers (every time a container is spawned,
+it could use a different address). To sort this problem, Docker adds a "docker DNS" in
+which he uses the network names as a way to easily communicate with containers inside
+that network (instead of needing to specify the IP address).
+
+When a container is added to a network, a link is created between the network and the
+container. This allows to use the name of the network instead of the IP address it is
+dynamically associated with to talk to the container.
+
+> Note: the default network "bridge" is not automatically linked to any containers, if
+> we want to link containers to it we need to specify it through the
+> `--link [<container list>]` command.
 
 # 2  - Getting data
 

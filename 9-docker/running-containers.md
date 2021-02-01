@@ -8,15 +8,19 @@
   - [1.0 Basic structure](#10-basic-structure)
   - [1.1 Querying info](#11-querying-info)
 - [2 - Containers](#2---containers)
-  - [2.1 Managing containers](#21-managing-containers)
-    - [Start a container](#start-a-container)
+  - [2.1 Launching and stopping containers](#21-launching-and-stopping-containers)
+    - [Run a container from an image](#run-a-container-from-an-image)
+    - [Start an already created container](#start-an-already-created-container)
     - [Stop a container](#stop-a-container)
     - [Deleting containers](#deleting-containers)
-  - [2.2 Monitoring containers](#22-monitoring-containers)
-    - [Get the container logs](#get-the-container-logs)
-    - [Check processes in a container (top)](#check-processes-in-a-container-top)
-    - [Get details of container configuration](#get-details-of-container-configuration)
-    - [Get stats](#get-stats)
+  - [2.2 Messing with running containers](#22-messing-with-running-containers)
+    - [2.2.1 Getting info](#221-getting-info)
+      - [Get the container logs](#get-the-container-logs)
+      - [Check processes in a container (top)](#check-processes-in-a-container-top)
+      - [Get details of container configuration](#get-details-of-container-configuration)
+      - [Get stats](#get-stats)
+    - [2.2.2 Modifying running containers](#222-modifying-running-containers)
+      - [Getting a shell inside the container](#getting-a-shell-inside-the-container)
   - [2.3 Listing containers](#23-listing-containers)
     - [Listing running containers](#listing-running-containers)
     - [Listing all containers](#listing-all-containers)
@@ -43,9 +47,9 @@ $ docker info
 
 # 2 - Containers
 
-## 2.1 Managing containers
+## 2.1 Launching and stopping containers
 
-### Start a container
+### Run a container from an image
 
 To run a container from an image for the first time:
 
@@ -61,6 +65,7 @@ $ docker container run <options> <image name>:<tag>
   * `-e EXAMPLE_ENV_VARIABLE=dummy` (or alternatively `--env`): defined an environment variable inside of the container.
   * `-t`: allocates a "pseudo-tty", simulates a pairing between a pair of devices (one giving orders, the other receiving them), similar to SSH. It allows to run a command inside the container (usually used along `-i`, which keeps the session open, allowing for multiple commands to be ran)
   * `-i`: interactive (used usually alongside `-t`), keeps the session open to receive terminal input.
+  * `-t`: Allocates a pseudo-TTY (which simulates a real terminal)
   * `--network <network name>`: connects the container to the specified network
 
 > Note: if no `<tag>` is specified, Docker will pull the latest version from Dockerhub
@@ -83,10 +88,19 @@ $ docker container run <options> <image name>:<tag> <command>
 Alternatvely to `run`, the `start` command can be used to run a stopped container (it must have
 been started already with `run`):
 
+### Start an already created container
+
+Instead of taking an image and starting a container from it, this command allows us to
+start up a container that was already created.
+
 ```sh
 $ docker container start <options> <container name>
 ```
 - Will start the stopped container requested
+- Options:
+  - `-a`: attach STDOUT/STDERR and forward signals (used with `-i` to "enter" the
+    container terminal)
+  - `-i`: interactive mode
 
 ### Stop a container
 
@@ -101,6 +115,7 @@ $ docker container stop <container id>
 
 > Note: as `<container id>`, it is enough to run the digits that make that id unique.
 
+
 ### Deleting containers
 
 ```
@@ -111,9 +126,9 @@ $ docker container rm <options> <container id(s)>
 * Options:
   * `-f`: forcefully delete a container (even if it is currently running)
 
-## 2.2 Monitoring containers
-
-### Get the container logs
+## 2.2 Messing with running containers
+### 2.2.1 Getting info
+#### Get the container logs
 
 To get the logs of a container running as daemon:
 
@@ -126,7 +141,7 @@ $ docker container logs <container name>
   * `--tail <n>`: outputs the last `n` lines of logs the container registered
   * `-f`: "follows" the log generation (in real time)
 
-### Check processes in a container (top)
+#### Check processes in a container (top)
 
 It can be useful to look at the different processes running inside a container. It
 can be done with the below command:
@@ -137,7 +152,7 @@ $ docker container top <container name>
 
 - Shows the processes running inside a container
 
-### Get details of container configuration
+#### Get details of container configuration
 
 It can be useful to know all the metadata used to start a container:
 
@@ -146,7 +161,7 @@ $ docker container inspect
 ```
 - Returns a JSON array of all the data used to initialise the container.
 
-### Get stats 
+#### Get stats 
 
 We can check how much resources (CPU, etc) each of the running containers is taking by running the below command:
 
@@ -157,6 +172,36 @@ $ docker container stats
 - Shows live data of local resources used by each container (CPU, Memory, Disk...), displayed by ID.
 
 > Note: we can specify a name to only view the stats of a single container instead of all the ones running.
+
+### 2.2.2 Modifying running containers
+
+#### Getting a shell inside the container
+
+To launch a container and open a CLI interface on it we can use:
+```sh
+$ docker container run -it <image name> <shell type>
+```
+- The `-i` option adds an interactive session, and the `-t` enables a pseudo-TTY (chec
+  [`docker run` section](#run-a-container)).
+- Options:
+  - `<shell type>` can be `bash`, `zsh`, etc. or even `ubuntu` (which installs the
+    minimal ubuntu package).
+
+Optionally, to access a container that is already running we can use:
+```sh
+$ docker container exec -it <icontainer name> <shell name>
+```
+- Again, the `-i` option adds an interactive session, and the `-t` enables a pseudo-TTY
+  (check [`docker run` section](#run-a-container)).
+- Options:
+  - `<shell type>` can be `bash`, `sh`, `zsh`, etc. or even `ubuntu` (which installs the
+    minimal ubuntu package).
+
+> Note: the requested shell should be installed in the container for this command to
+> succeed.
+
+> Note2: leaving the container after accessing it with `exec` will not stop the container
+> as `exec` runs a different process than the root one.
 
 ## 2.3 Listing containers
 
