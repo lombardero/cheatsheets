@@ -1,6 +1,7 @@
 # Logging and Debugging
 
 # 1 - Python’s logging module
+
 The logging module allows us to write logging events with different levels of severity: 
 * `debug()`: detailed information, typically only used when diagnosing problems
 * `info()`: confirmation that things are working as they should (logging "normal" behavior of the code, and actions performed)
@@ -12,6 +13,7 @@ We set up these logging statements in our code, and the module allows us to turn
 
 ## 1.1 Configuring `logging`
 ### 1.1.1 Setting up the severity
+
 Example (only taking logging statements from info level and beyond):
 ```python
 import logging
@@ -25,6 +27,7 @@ logging.warning('This should be logged too')
 > Note: the default level of severity is `warning`; we can also set up our own levels of severity  
 
 ### 1.1.2 Saving logs in a file
+
 If we want to save the log statements in a file, we should use:
 ```python
 import logging
@@ -34,6 +37,7 @@ logging.basicConfig(level=logging.INFO, filename = 'filename.log')
 > Note: the default, is to open the file as `a` (append), so that we do not lose logs. We can also set it up `filemode = ‘w’` to wipe the logs before every new program run.  
 
 ### 1.1.3 Adding a timestamp to the logs
+
 Adding a timestamp and severity to the logs:
 ```python
 import logging
@@ -43,6 +47,7 @@ logging.basicConfig(level=logging.INFO, filename = 'filename.log', format= '%(as
 * If we want a more specific date format, we can add the `datefmt` argument to it up. Example: `datefmt=‘%d/%m/%Y %I:%M:%S %p’` 
 
 ### 1.1.4 Enabling `logging` in different modules
+
 In order to have a specific logging configurations for different modules, the `logging` library allous us to instantiate a `LOGGER` object that will be specific to that module. We do so through the `getLogger()` function.
 > Note: without instantiating `LOGGER` on each file, we would not be able to define different logging configurations for each, as one single `basicConfig` would be run, overriding the rest.
 
@@ -77,16 +82,8 @@ file_handler.setFormatter(formatter)
 LOGGER.addHandler(file_handler)
 ```
 * Adds a `file_handler` object to writ the logs in a file, and sets the format of these logs with the `formatter` object.
-
-# 2 - The `pdb` module
-`pdb` is a debugging library that allows us to interact with the code through the CLI. We set up break points with `pdb.set_trace()`, and the code will stop executing at that point, allowing us to check the values of variables at that point. We can type:
-* `c` (for ‘continue’) in the CLI to go to the next break point we set up (works well in a loop too).
-* `n` (for ‘next’) to simply execute the next line of the code (hence understanding it line by line). Note that `n` will not enter other contexts (ex: functions called), for that we use `s`
-* `s` (for ‘step’) to execute the code line by line, including the next context (ex: entering inside functions or Classes defined) so that we can debug them. To use only if we are not sure the Class or function does not behave as it should.
-* `l` (for ‘line’) to see which line we currently are inspecting in the code (shown by a `->`)
-* `h` (for ‘help’) to see all available commands
-
 # 2 - Python’s logging module
+
 The logging module allows us to write logging events with different levels of severity: 
 * `debug()`: lowest level of criticality
 * `info()`
