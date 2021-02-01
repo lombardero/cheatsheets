@@ -1,7 +1,7 @@
 # System utilities (date, hostname)
 
 # 1 - Getting basic info
-## 1.1 Hostname
+## Hostname
 Checking the hostname:
 ```
 $ hostname
@@ -16,8 +16,31 @@ $ hostnamectl set-hostname <new-hostname>
 * Changes the hostname to the newly specified one. Note that we can change the hostname modifying the `/etc/hostname` file)
 > Note: the machine needs to reboot to see the changes affected  
 
+## Getting hardware info
+```
+$ sudo dmidecode
+```
+* Will print info about the hardware
 
-## 1.2 Other utilities
+```
+$ sudo fdisk
+```
+* Displays size of disk with all partitions
+
+```
+$ arch
+```
+* “Architecture” tells if machine uses 32-bit or a 64-bit CPU.
+
+## Getting OS info
+```
+$ uname -a
+```
+* Returns the OS name, the hostname, the distribution version, the date, bits used…
+
+# 2 - Other utilities
+
+## Date and time
 ```
 $ date
 ```
