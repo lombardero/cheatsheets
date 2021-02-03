@@ -9,7 +9,7 @@ Parts covered:
 
 - 1.1 [Running containers](running-containers.md)
 
-- 1.2 [Container networks](running-containers.md)
+- 1.2 [Container networks](docker-networks.md)
 
 
 # Part 2: Docker compose

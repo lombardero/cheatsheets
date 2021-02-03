@@ -49,3 +49,11 @@ Prune volumes:
 ```shell
 docker volume prune
 ```
+
+# Prune networks
+
+Prune volumes:
+```shell
+docker network
+ prune
+```

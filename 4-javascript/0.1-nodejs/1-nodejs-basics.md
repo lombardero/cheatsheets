@@ -1,15 +1,15 @@
-# 1 - NODEJS BASICS
+# NODEJS BASICS
 This document is an introduction to some of the NodeJS basics.
 
 Useful article on how to Debug `Node.js` using VS Code in this [link](https://code.visualstudio.com/docs/nodejs/nodejs-debugging). (Additional article [here](https://nodejs.org/en/docs/guides/debugging-getting-started/))
 
-## 1.0 Basic file organization
+# 1 - Basic file organization
 ### Basic files
 NodeJs projects should be organized as follows:
 - `app.js` file: the 'core' file of our server, the one holding the server functionalities and dependencies. This is where we call the `createServer()` function
 - `routes.js` file: this file contains all the routes of the server, which are specified in the `requestListener()` function that will be passed as an argument to `createServer()`.
 
-### Exporting files in NodeJS
+## Exporting files in NodeJS
 Any object (class, function, variable) can be exported in NodeJS using the `module.exports` statement. This will make available globally whichever of the objects we set it equal to in any other file, by calling the `require('filename')` statement.
 
 Example: creating `requestListener()` function in the `routes.js` file:
@@ -62,7 +62,7 @@ const app = createServer(imported_file.listener);
 const fs = require('fs');
 ```
 
-### Writing in files
+## Writing in files
 ```Javascript
 fs.writeFileSync('<filename>.<extension>', 'file content');
 ```
@@ -74,8 +74,8 @@ The `http` library allows us to launch the server and handle requests. It is imp
 const http = require('http');
 ```
 
-### 1.1.1 Launching the server
-#### Creating the Server
+## 1.3 Launching the server
+### Creating the Server
 To launch the server, we need to use the `createServer()` functionality of the `http` module.
 ```Javascript
 const server = http.createServer(rqListener);
@@ -103,7 +103,7 @@ const server = http.createServer((req, res) => {
 ```
 - The code above will start a server listening to `req` requests, and sending `res` responses. Note that the function defining the `computation` will be executed asynchonously, only when the user sends a request to the server.
 
-#### Listening to the server
+### Listening to the server
 Once the `server` variable (containing a `Server` object) is created, we can call methods on it. One of them is the `listen()` method.
 
 `listen()` will create a running instance that will keep on 'listening' to incoming requests. `listen()` takes two optional arguments: the port number (can be specified, is 80 by default), and a host name (localhost by default).
@@ -111,7 +111,7 @@ Once the `server` variable (containing a `Server` object) is created, we can cal
 server.listen(port, host_name);
 ```
 
-### 1.1.2 Getting Requests
+## 1.4 Getting Requests
 ### Listening to Requests
 Requests given by browsers are usually complex JSON objects, with a lot of information and meta-data (such as which browser the request came from, what response format is expected, cookies, and many more). We can access requests using the `req` argument defined in the `requestListener()` function of the `createServer()` method.
 
@@ -143,13 +143,13 @@ req.on('end', (data_chunk) => {
 - In the code above, the first event listener checks for `'data'` transmitted, and adds it to an array of data called `body`. A second event listener checks for `end` of transmission, and concatenates the chunks of data received in a `Buffer` object, to be converted to a string (assuming the input is a string).
 Note: the `Buffer` object is a NodeJS class allowing to read streams of binary data; in the above case it allows to 'translate' from binary data the incomming string.
 
-#### Setting up responses depending on event listeners
+### Setting up responses depending on event listeners
 Important note: In NodeJS, the event listeners are kept active constantly: they will keep on listening to data even if a response has already been sent. That is why, if the response depends on that event listener, all the modifications to `res` should be inserted inside the `req.on()` statement (inside the function of the second argument of `on()`).
 
-### 1.1.3 Sending Responses
+## 1.5 Sending Responses
 The `requestListener()` function allows us to set up server responses thanks to the second argument of the function, `res`. NodeJS allows to set up the response by modifying the `res` object, which is empty by default.
 
-#### Response header
+### Response header
 ```Javascript
 res.setHeader(key, value);
 ```
@@ -157,14 +157,14 @@ res.setHeader(key, value);
 
 Note: it is important to set the headers each time we give a response so the client knows what to expect.
 
-#### Redirecting
+### Redirecting
 ```Javascript
 res.statusCode = 302;
 res.setHeader('Location', url);
 ```
 - Redirects the user to the `url` specified. The status code tells the browser to look for another location on the header, and the Header is set to the new `url` the browser needs to go to (sends the client to that URL).
 
-#### Response body
+### Response body
 The body of the response can be set up line by line using the `write()` method, as shown below:
 ```Javascript
 res.write('<html>');
@@ -180,13 +180,13 @@ Note: setting a `return res.end()` will explicitely end the modification of the 
 
 More about responses: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers
 
-#### Response status code
+### Response status code
 We can set the status code of the response as with the `statusCode` statement, as shown below:
 ```Javascript
 res.statusCode = 404;
 ```
 
-## 1.1.4 Routing responses
+## 1.6 Routing responses
 Routing responses (selecting different server responses depending on the URL) can be done with `if` statements.
 
 ```Javascript

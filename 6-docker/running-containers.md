@@ -1,5 +1,6 @@
 # Running containers
 
+> Click [go to the commands cheatsheet](#1---basic-commands).
 ## Table of contents
 
 - [Running containers](#running-containers)
@@ -10,6 +11,7 @@
 - [2 - Containers](#2---containers)
   - [2.1 Launching and stopping containers](#21-launching-and-stopping-containers)
     - [Run a container from an image](#run-a-container-from-an-image)
+    - [Run a command inside of the container](#run-a-command-inside-of-the-container)
     - [Start an already created container](#start-an-already-created-container)
     - [Stop a container](#stop-a-container)
     - [Deleting containers](#deleting-containers)
@@ -66,11 +68,17 @@ $ docker container run <options> <image name>:<tag>
   * `-t`: allocates a "pseudo-tty", simulates a pairing between a pair of devices (one giving orders, the other receiving them), similar to SSH. It allows to run a command inside the container (usually used along `-i`, which keeps the session open, allowing for multiple commands to be ran)
   * `-i`: interactive (used usually alongside `-t`), keeps the session open to receive terminal input.
   * `-t`: Allocates a pseudo-TTY (which simulates a real terminal)
-  * `--network <network name>`: connects the container to the specified network
+  * `--net <network name>`: connects the container to the specified network
+  * `--netw-alias <alias>`: defines a network alias for the container. A robin-like
+    routing strategy will be used by Docker when accessing containers using the same
+    alias.
+  * `--rm`: clean up (erase) the container when it is exited or stopped.
 
 > Note: if no `<tag>` is specified, Docker will pull the latest version from Dockerhub
 
 > Note 2: Docker gives each running container a virtual IP inside the docker engine
+
+### Run a command inside of the container
 
 Running optional commands: apart from `<options>`, the `run` command allows to run
 alternative commands inside the container with the below syntax:
