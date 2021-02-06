@@ -1,6 +1,6 @@
 # Running containers
 
-> Click [go to the commands cheatsheet](#1---basic-commands).
+> Click here to [go to the commands directly](#1---basic-commands).
 ## Table of contents
 
 - [Running containers](#running-containers)
