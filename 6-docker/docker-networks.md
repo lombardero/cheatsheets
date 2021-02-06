@@ -1,6 +1,6 @@
 # Docker networks
 
-> Click here to [go to the commands cheatsheet](#2----getting-data).
+> Click here to [go to the commands directly](#2----getting-data).
 # 1 - Concepts
 ## 1.1 What are networks used for in docker
 
