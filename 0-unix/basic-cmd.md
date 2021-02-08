@@ -7,22 +7,30 @@ List of UNIX command-line statements:
 
 # 1 - Basic commands
 ## 1.0 Get help
-```<command> --help```
+```sh
+$ <command> --help
+```
 - Will output syntax guidelines to run any command
 
 ## 1.1 File and folder navigation
 ### Move through folders
-```cd <path>```
+```sh
+$ cd <path>
+```
 - cd stands for "change directory"; this command moves the folder the terminal is looking to into to the specified absolute or relative path. Example: `cd /folder` will move to `folder` (which should be inside the folder we are currently looking to).
 - `cd ..` moves to the upwards (or 'preceding') directory
 
 Note: in some terminals, typing `cd ` (with a space), and pressing `Tab` allows the terminal to jump between available sub-folders possible options.
 
-```pwd```
+```sh
+$ pwd
+```
 - stands for "Print Working Directory": returns the absolute path of the current directory
 
 ### Show folder contents
-```ls```
+```sh
+$ ls
+```
 - lists current directory contents (prints the filenames)
 Options:
 - use `ls -l` to output the file details. `-l` stands for 'long' listing format.
@@ -40,7 +48,9 @@ Options:
 ### The `cat` command
 The command `cat` is one of the most useful commands to quickly check on the terminal the contents of a file. `cat` stands for 'concatenate': the contents of the file will be 'concatenated' and shown in the terminal.
 
-```cat <filename>```
+```sh
+$ cat <filename>
+```
 - Prints on the terminal the contents of `<filename>`
 
 Additional arguments we can use for `cat`:
@@ -56,11 +66,15 @@ The command `echo` displays a string directly on the terminal. It can be used to
 #### the `apt-get` command
 `apt-get` (Advanced Packaging tool) is a command which handles packages in Linux. It retrieves information about packages from the authenticated sources; it allows to install, upgrade and remove packages along with their dependencies (We will use `apt-get` to download Python inside our VM, for example).
 
-```apt-get install <package-name>```
+```sh
+$ apt-get install <package-name>
+```
 - Downloads and installs the package added from the authenticated source
 > Note: we can add `-y` for 'Yes' to let the `apt-get` reply 'Yes' for all `[yes/no]` queries (such as 'are you sure you want to install?').
 
-```apt-get update```
+```sh
+$ apt-get update
+```
 - Checks if there are any updates for the packages installed
 
 
@@ -76,7 +90,9 @@ Each digit is converted into a binary 'mapping' (`1` for 'permission granted' an
 
 That way, `400`, for example, will enable reading permissions for the first type of user (which is the 'user' of the file itself), and disable any permissions for rest ('groups' and 'others'); `777`, as another example, would enable all permissions by all users.
 
-```chmod <three-digit-code> <filename>```
+```sh
+$ chmod <three-digit-code> <filename>
+```
 - Modifies the permissions of `<filename>` and sets them to the ones specified on the three digit code. 
 > For example, `chmod 400 file.txt` will only enable reading of `file.txt` by the main user, and will not allow groups or others to read it, write it or execute it.
 
@@ -92,18 +108,26 @@ Note: in Unix systems, global environment variables are stored in the `/etc/envi
 - `HOME` is the absolute location of the user's home directory
 
 #### Get list of environment variables
-```printenv```
+```sh
+$ printenv
+```
 - prints in the terminal the list of currently set environment variables (alternatively, we can use the command `env`)
 
-```set```
+```sh
+$ set
+```
 - displays the entire list of set or unset values of shell options (environment variables). Gives a much more complete list than  `env`, with all predefined evironment variables (even those that have no value assigned to it)
 
 #### View contents of environment variables
-```echo $<environment-variable>```
+```sh
+$ echo $<environment-variable>
+```
 - Displays the value of the environment variable. Example: `echo $PATH`
 
 Note: the `$` sign is used by Linux to access the value of environment variables
 
 #### Update environment variables
-```export <env-variable>=<variable-content>```
+```sh
+$ export <env-variable>=<variable-content>
+```
 - Sets up the contents of an environment variable. Example: `export PATH=$PATH:opt/bin` adds an address to `PATH`.

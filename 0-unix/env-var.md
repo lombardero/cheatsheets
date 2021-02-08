@@ -5,19 +5,19 @@ Formal definition of an env. variable: a dynamic-named value that can affect the
 	* “environment”: all which affects a script or program’s behaviour
 
 # 1 - Reading environment variables
-```
+```sh
 $ env
 ```
 * Shows all currently defined environment variables (`printenv` will do the same)
 
-```
+```sh
 $ echo $<variable-name>
 ```
 * Shows the value of the environment variable (the `$` accesses the variable)
 
 # 2 - Setting up environment variables
 ## 2.1 Temporary change
-```
+```sh
 $ export VARIABLE=<value>
 ```
 * Will set up temporarily the environment variable 
@@ -30,7 +30,7 @@ For “bash”, for example, we can modify the `.bashrc` file, which is loaded e
 > Note: it is good practice to keep a copy the original `.bashrc` file just in case we break it.  
 
 Changing `.bashrc` file:
-```
+```sh
 $ cd
 $ vi .bashrc
 ```
@@ -45,11 +45,11 @@ echo VARIABLE
 We can add environment variables globally for all users of the machine as well (need to be careful with it).
 
 The same way we modified `.bashrc` we can modify either  `/etc/profile` or `/etc/bashrc`, and add the same lines of code:
-```
+```sh
 $ vi /etc/profile
 ```
 
-```
+```sh
 $ vi /etc/bashrc
 ```
 

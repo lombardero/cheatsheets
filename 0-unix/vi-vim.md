@@ -6,7 +6,7 @@ There are many built-in text editors in linux systems: `vi`, `ed`, `ex`, `emacs`
 ## 1.1 The vi editor
 `vi` is the most well-known linux editor since it is known to be easy to use, and is in almost every linux system.
 
-```
+```sh
 $ vi <filename>
 ```
 * Enters the `vi` mode (allows you to modify the file)
@@ -30,7 +30,7 @@ Substituting words inside `vi`:
 Vim is a “newer and more enhanced” version of the vi editor, however it is not present in all linux devices.  It adds some functionalities (such as auto-completion and spell check) to `vi`, as well as many customisations.
 For more details, check [this link where we can interact with it](openvim.com).
 
-```
+```sh
 $ vim <filename>
 ```
 * Vim uses `h`, `j`, `k` and `u` to move around instead of arrows
@@ -43,7 +43,7 @@ Sed allows us to perform many useful actions on a file such as:
 	* (and many more)
 
 Replacing strings:
-```
+```sh
 $ sed -i 's/old-string/new-string/g' filename
 ```
 * Substitutes (`s`) globally (`g`, all occurrences) an old string for a new one in the filename specified.
@@ -55,19 +55,19 @@ $ sed -i 's/old-string/new-string/g' filename
 > Note: a tab in linux is indicated with `\t` (replace tabs with spaces would be: `’s/\t/ /g’`  
 
 Deleting lines:
-```
+```sh
 $ sed -i '/keyword/d' filename
 ```
 * Will delete (`d`) all lines that contain the keyword
 
 Deleting empty lines
-```
+```sh
 $ sed -i '/^$/d' filename
 ```
 * Deletes all empty lines of the file (recall: `^` means the start of line, and `$` is the end of the line)
 
 Deleting specific lines:
-```
+```sh
 $ sed -i '1,2d' filename
 ```
 * Deletes the first two lines of the file

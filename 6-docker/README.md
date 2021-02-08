@@ -11,7 +11,9 @@ Parts covered:
 
 - 1.2 [Container networks](docker-networks.md)
 
+- 1.3 [Building images](docker-images.md)
 
+- 1.4 [Persisting data with volumes](docker-volumes.md)
 # Part 2: Docker compose
 
 (to be done)

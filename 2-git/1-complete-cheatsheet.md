@@ -465,11 +465,17 @@ $ git rebase <options> [base-branch]
   after the last commit of `[base-branch]`. Running this command will tell us if there
   are merge conflicts. (After this, a PR can be issued.)
 - Options:
-  - `-i` (interactive): runs `rebase` in interactive mode, will open a file that will
-  enable us to define the action to do at each step of the rebase (each commit is a
-  step). In interactive mode, commits can be reordered (by simply deleting a row and
-  copy-pasting it - careful with merge conflicts), renamed (change the `pick` keyword
-  by `reword`), or squashed. Example: `git rebase -i <commit to start from>`
+  - `-i` (interactive): runs `rebase` in interactive mode. This option is super useful
+  to correct typos and squash commits together. When `rebase` is open in interactive
+  mode, a file will be opened (using vi) showing a list of the commits. Before each
+  commit, we can specify the action we want to do with it:
+    - `r` (rename): will enable us to change the name of the commit (a vi will be
+      opened when the rebase reaches that commit to change the commit message)
+    - `s` (squash): "merges" this commit with the one above (a `vi` editor will be
+      opened at the time to select a commit message)
+    - `d` (delete): will discard all changes done in that commit
+  Also, in interactive mode, commits can be reordered deleting a row and copy-pasting
+  it.
 
 **Example of `rebase` usage**: we create a `new-branch` from `master` to start working
 on a new feature and we start working on it. We commit two times (commits `(b)` and

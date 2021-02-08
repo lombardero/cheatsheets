@@ -17,47 +17,47 @@ ACL is a layer that runs on top of permissions that allow us to give certain per
 > Note2: setting up ACL permissions does not allow to delete files  
 
 Get the ACL permissions:
-```
+```sh
 $ getfacl </path/to/file>
 ```
 
 To set a permission for a user (the owner of the file must change it)
-```
+```sh
 $ setfacl -m u:<user>:<rwx> </path/to/file>
 ```
 * use `setfacl -x u:<user> </path/to/file>` to remove a user from the ACL
 
 Setting a permission for a specific group:
-```
+```sh
 $ setfacl -m g:<group>:<rwx> </path/to/file>
 ```
 
 Enable all files in a directory to inherit all ACL permissions of the directory:
-```
+```sh
 setfacl -rm "entry" </path/to/dir>
 ```
 * `-r` for recursive
 
 Remove all entries in the ACL:
-```
+```sh
 setfacl -b </path/to/file>
 ```
 
 ## 1.2 Root privileges
 Become root user
-```
+```sh
 $ su -
 ```
 * command for becoming a superuser
 * Run `exit` to logout
 
 Execute a command as “root”:
-```
+```sh
 $ sudo <command>
 ```
 
 Edit superuser privileges (run the command as root):
-```
+```sh
 $ visudo
 ```
 * Opens the editor of the file `/etc/sudoers`, which defines the superuser privileges (can add any users to perform any root commands -> need to add: `username  ALL=(ALL)   ALL` in the line where it says “Allow root to run any commands anywhere (below root itself) to allow the user have superuser privileges (not recommended). This file also mentions which groups have root privileges
@@ -65,7 +65,7 @@ $ visudo
 
 ## 1.2 Changing password
 Change password of the current user:
-```
+```sh
 $ passwd
 ```
 * Asks for the old password, and asks for new password two times.
@@ -73,7 +73,7 @@ $ passwd
 
 Changing the “root” password (or getting root password if lost).
 	* Step 1: rebooting the machine
-```
+```sh
 $ reboot
 ```
 
@@ -82,7 +82,7 @@ $ reboot
 	* Step 3: we modify some lines of code (go to Udemy course, lesson 99 and check) to start computer in single user mode
 	
 	* Step 4: run the following commands to reset a password for root
-```
+```sh
 $ chroot /sysroot
 $ passwd root
 ```
@@ -98,7 +98,7 @@ Users and groups get stored in three files:
 We can verify the users created by going into the `/home` folder and looking at the folder names there (should match users)
 
 Example:
-```
+```sh
 $ grep <groupname> /etc/group
 ```
 * Will tell us which usernames are inside the group
@@ -107,7 +107,7 @@ $ grep <groupname> /etc/group
 ### 1.3.1 Managing users
 #### Creating a user
 Note: only `root` can create users.
-```
+```sh
 $ useradd <name>
 ```
 * Creates a new user with the specified name
@@ -115,26 +115,26 @@ $ useradd <name>
 	* `-s` specifies the shell to be used
 	* `-c` adds a user description
 
-```
+```sh
 $ useradd -g <group-name> -s /bin/bash -c "user description -m -d /home/<username> <username>
 ```
 * Creates a user inside a group, defines the shell to be used, gives a description, defines a home directory and gives it a name
 
 Verify if user has been created:
-```
+```sh
 $ id <username>
 ```
 * Will return the user id as well as the group it belongs to
 
 #### Changing user password
-```
+```sh
 $ passwd <username>
 ```
 * Changed the password for the user
 
 
 #### Deleting users
-```
+```sh
 $ userdel <username>
 ```
 * Deletes the user
@@ -142,7 +142,7 @@ $ userdel <username>
 
 #### Changing user settings
 Changing the group the user belongs to:
-```
+```sh
 $ usermod -G <old-group> <new-group>
 ```
 > Note: if user had a group (its own name), the user will still be part of its own group, and the new one; therefore, the groups of files that he created might not change. We will need to use `chgrp` for that.  
@@ -152,18 +152,18 @@ $ usermod -G <old-group> <new-group>
 
 ### 1.3.2 Managing groups
 Creating a group
-```
+```sh
 $ groupadd <groupname>
 ```
 * Creates a new, empty group
 
 Deleting a group:
-```
+```sh
 $ groupdel <groupname>
 ```
 
 Modifying a group:
-```
+```sh
 $ chgrp -R <old-group> <new-group>
 ```
 * Changes the files in the old group to the new
@@ -186,7 +186,7 @@ There are three kinds of users for the file:
 
 ## 2.2 - the `chmod` command
 Changing permissions
-```
+```sh
 $ chmod <code> <filename>
 ```
 * `<code>` can have multiple formats:
@@ -207,7 +207,7 @@ $ chmod <code> <filename>
 Files belong to a certain user, and to a group.
 
 We can change the group it belongs and the owner with the following commands:
-```
+```sh
 $ chown <username> <filename>
 ```
 * changes the ownership of a file
@@ -220,35 +220,35 @@ $ chgrp <username> <filename>
 
 # 3 - Monitoring users
 Check who is currently logged in
-```
+```sh
 $ who
 ```
 * Returns user id, terminal id and the time they logged it (useful to see why a machine has a high load)
 
-```
+```sh
 $ w
 ```
 * Gives more info than `who` (idle time, cpu usage…)
 
 
-```
+```sh
 $ last
 ```
 * Returns a list of the last things that happened to she system (logins, reboots, etc) - useful for troubleshooting
 * Ex: use `last | awk ‘{print $1}’ | sort | uniq` to print the list of users that logged in
 
-```
+```sh
 $ finger
 ```
 * Tracks users (needs to be installed)
 
 # 4 - Real-time messaging to users
-```
+```sh
 $ wall
 ```
 * Enters the `wall` mode, which allows you to send a message to all logged in users
 
-```
+```sh
 $ write <username>
 ```
 * Enters a writing mode that will send a message to a specific user (under the scenes, root is the ones who sends the message) 

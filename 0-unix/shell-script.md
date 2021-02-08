@@ -5,22 +5,22 @@
 
 # 0 - Checking available shells
 Check which shell you are currently in:
-```
+```sh
 $ echo $0
 ```
 
 Get the list of available shells:
-```
+```sh
 $ cat /etc/shells
 ```
 
 Check shell associated to each user:
-```
+```sh
 $ cat /etc/passwd
 ```
 
 Check location of binary files for specific command:
-```
+```sh
 $ which <command>
 ```
 * Returns path where the binaries of the command are located
@@ -38,7 +38,7 @@ A shell script is an executable file containing multiple shell commands that are
 
 ## 1.0 Good practices
 It is good practice to start all bash scripts by running the `set` command at the start of the script:
-```
+```sh
 set -euo pipefail
 ```
 
@@ -46,7 +46,7 @@ set -euo pipefail
 ### 1.1.0 Basic operators
 #### The "pipe": `|`
 `|` is one of the most used operators in shell scripting, it takes the standard output from a command and redirects it as the standard input of another. It can be used, for example, to filter results from `ls -la` using `grep`:
-```
+```sh
 $ ls -la | grep <keyword>
 ```
 * will output all files in the current folder containing `<keyword>` on its name.
@@ -54,7 +54,7 @@ $ ls -la | grep <keyword>
 
 ### 1.1.1 Basic syntax
 Simple script printing “hello world”. We create a file with `vi`:
-```
+```sh
 #!/bin/bash
 
 echo Hello world!
@@ -66,7 +66,7 @@ Accessing a variable: `$var`
 Accessing the exit status of a command: `$?` (ex: if `ping -c1 <ip>` failed, will return 1, else will return zero)
 
 Same script with a variable:
-```
+```sh
 #!/bin/bash
 
 a='Hello world!'
@@ -76,7 +76,7 @@ echo $a
 > Note: single quotes are interpreted as strings, (will not consider the space as a line breaker). This command will not work with double quotes. For single words, we can avoid using quotes at all.  
 
 Getting expressions in variables:
-```
+```sh
 #!/bin/bash
 
 a=`hostname`
@@ -89,7 +89,7 @@ echo Logged in in $a machine.
 When we want a script to take the user input, we will use the `read <variable>` command, which will set up the user input inside a variable (we then can use it in other parts of the script).
 
 Simple use of `read`:
-```
+```sh
 #!/bin/bash
 
 echo Please enter your name
@@ -101,7 +101,7 @@ echo Hello $variable
 ## 1.2 Logical statements
 ### 1.2.1 `If-then` statements
 This is the syntax required for an if/then statement:
-```
+```sh
 if [ condition ]
 then
 	<command-if-true>
@@ -117,7 +117,7 @@ List of boolean operators to use in an “if” condition:
 	* `-e`: checks if something exists (ex: `-e /home/user/file.txt` checks if file exists
 
 Example of a script using if/then:
-```
+```sh
 #!/bin/bash
 
 if [ -e /home/manu/file.txt]
@@ -130,7 +130,7 @@ fi
 
 ### 1.2.2 `for` loop
 This is the syntax needed by a `for` statement:
-```
+```sh
 for i in <set-of-values>
 do
 <command>
@@ -142,7 +142,7 @@ done
 
 ### 1.2.3 `while` statement
 The `while` statement executes a command while a condition holds true.
-```
+```sh
 while [ condition ]
 do
 	<command1>
@@ -150,7 +150,7 @@ do
 ```
 
 Example of a `while` statement script that counts from 10 to zero then stops:
-```
+```sh
 #!/bin/bash
 
 count=0
@@ -174,8 +174,10 @@ echo $1 process stopped
 > Note3: The `expr $variable - 1` reduces the variable value by one unit.  
 
 ### 1.2.4 `case` statement scripts
+
 Case statements allow the user to select from a list of options, and performs an action depending on the option selected.
-```
+
+```sh
 echo Explanatory message
 	read choices
 	case $choices in
@@ -189,7 +191,7 @@ echo Explanatory message
 
 
 Example:
-```
+```sh
 #!/bin/bash
 echo
 echo Please select one of the options below

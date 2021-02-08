@@ -3,7 +3,7 @@
 # 1 - Downloading packages
 ## 1.1 Installing packages
 In most Linux distributions:
-```
+```sh
 $ apt-get install <package-name>
 ```
 * Check if the package is downloaded, if not, will check for the “official” repository (defined in the configuration files), download, and install the package and its dependencies.
@@ -16,7 +16,7 @@ $ apt-get install <package-name>
 
 
 In RedHat:
-```
+```sh
 $ yum install <package-name>
 ```
 * Same as `apt-get` 
@@ -25,7 +25,7 @@ $ yum install <package-name>
 RPM stands for RedHat Package Manager, and is only available in RedHat systems.
 
 Listing all installed packages:
-```
+```sh
 $ rpm -qa
 ```
 * Prints out all installed packages (can be combined with `grep` to search for a specific command)
@@ -33,7 +33,7 @@ $ rpm -qa
 	* `-a`: for “all”
 
 Installing packages downloaded
-```
+```sh
 $ rpm -ihv <downloaded-package-path>
 ```
 * Installs the downloaded 
@@ -41,13 +41,13 @@ $ rpm -ihv <downloaded-package-path>
 	* `-v`: for verbose
 
 Uninstalling a package:
-```
+```sh
 $ rpm -e <package-name>
 ```
 * Uninstalls a package (needs the full name with the version, same as in `rpm -qa`)
 
 Finding configuration file location for a specific package:
-```
+```sh
 $ rpm -qc <package-name>
 ```
 
@@ -60,14 +60,14 @@ $ rpm -qc <package-name>
 There are two ways of updating: preserving the old versions of the packages (`update`) or overwriting them (`upgrade`).
 
 Downloading and updating a package without deleting original package:
-```
+```sh
 $ apt-get update -y
 ```
 * Updates Linux to the latest version (of the current major version)
 	*  `-y`: to say “yes” to all yes/no questions
 
 Downloading and updating a package overwriting the original package:
-```
+```sh
 $ yum upgrade -y
 ```
 
@@ -77,7 +77,7 @@ The easiest way of rolling back upgrades is to always create snapshots of the VM
 > Note: it is recommended to do a snapshot before a major update since it is not recommended to do a system downgrade (since many dependencies are installed)  
 
 Otherwise, we can roll back packages:
-```
+```sh
 $ yum history undo <package-id>
 ```
 * Undoes everything done by the package, and removes it

@@ -1,20 +1,42 @@
 # Clean stuff in Docker
 
-# Running containers
+# 1 - Generic cleanup
+
+Check space taken by Docker:
+
+```sh
+$ docker system df
+```
+- Shows all space taken by Docker locally
+
+Clean up everything that is not being used:
+
+```sh
+$ docker system prune <options>
+```
+- Will remove all "dangling" images, containers & networks
+- Options:
+  - `-a`: remove all unused resources not being used by at least on container
+  - `--volumes`: prunes volumes as well
+
+# 2 - Containers
+## Stop a running container
+
 Check which processes are running:
-```shell
-docker ps
+```sh
+$ docker ps
 ```
 
 Stop a process:
-```shell
-docker kill <container-name>
+```sh
+$ docker kill <container-name>
 ```
 
-# Non running containers
+## Remove non-running containers
+
 Check downloaded containers (not running)
-```shell
-docker container ls -a
+```sh
+$ docker container ls -a
 ```
 
 Delete a container
@@ -22,7 +44,7 @@ Delete a container
 docker rm <container-id>
 ```
 
-# Downloaded images
+# 3 - Images
 List all images downloaded:
 ```shell
 docker images
@@ -38,7 +60,9 @@ Delete all images:
 docker image prune -a
 ```
 
-# Prune volumes
+# 4 - Others
+
+## Volumes
 
 List volumes:
 ```shell
@@ -50,10 +74,8 @@ Prune volumes:
 docker volume prune
 ```
 
-# Prune networks
+## Networks
 
-Prune volumes:
 ```shell
-docker network
- prune
+$ docker network prune
 ```

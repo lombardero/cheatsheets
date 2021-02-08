@@ -46,7 +46,7 @@ When the command `ls -l`  is run, a list of attributes is displayed for each fil
 Links should be created on the `/tmp` folder:
 
 Creating the link
-```
+```sh
 $ ln -s <absolute-file-path>
 ```
 * Creates a link to the file in the absolute path. By default, the link will have the same name as the file; now the file can be accessed through the link directly
