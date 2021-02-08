@@ -128,12 +128,12 @@ $ ntpq
 
 # 5 - Other network utilities
 ## 5.1 - Checking hostnames/IP
-```
+```sh
 $ nslookup <URL-or-IP>
-```
+```sh
 * Will return the page corresponding to the IP and the opposite.
 
-```
+```sh
 $ dig <URL-or-IP>
 ```
 * Returns a more detailed description

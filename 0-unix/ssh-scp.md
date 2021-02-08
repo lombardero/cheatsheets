@@ -2,8 +2,9 @@
 
 
 # 1 - Downloading files or apps
+
 Downloading files (used mostly to download files that cannot be downloaded through the `yum` or `apt-get` commands.
-```
+```sh
 $ wget <url>
 ```
 * “Www get”, downloads file or app from the world wide web (providing the URL with the file endpoint) and places it in the current folder
@@ -15,19 +16,19 @@ The standard network protocol to transfer files (runs on port 21); uses the clas
 To receive a file, the FTP daemon must be installed and running on the receiver machine. (Name of the package: `vsftpd`).
 
 Step1: installing the package 
-```
+```sh
 $ apt-get install vsftpd
 ```
 * Installs the required package
 > Note: use `yum` in RedHat distributions instead of `apt-get`  
 
 Step2: configuring it (go to `/etc/vsftpd`)
-```
+```sh
 $ cp /etc/vsftpd/vsftpd.conf /etc/vsftpd/vsftpd.conf-old
 $ vi /etc/vsftpd/vsftpd.conf
 ```
 * Make a copy of the default config (safety), then edit the file (these options need to be changes/uncommented and added):
-```
+```sh
 #change
 anonymous_enable=NO
 
@@ -53,26 +54,26 @@ $ systemctl start vsftpd
 We need to install the FTP service (not the daemon) to send files. Name of the package: `ftp`
 
 Step1: installing the package 
-```
+```sh
 $ apt-get install ftp
 ```
 * Installs the required package
 > Note: use `yum` in RedHat distributions  
 
 Step2: connect with the server side (receiver)
-```
+```sh
 $ ftp <ip-address>
 ```
 * Starts a connection with the receiver (returns the flag we set up). Will require the user password; an ftp session will be open-
 
 Step3: switch to binary mode, ask the system to show the hash of the send progress
-```
+```sh
 > bin
 > hash
 ```
 
 Step4: send the file
-```
+```sh
 > put <filename>
 ```
 
@@ -81,7 +82,7 @@ Step4: send the file
 SSH accepts connections through the SSH daemon (a constant running process called `sshd` in Linux that listens to SSH connections by default). Once connected, a terminal will be able to run in a remote machine as if it was running locally.
 
 Connect to a remote machine through ssh:
-```
+```sh
 $ ssh remote-username@<remote-IP-address>:<remote-file-absolute-path>
 ```
 
@@ -92,7 +93,7 @@ Like ”FTP” but “secure”: adds security and authentication. SCP has no po
 > Note: port 22 must be open on the receiver.  
 
 Copying a local file into a remote server:
-```
+```sh
 $ scp <local-file-path> username@<remote-IP-address>:<remote-file-absolute-path>
 ```
 * Copies the local file into the remote server.
@@ -102,7 +103,7 @@ $ scp <local-file-path> username@<remote-IP-address>:<remote-file-absolute-path>
 > Note: a synchronised file from system A to system B will be transferred first, and all modifications of that file updated subsequently (protocol only sends the ndifferences; ex: original file of 2MB, gets modified to 8MB, `rsync` only sends 6MB).  
 
 Copy files locally:
-```
+```sh
 $ rsync -vh <source-path> <destination-path>
 ```
 * Copies a file locally from source to destination (`-z` can also be used).
@@ -111,7 +112,7 @@ $ rsync -vh <source-path> <destination-path>
 	* `-z`: compress the file (useful for slow connections)
 
 Copy files remotely:
-```
+```sh
 $ rsync -avz <source-path> <remote-username>@<remote-ip>:<destination-path>
 ```
 * Copies a file locally from source to destination (`-z` can also be used).
@@ -121,7 +122,7 @@ $ rsync -avz <source-path> <remote-username>@<remote-ip>:<destination-path>
 	* `-a`: preserves all info it can (?)
 
 Fetching a file from a remote machine:
-```
+```sh
 $ rsync -avzh <remote-username>@<remote-ip>:<source-path> <local-destination-path>
 ```
 * Fetches file from remote source to local destination

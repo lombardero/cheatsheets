@@ -2,34 +2,34 @@
 
 
 # 0 - Get help
-```
+```sh
 $ whatis <command>
 ```
 * Shows a small description of what the command does
 
-```
+```sh
 $ <command> --help
 ```
 * Shows some details on how to use the command (options, etc.)
 
-```
+```sh
 $ man <command>
 ```
 * Shows the “manual”, or the complete set of explanations and options to use the command (press space several times to jump through pages)
 
 # 1 - Navigating
-```
+```sh
 $ cd <directory-name>
 ```
 * takes us to the requested directory (accepts relative and absolute paths)
 > Note: absolute paths start with a `/`  
 
-```
+```sh
 $ pwd
 ```
 * “print working directory
 
-```
+```sh
 $ ls -l
 ```
 * lists all files on the current directory 
@@ -39,13 +39,13 @@ $ ls -l
 * Use filenames with wildcards to list all of them (ex: `ls -l *.txt` will list all files with the “txt” extension)
 
 Viewing files one page at a time:
-```
+```sh
 $ ls -ltr | more
 ```
 * The `more` command shows the results of the output one page at a time (press space to go to the next page, q to quit)
 > Note, the “pipe” (`|`) command allows to add an additional command to the one we just ran. In this example, on top of `ls` we ran `more`.  
 
-```
+```sh
 $ whoami
 ```
 * prints the name of the user
@@ -53,28 +53,28 @@ $ whoami
 
 
 # 2 - Creating and handling files
-```
+```sh
 $ touch <filename>
 ```
 * Creates an empty file with the specified name
 
-```
+```sh
 $ cp <original> <copy>
 ```
 * Copies original file (works with both absolute and relative paths)
 
-```
+```sh
 $ mv <initial-path> <final-path>
 ```
 * moves (or renames) a file, works with both absolute and relative paths
 
-```
+```sh
 $ mkdir <directory-name>
 ```
 * creates a new directory (`mkdir` stands for “make directory”)
 * `rmdir` can be used to remove it
 
-```
+```sh
 $ rm <file>
 ```
 * Deletes a file
@@ -83,7 +83,7 @@ $ rm <file>
 
 
 # 3 - Finding files
-```
+```sh
 $ find <path> -name "<filename>"
 ```
 * Iterates over the filesystem to locate files; it returns the path to the filename requested. (Slower than `locate`)
@@ -92,7 +92,7 @@ $ find <path> -name "<filename>"
 > Note: some directories are only accessible by root  
 
 
-```
+```sh
 $ locate <filename>
 ```
 * Uses a pre-built database to return the location of the file (searches in the whole filesystem); returns an absolute path. The database needs to be updated for it to work properly
@@ -112,18 +112,18 @@ Other wildcards:
 * `$`: end of a line
 
 Example: creating 10 files.
-```
+```sh
 $ touch file{1...10}.txt
 ```
 * Creates 10 files: (“file1.txt”, … “file10.txt”)
 
 Example: removing all files starting with “file”:
-```
+```sh
 $ rm file*
 ```
 
 Example: listing all files containing the letter c or d on its name
-```
+```sh
 $ ls -l *[cd]*
 ```
 
@@ -131,13 +131,13 @@ $ ls -l *[cd]*
 ## 5.1 Redirecting outputs
 ### The `>` command
 Redirecting outputs from the `echo` command is the classic, easy way to add single lines to a file.
-```
+```sh
 $ echo "text to be added" > filename.txt
 ```
 * Deletes whatever was in `filename.txt` and replaces it with the text written
 > Note: redirecting takes the standard output of a command and writes into a file. In the example, we use `echo`as the source, but we can use any other command.  
 
-```
+```sh
 $ echo "text to be added" >> filename.txt
 ```
 * Appends the text (in a new line) into `filename.txt`
@@ -152,28 +152,28 @@ $ echo "text to be added" | tee filename.txt
 * `tee` allows us to redirect the output to many files (all arguments)
 
 ## 5.2 - Displaying file contents
-```
+```sh
 $ cat <filename>
 ```
 * Reads the entire contents of a file in the terminal
 
-```
+```sh
 $ more <filename>
 ```
 * Reads contents of a file in the terminal one line at a time (space to go to next page, q to quit)
 
-```
+```sh
 $ head -10 <filename>
 ```
 * Reads the top 10 lines of the file (can print as much lines as wanted)
 
-```
+```sh
 $ tail -10 <filename>
 ```
 * Reads the bottom 10 lines of the file
 
 ## 5.3 Cutting files
-```
+```sh
 $ truncate -s <n> <filename>
 ```
 * Keeps the first n bytes of the file (deleting the rest)
@@ -181,12 +181,12 @@ $ truncate -s <n> <filename>
 
 ## 5.4 Combining and splitting files
 Combining files into another one:
-```
+```sh
 $ cat file1 file2 > combined-file
 ```
 
 
-```
+```sh
 $ split -l <n> <original-file> <new-name>
 ```
 * Takes the contents of the original file, and puts it into smaller files (n lines at a time). The smaller files are called “new-nameaa”, “new-nameab”,…
@@ -200,7 +200,7 @@ The `tar` command groups a bunch of files together (compressing them a bit( in a
 
 ## 6.1 Taring a file
 Taring a file:
-```
+```sh
 $ tar cvf <filename.tar> <path>
 ```
 * Groups a list of files into the tar filename specified
@@ -212,7 +212,7 @@ $ tar cvf <filename.tar> <path>
 > Note: the path can be relative or absolute  
 
 Un-taring a file:
-```
+```sh
 $ tar xvf <filename.tar>
 ```
 * Un-tars the tar file on the current location
@@ -221,13 +221,13 @@ $ tar xvf <filename.tar>
 
 # 6.2 Zipping a file
 Compressing:
-```
+```sh
 $ gzip <file>
 ```
 * Zips (compresses) the file
 
 Uncompressing:
-```
+```sh
 $ gzip -d <file>
 ```
 * Unzips the file
