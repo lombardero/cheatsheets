@@ -5,20 +5,20 @@ NIC bonding is a way to increase the available bandwidth of an interface in Linu
 This procedure can be done with any real adapter of the system.
 
 Step 1: install the bonding driver
-```
+```sh
 $ modprobe bonding
 ```
 And get info about it:
-```
+```sh
 $ modinfo bonding
 ```
 
 Step 2: create the new interface file (bonding the interfaces we want to “join”) adding some parameters
-```
+```sh
 $ vi /etc/sysconfig/network-scripts/ifcfg-bond0
 ```
 Contents of the file:
-```
+```sh
 DEVICE=bond0
 TYPE=Bond
 NAME=bond0
@@ -36,12 +36,12 @@ BONDING_OPTS="mode=5 miimon=100"
 
 
 Step3: we edit the interface files we want to join, and point both files to the newly created one
-```
+```sh
 $ vi /etc/sysconfig/network-scripts/<interface1>
 $ vi /etc/sysconfig/network-scripts/<interface2>
 ```
 Delete the contents, and modify them by this:
-```
+```sh
 TYPE=Ethernet
 BOOTPROTO=none
 DEVICE=<name>
@@ -53,11 +53,11 @@ SLAVE=yes
 * The mac address can be found using `ifconfig`
 
 Step4: restart network to see the changes
-```
+```sh
 $ systemctl restart network
 ```
 
 Bonus: verify the configuration with `ifconfig` and verifying the bonding file:
-```
+```sh
 $ cat /proc/net/bonding/<bond-name>
 ```

@@ -116,6 +116,9 @@ $ docker pull <image name>
 
 # 3 - Building images
 
+Check the [official documentation](https://docs.docker.com/engine/reference/builder/)
+on building Docker images.
+
 The `Dockerfile` is the list of commands used to create an image. It uses a language
 that is made similar to bash commands on purpose.
 
@@ -139,7 +142,8 @@ the same layer, Docker will re-use that layer (speeding up the process immansely
 - [`CMD`](#cmd-command-to-be-run-at-startup): startup command (required)
 - [`ARG`](): arguments
 - [`COPY`](#copy-copy-files-into-the-image): copy files into the image
-- [`WORKDIR`](): change directory
+- [`WORKDIR`](#workdir-change-directory): change directory
+- [`VOLUME`](#volume-specify-the-container-volume-path)
 
 ### `FROM`: starting a build stage
 
@@ -269,6 +273,13 @@ Arguments are defined with the below syntax:
 ```Dockerfile
 ARG ARGUMENT_NAME=<default value>
 ```
+
+### `VOLUME`: specify the container volume path
+
+All the files the container will put in a given folder will outlive the container and
+be stored as a volume locally.
+
+
 
 #### Outside of a building stage (before the first `FROM` statement)
 

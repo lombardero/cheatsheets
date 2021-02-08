@@ -6,14 +6,14 @@
 # 1 - Selecting data
 ## 1.1 - The `cut` command
 Cut allows to display part of the output separated by delimiter, position, or characters
-```
+```sh
 $ cut -cn-m <filename> 
 ```
 * Lists the n to m characters of each line
 * `-cn,m` lists the characters n and m (can use any combination of those
 * `bn-m` can be used to cut by number of bytes (rather than characters)
 
-```
+```h
 $ cut -d<delimiter> -f <n> <filename> 
 ```
 * Cuts the file using the delimiter sign requested, and gets the nth field following that 
@@ -25,7 +25,7 @@ $ cut -d<delimiter> -f <n> <filename>
 `awk` extracts data from files or outputs
 
 Extracting single columns:
-```
+```sh
 $ awk '{print $1}' <filename>
 ```
 * Prints the first column of each line (column= text field divided by space)
@@ -37,19 +37,19 @@ $ awk '{print $1}' <filename>
 
 
 Extracting lines that contain specific characters:
-```
+```sh
 $ awk '/keyword/ {print}' <filename>
 ```
 * Prints only the lines on the file where the keyword appears
 
 Getting lines with more than X characters:
-```
+```sh
 $ awk 'length($0) > 15' <filename>
 ```
 * Returns lines with more than 15 characters
 
 Replacing a keyword with another in a file:
-```
+```sh
 $ cat <file> | awk '{$2="name"; print $0}'
 ```
 * Takes the second element on each line and replaces it by the string we asked for (in this case, “name”). Awk understands: “take the second element of what you read, set it up to “name”, and print everything”.
@@ -57,7 +57,7 @@ $ cat <file> | awk '{$2="name"; print $0}'
 ## 1.3 - The `grep` command
 Stands for “global regular expression print”. It processes text line by line and prints any lines matching a specific pattern. (Kind of like a search feature)
 
-```
+```sh
 $ grep <keyword> <file>
 ```
 * Will return the lines of the file containing the keyword
@@ -69,7 +69,7 @@ $ grep <keyword> <file>
 > Note: can be combined with other commands to find specific lines  
 
 We can also use `egrep` to search for multiple keywords:
-```
+```sh
 $ egrep "keyword1|keyword2" <filename>
 ```
 * Prints the lines containing keyword 1 or keyword 2
@@ -77,7 +77,7 @@ $ egrep "keyword1|keyword2" <filename>
 > Note: this file can also be used with other stdout commands such as `ls`  
 
 ## 1.4 - Sorting
-```
+```sh
 $ sort <file>
 ```
 * Sorts the lines of the file in alphabetical order
@@ -86,7 +86,7 @@ $ sort <file>
 
 ## 1.5 - Removing duplicates
 `uniq` deletes all duplicate lines from a file:
-```
+```sh
 $ sort <file> | uniq
 ```
 * Deletes all duplicate lines from the file (`uniq` needs `sort` to work properly)
@@ -94,7 +94,7 @@ $ sort <file> | uniq
 	* `-d` will show lines having a duplicate
 
 ## 1.6 - Counting Words
-```
+```sh
 $ wc <file>
 ```
 * Returns the number of lines, words, and bytes of the file
@@ -103,12 +103,12 @@ $ wc <file>
 	* `-c` returns the number of bytes only
 
 # 2 - Comparing files
-```
+```sh
 $ diff <file1> <file2>
 ```
 * returns the lines and byte numbers that are different
 
-```
+```sh
 $ cmp <file1> <file2>
 ```
 * Compares files byte by byte

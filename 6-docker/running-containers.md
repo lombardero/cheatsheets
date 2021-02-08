@@ -66,6 +66,7 @@ $ docker container run <options> <image name>:<tag>
   * `--name <container name>`: defines the container name (otherwise it is randomly generated)
   * `-e EXAMPLE_ENV_VARIABLE=dummy` (or alternatively `--env`): defined an environment variable inside of the container.
   * `-t`: allocates a "pseudo-tty", simulates a pairing between a pair of devices (one giving orders, the other receiving them), similar to SSH. It allows to run a command inside the container (usually used along `-i`, which keeps the session open, allowing for multiple commands to be ran)
+  * `-v <volume name>:<path to volume in container>`: allows us to define a name for the given volume
   * `-i`: interactive (used usually alongside `-t`), keeps the session open to receive terminal input.
   * `-t`: Allocates a pseudo-TTY (which simulates a real terminal)
   * `--net <network name>`: connects the container to the specified network
