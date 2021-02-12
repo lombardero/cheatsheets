@@ -35,14 +35,15 @@ There are two types of commands in Docker:
 > Note: the original `docker run` (which still works) is replaced by `docker container run`
 
 ## 1.1 Querying info
+
 Check current version:
-```
+```sh
 $ docker version
 ```
 * Returns the version
 
 Check generic information:
-```
+```sh
 $ docker info
 ```
 * Returns current number of containers (running & stopped), and images
@@ -55,7 +56,7 @@ $ docker info
 
 To run a container from an image for the first time:
 
-```
+```sh
 $ docker container run <options> <image name>:<tag>
 ```
 
@@ -115,7 +116,7 @@ $ docker container start <options> <container name>
 
 Stopping a running container:
 
-```shell
+```sh
 $ docker container stop <container id>
 ```
 
@@ -127,7 +128,7 @@ $ docker container stop <container id>
 
 ### Deleting containers
 
-```
+```sh
 $ docker container rm <options> <container id(s)>
 ```
 
@@ -141,7 +142,7 @@ $ docker container rm <options> <container id(s)>
 
 To get the logs of a container running as daemon:
 
-```
+```sh
 $ docker container logs <container name>
 ```
 
@@ -155,7 +156,7 @@ $ docker container logs <container name>
 It can be useful to look at the different processes running inside a container. It
 can be done with the below command:
 
-```
+```sh
 $ docker container top <container name>
 ```
 
@@ -165,7 +166,7 @@ $ docker container top <container name>
 
 It can be useful to know all the metadata used to start a container:
 
-```shell
+```sh
 $ docker container inspect
 ```
 - Returns a JSON array of all the data used to initialise the container.
@@ -174,7 +175,7 @@ $ docker container inspect
 
 We can check how much resources (CPU, etc) each of the running containers is taking by running the below command:
 
-```shell
+```sh
 $ docker container stats
 ```
 
@@ -216,16 +217,15 @@ $ docker container exec -it <icontainer name> <shell name>
 
 ### Listing running containers
 
-```shell
+```sh
 $ docker container ps <options>
 ```
 
 ### Listing all containers
 
-```shell
+```sh
 $ docker container ls <options>
 ```
-
 * lists all running containers
   * Options:
     * `-a`: lists all containers (stopped, and running)

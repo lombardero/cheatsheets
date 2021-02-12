@@ -7,11 +7,55 @@ or writing files to the DB). Check the
 [official documentation](https://docs.python.org/3/library/asyncio.html).
 
 `asyncio` provides a set of objects that allow:
-- running python [`coroutines`](#11-coroutines) concurrently (check [`asyncio.Task`](#12-tasks))
+- running python [`coroutines`](#11-coroutines) concurrently (when they are wrapped in 
+  an [`asyncio.Task`](#12-tasks)) - most important point
 - perform network IO and IPC ([Streams](#2---streams))
 - distribute tasks via [`queues`](#3---queues)
 
+# 0 - Basic concepts
 
+## CPU vs I/O bound
+
+In programming, a task can have two bottlenecks:
+- The CPU (the task is CPU-bound) tasks, for example, matrix multiplication
+- Reading Input or producing an Output (the task is I/O-bound), for example,
+  downloading a very large file from the internet.
+
+In Python we use different strategies for CPU-bound or I/O-bound tasks.
+
+Since Python is a single-threaded programming language, the only way of speeding
+CPU-bound tasks is through multiprocessing (using more CPUs).
+
+I/O bound tasks, in which a single thread blocks all the process for a long time waiting
+for some missing information, can be sped up in Python using:
+- `threading`: in which other tasks can keep processing while others are blocked (there
+  is an improvement from a complete blockage but is not optimal).
+- `asyncio`: in which the main thread looks for other parts of the code that can be run
+  while waiting for calls to be resolved (if written properly, can improve performance
+  substantially).
+
+
+> Note: Although the `threading` module in Python enables running separate threads,
+> what happens in the background is that the CPU switches between each thread really
+> fast, giving the illusion of parallelization. Everything happens as a single thread
+> in one single worker of a CPU.
+
+## The event Loop
+
+The main concept that `asyncio` brings is an event loop. The event loop is what will
+control the code execution. Independent functions, wrapped in tasks, are scheduled in
+the event loop. The event loop will run the first task until an `await` keyword is
+reached. At that point, the event loop will switch to execute the second task. When the
+first `await` statement succeeded (some data was received), the first task can resume
+its execution from the point where it left.
+
+For the event loop to work properly, running code concurrently, the asynchronous
+functions (also called coroutines) need to be wrapped in an `asyncio.Task`. Otherwise
+the code will not work in a concurrent way (tasks are what hand over the control back
+to the event loop).
+
+> Note that the even if code is run concurrently, the event loop will ensure the
+> final execution will run in the specified order.
 # 1 - Awaitables
 
 There are three types of awaitables: Coroutines, Tasks, and Futures. Check
@@ -20,13 +64,21 @@ of the official documentation.
 
 ## 1.1 Coroutines
 
-Coroutines are asynchronous objects that do not run when they get instantiated, rather,
-they need to be ran with the `asyncio.run(<coroutine>)` method (or when they are
-awaited by another coroutine). To define a coroutine, we use the `async` and `await`
-keywords:
+Coroutines are the way functions are defined to run concurrently in Python. Coroutines
+are similar to regular functions, in the way that if they are sent unexecuted, they
+are still a `function` object. But as opposed to functions, if executed, coroutines
+return a `coroutine` object (which can be scheduled) rather than running the code
+itself. This behavior enables the event loop to take control of its execution.
+
+As mentioned above, coroutines are asynchronous objects that do not run when they get
+instantiated, rather, they need to be ran with the `asyncio.run(coroutine())` method
+(or when they are awaited by another coroutine). 
+To define a coroutine, we use the `async` (mandatory) and `await` (otpiona) keywords:
 - `async` will define the object as a coroutine
-- `await` will stop the coroutine until the object awaited has completed (returns
-  something).
+- `await` will stop the coroutine's execution until the object awaited has completed
+  (returns something). This behavior, if the coroutine is wrapped around a `Task`,
+  enables to execute some code while waiting for that statement to get the data it
+  needs to continue.
 
 Example of asynchronous "Hello World":
 
@@ -46,21 +98,35 @@ asyncio.run(hello_world())
 
 ## 1.2 Tasks
 
-`asyncio.Task` is a wrapper around a coroutine that adds some features to it, as well
-as making it run in a non-lazy way: all the code that can be executed will be, awating
-for the moment it is requested by another task.
+### Defining a task
+
+`asyncio.Task` is a wrapper around a coroutine that enables the event loop to switch
+between them, as well as making them run in a non-lazy way: all the code that can be
+executed will be, awating for the moment it is requested by another task.
+
+Example:
+```py
+async def a_coroutine_function() -> int:
+    await asyncio.sleep(1)
+    return 23
+
+my_task = asyncio.create_task(a_coroutine_function())
+```
+- Creates a task and schedules it to run as soon as it is possible (adds it to the
+  queue of the `asyncio` event loop).
+
+> Note: this will only schedule the task and run all the code it can, but the
+> execution will not be await until it is completed. To await the execution of a task
+> until it finishes, we can use the `await` keyword.
+
+```py
+await my_task
+```
 
 A task is created using `asyncio.create_task(coro())` or `asyncio.ensure_future(coro())`
 (both do the same). This will perform all needed actions and save the result into a
 future, which will then be passed onto a coroutine when it awaits it. The `Task` wrapper
 also enables an API to check if it has completed, add callbacks to it, or cancel it.
-
-To create a task:
-```python
-task = asyncio.create_task(coro()) # or alternatively `asyncio.ensure_future(coro())`
-```
-- The task is now scheduled. Once the event loop starts, all tasks will run their code
-  until an `await` is encountered.
 
 > Note: while coroutines will be stacked as functions (if a coroutine is entered, all
 > remaining code will not be executed until the await succeeds), tasks behave more
@@ -68,6 +134,26 @@ task = asyncio.create_task(coro()) # or alternatively `asyncio.ensure_future(cor
 > execute the first function awaited, and while that function processes, it will start
 > processing the second one. Even if the second one returns before the first, the order
 > in the task is maintained.
+
+### Running tasks concurrently
+
+To run several tasks concurrently, we can schedule all of them, then call await for
+each one of them. `asyncio` provides some help in this aspect with constructs that
+enable, for example, awaiting for a group of tasks until all succeeded.
+
+#### Awaiting a group of tasks
+
+`asyncio.gather()` is one of the basic constructors that `asyncio` provides, it expects
+a list of tasks; will execute them concurrently until all of them succeed. Then, it
+will return an iterable with all the
+
+```py
+asyncio.gather(a_coroutine_function_1(), a_coroutine_function_2())
+```
+- Returns an iterable with all the results of each of the coroutines when all coroutines
+  complete. The coroutines are ran concurrently.
+
+### Example
 
 See this below example to compare coroutines and tasks:
 ```python
