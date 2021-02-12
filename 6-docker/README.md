@@ -16,7 +16,7 @@ Parts covered:
 - 1.4 [Persisting data with volumes](docker-volumes.md)
 # Part 2: Docker compose
 
-(to be done)
+- 2.1 [Docker compose](docker-compose.md)
 
 # Part 3: Miscellaneous
 
