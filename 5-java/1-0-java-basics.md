@@ -23,21 +23,4 @@ In Java, one file contains usually a single class. The name of the file will be 
 as the Java class (with a `.java` extension), which by convention is written
 `InCamelCase`.
 
-## 1.2 Building a class
-
-### The `main` method
-
-In Java, like many other languages, a "constructor" function can be defined while
-building a class. This method will be run automatically when the file is run. In Java,
-this function is called `main()` (works as Python's `__init__`).
-
-Example of a `HelloWorld` class:
-```Java
-public class HelloWorld {
-    public static void main(String[] args){
-        System.out.println("Hello world!");
-    }
-}
-```
-
-
+> See how we work with Classes in Java in [this part](1-3-java-oop.md).
