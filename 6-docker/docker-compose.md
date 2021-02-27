@@ -48,7 +48,7 @@ services:
             - <local port>:<container port>
 ```
 
-### Starting the container
+### Option 1: using Compose to build the image
 
 A container needs either a `Dockerfile` path:
 ```yml
@@ -58,20 +58,24 @@ services:
             context: path/to/dockerfile
             args: # (Optional) Arguments passed to the Dockerfile
                 - ARG_NAME=<value>
+            image: # (Optional) Name given to the image created by the Dockerfile
 
 ```
+
+### Option 2: use a base image
 
 Or a base image and a startup command:
 ```yml
 services:
     <service name>: # Name Given to the container; this will be used as a DNS for
                     # the container inside the network.
-        image: <image name> # (Optional) Same as the "FROM" statement in the Dockerfile
+        image: <image name> # Same as the "FROM" statement in the Dockerfile
                             # if no base image provided, docker-compose will look for a
                             # Dockerfile path.
-        command: ["a", "startup", "command"] # (Optional) Only needed if no Dockerfile
-                                             # is provided
+        command: ["a", "startup", "command"] # (Optional)
 ```
+> Note: the `command` field is only required if it is different than the one used
+> on the base image used.
 
 ### Adding container dependencies
 
@@ -90,8 +94,20 @@ services:
 
 ## 1.3 Volumes
 
-This section allows us to define all volumes needing to be defined for the application
-to run.
+This section allows us to tag all volumes we have attached to our services.
+
+```yml
+services:
+  <service name>:
+    volumes:
+      - volume-name-1:/a/path/in/the/container
+      - colume-name-2:/another/path
+
+volumes:
+  volume-name-1:
+  volume-name-2:
+```
+- Syntax to create the volumes needed for our service to run.
 
 ## 1.4 Networks
 
@@ -120,6 +136,7 @@ $ docker-compose up <options> <container-name>
 - Setup volumes, networks and runs containers
 - Options:
   - `-d`: run all containers in a daemon thread
+  - `--build`: rebuild the images of the containers before startup
 
 ## 2.2 Stop containers and clean up
 
@@ -130,6 +147,8 @@ the images though).
 $ docker-compose down <options> <container-name>
 ```
 - Stop and remove all containers, volumes and networks
+- Options:
+  - `-v`: removes all local files in the volumes when bringing containers down
 
 ## 2.3 Getting container data
 

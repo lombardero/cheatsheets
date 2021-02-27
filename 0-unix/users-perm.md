@@ -208,15 +208,24 @@ Files belong to a certain user, and to a group.
 
 We can change the group it belongs and the owner with the following commands:
 ```sh
-$ chown <username> <filename>
+$ chown <options> <username> <filename>
 ```
 * changes the ownership of a file
-* add `-r` to change recursively all the ownerships of files inside of a directory
-* Can use `chown <user>:<group> <filename>` to change both group and owner of the file.
+* Options:
+  * `-r`: change recursively all the ownerships of files inside of a directory
+  * `-R`: changes recursively all the ownerships of files and directories inside a folder
 
-```
+```sh
 $ chgrp <username> <filename>
 ```
+- Change group of a given file
+
+To change the group and the ownership of a given file, both can be changed with one
+command:
+```sh
+chown <user>:<group> <filename>
+```
+- Change both group and owner of the file.
 
 # 3 - Monitoring users
 Check who is currently logged in

@@ -38,3 +38,19 @@ $ docker container run -d --name mysql -e MYSQL_ALLOW_EMPTY_PASSWORD=True -v mys
 ```
 - The `-v <volume name>:<path to volume in container>` will add a name to the given
   volume.
+
+
+### Cleaning cache after running `apt-get`
+
+The `apt-get` command to install packages on the images caches some data. It is a good
+practice to delete that cache after the package is installed to make sure that unused
+data is not in the final image.
+
+Example of a `Dockerfile` installing stuff with `apt-get` and cleaning it after:
+
+```Dockerfile
+RUN apt-get update && apt-get install -y <package> \
+    && rm -rf /var/lib/apt/lists/*
+```
+- Updates `apt-get`, installs a package, then cleans all files inside the folder
+  `/var/lib/apt/lists/` (which is where  `apt-get` keeps the caches)

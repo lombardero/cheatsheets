@@ -64,12 +64,30 @@ int myInteger = 100;
 byte myByte = (byte) (myInteger);
 ```
 
-# 2 - Other keywords
+# 2 - Function keywords
+
+When functions or class methods are defined, we need to specify two mandatory pieces of
+information, and some optional ones:
+1. The accessibility (`private` vs `public`)
+2. The return type (Does the function return something? If so, what object or data type?)
+3. (Optional) Is the function static? (Does it depend of the state of the outer class?)
+
+The syntax to define a function in Java:
+```java
+//<access modifier> <return type> <function name> (<args>) {}
+public void myFunction (str functionInput){
+  // <some computation>
+}
+
+```
 
 ## 2.1 Access modifiers
 
-## 2.2 Function keywords
+`public` - `private`
 
-`static`
+## 2.2 Return type
 
-`void`
+`void` - Datatype
+
+
+## 2.3 Static functions
