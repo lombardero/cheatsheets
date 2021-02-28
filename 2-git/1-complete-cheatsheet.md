@@ -246,13 +246,16 @@ working immediately. (It is similar to `git init`, but the contents are copied f
 a remote repository instead of being empty).
 
 ```sh
-$ git clone [URL]
+$ git clone <options> [URL] <folder name>
 ```
 - Creates a new folder in current directory, and makes a local copy of the contents of
-  the repository of the specified URL
+  the repository of the specified URL. Adding a folder name will use it for creating the
+  new folder.
 - Options:
-  - `git clone [URL] [folder_name]`: adding `[folder_name]` creates a new folder (named
-  `[folder_name]`), and clones the content of the URL.
+  - `--branch`: clones a specific branch of the repository
+  - `--single-branch`: only clones the specified branch (saves downloading time)
+  - `--depth <n>`: only clones the `n` latest commits on that branch (also saves
+    downloading time - very useful to build Docker images)
 
 ### 2.2 Adding/checking remote repositories
 

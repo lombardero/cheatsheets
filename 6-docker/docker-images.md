@@ -140,7 +140,7 @@ the same layer, Docker will re-use that layer (speeding up the process immansely
 - [`RUN`](#run-running-commands-inside-of-the-image): execute commands
 - [`EXPOSE`](#expose-command): ports
 - [`CMD`](#cmd-command-to-be-run-at-startup): startup command (required)
-- [`ARG`](): arguments
+- [`ARG`](#arg-use-arguments): arguments
 - [`COPY`](#copy-copy-files-into-the-image): copy files into the image
 - [`WORKDIR`](#workdir-change-directory): change directory
 - [`VOLUME`](#volume-specify-the-container-volume-path)
@@ -242,9 +242,11 @@ EXPOSE <open port> <open port>
 
 ### `CMD`: command to be run at startup
 
-This is a mandatory statement, and is what will start up the container layer. This is
-enables us to define the command that will be run every time a container is run from
-an image, and every time it is restarted.
+This statement allows us to define what will start up the container layer. It is only
+required if the base image we pull from does not implement it, or we want to superseed
+it. This statement enables us to define the command that will be run every time a
+container is run from an image, and every time it is restarted. It is always the last
+statement to be specified in a `Dockerfile`.
 
 ```Dockerfile
 CMD ["command", "to", "run", "at", "startup"]
@@ -263,8 +265,9 @@ COPY <source path> <destination path in the image>
 
 ### `ARG`: use arguments
 
-Arguments are variables that we can pass on to the `Dockerfile` to build the image
-(wither through the `docker image build` command, or through `docker-compose.yml`).
+Arguments are environment variables that are only available at a certain build stage, not for all build stages like variables defined in `ENV`. They can be seen as variables that
+we can pass on to the `Dockerfile` to build the image (through the `docker image build`
+command, or through `docker-compose.yml`).
 
 There are two ways of using `ARG`: inside or outside of a building stage.
 
@@ -273,6 +276,7 @@ Arguments are defined with the below syntax:
 ```Dockerfile
 ARG ARGUMENT_NAME=<default value>
 ```
+- This value will only be available for a given build stage
 
 ### `VOLUME`: specify the container volume path
 
