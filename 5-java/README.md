@@ -6,5 +6,8 @@ The Java cheatsheets follow a quite linear path, starting from a very basic leve
 
 - [Java fundamentals](1-0-java-basics.md)
 - [Java datatypes, access modifiers](1-1-java-building-blocks.md)
-- [Basic syntax]
-- [Common statements](1-2-common-java-statmts.md)
+- [Java logic statements](1-2-java-sttmt.md) : `if`, `for`
+- [Java OOP basics](1-3-java-oop.md)
+
+
+Bonus: [Common Java statements](common-java-statmts.md)

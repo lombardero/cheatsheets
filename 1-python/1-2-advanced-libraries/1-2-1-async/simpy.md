@@ -31,7 +31,7 @@ env = simpy.Environment()
 ### General idea
 
 Processes are defined by simple Python `generators` (check
-[this resource](https://jeffknupp.com/blog/2013/04/07/improve-your-python-yield-and-generators-explained/)),
+[this section](generators-coroutines.md) on generators and coroutines),
 which can be functions or methods of a Class. Processes yield `Event` or other
 processes, and then get suspended until these events complete. Processes can be
 called through other processes as well. Multiple processes can wait for a single event.
