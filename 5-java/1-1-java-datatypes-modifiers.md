@@ -48,7 +48,6 @@ Java supports natively two types of floating point numbers:
   ```
 
 
-
 - `boolean`
 - `char`
 
