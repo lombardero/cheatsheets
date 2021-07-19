@@ -42,13 +42,14 @@ when running `docker history <image name>`, where all the layers of the image ar
 displayed.
 
 The image always starts from a base image we call "scratch"; all the changes added
-to that base image is an additional layer (i. e. running a command, adding environment
-variables). Each layer of the image is identified with a unique hash, which enables
-other images to use that same layer (the stored version of it) if shared. This saves
-a lot of space and booting time.
+to that base image are an additional layer (such as running a command, or adding
+environment variables). Each layer of the image is identified with a unique hash, which
+enables other images to use that same layer (the stored version of it) if shared. This
+saves a lot of space and booting time.
 
-This works also for custom-made containers. If we create two images with `Dockerfile`s
-that only copy application A or B in the container, the common layers from both images]can be shared (hence saving a lot of space).
+This feature works also for custom-made containers. If we create two images with
+`Dockerfile`s that only copy application A or B in the container, the common layers
+from both images can be shared (hence saving a lot of space).
 
 ### Containers are also layers
 
