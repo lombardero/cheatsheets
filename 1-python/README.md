@@ -61,7 +61,7 @@ Bonus: random [Python tricks](1-1-python-concepts/python-tricks.md)
 
 ## Basic data science libraries
 
-- [Numpy](1-4-data-science/2.1-numpy.txt) (still `.txt` file)
+- [Numpy](1-4-data-science/2.1-numpy.md)
 - [Pandas](1-4-data-science/2.2-pandas.md) (on the process of translating to
   Markdown)
 - [Scikit Learn](1-4-data-science/4.1-scikit-learn.txt)
