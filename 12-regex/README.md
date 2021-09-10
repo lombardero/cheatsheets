@@ -4,10 +4,7 @@ Regular expressions are useful to match and identify patterns of text. They can 
 used to assert a pattern is found in a given string, or to get an element from it.
 
 Building blocks:
-- basics:
-  - `.`: Any character
-  - `
-  - `*`: Zero or more of previous characters
+- Special:
   - `\`: "Literal" - do not interpret next character as an operator (ex: `google\.com` s)
 - Character matchers:
   - `.`: Any character
