@@ -9,7 +9,12 @@ in an asynchronous way to not block the main thread of the script.
 ## 1.1 Starting threads
 
 `threading` is a built-in Python package that enables us to run functions outside of
-the main thread of the script through the `Thread` class.
+the main thread of the script through the `Thread` class. Because of the Python
+interpreter (which cannot run several threads at a time due to its memory collection
+system), the `threading` module will implement an "illusion" of threading rather than
+running two actual threads in the computer (meaning the `threading` mdule in
+Python is only truely useful for I/O bound tasks).
+
 
 Example: running a function in a separate thread
 ```py
@@ -120,3 +125,47 @@ with concurrent.futures.ThreadPoolExecutor() as executor:
     # The `.result()` method enables us to await for a result.
     f1.result()
 ```
+
+# 3 - Locks
+
+One of the classic issues of the `threading` library is the utilisation of
+non-thread-safe resources. For that, the `threading` library introduces a `Lock`
+class that blocks a second thread requesting to use a resource until the first
+thread releases it:
+
+```py
+import threading
+import time
+
+class SharedResource:
+  
+    def __init__(self):
+        self.value = 0
+        self.lock = threading.Lock()
+
+    def read_value(self, caller: str):
+        print(f"{caller} read value of {self.value}")
+        return self.value
+
+    def set_value(self, value: int, caller: str):
+        print(f"{caller} set value of {value}")
+        self.value = value
+
+
+r = SharedResource()
+def process(name: str):
+    r.lock.acquire()
+    read_value = r.read_value(name)
+    read_value += 2
+    time.sleep(0.1)
+    read_value = r.set_value(read_value, name)
+    r.lock.release()
+
+t1 = threading.Thread(target=process, args=["T1"])
+t2 = threading.Thread(target=process, args=["T2"])
+
+t1.start()
+t2.start()
+```
+- The use of `lock` bove allows to access the `SharedResource()` by two different
+  threads without corrupting the final result (which should be 4)
