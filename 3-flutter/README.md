@@ -9,6 +9,7 @@ This section is composed in two parts, which follow a linear structure.
 
 ## Flutter section
 
-- [Flutter basics](1-flutter-basics.dart) (still in `.dart` format)
+- [Flutter organisation](1.1-flutter-org.md)
+- [Flutter CLI](1.2-flutter-cli.md)
 - [Importing widgets](2.1-import-widgets.md)
-- [Widget types](2.2-flutter-widget-types.dart) (still in `.dart` format)
+- [Widget types](2.2-flutter-widgets.md)
