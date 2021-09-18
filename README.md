@@ -15,8 +15,9 @@ Here is the content list.
 5. [Java](5-java/README.md)
 6. [Docker](6-docker/README.md)
 7. [SQL](7-sql/README.md)
-8. [C#](8-cs/README.md)
-9. [C++](9-cpp/README.md)
-10. [Swift](10-swift/0-swift-basics.md)
-11. R
-12. [Regex](12-regex/README.md)
+8. [C](8-c/README.md)
+9. [C#](9-cs/README.md)
+10. [C++](10-cpp/README.md)
+11. [Swift](11-swift/0-swift-basics.md)
+12. R
+13. [Regex](13-regex/README.md)

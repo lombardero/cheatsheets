@@ -6,6 +6,18 @@ syntax, which is perfect for IO-bound processes (ex: awaiting for network respon
 or writing files to the DB). Check the
 [official documentation](https://docs.python.org/3/library/asyncio.html).
 
+> Note: concurrency is the umbrella term behind threading and parallel processing,
+> it is the idea of running tasks in an overlapping manner (either in a separate
+> thread, or in a different CPU)
+
+`asyncio` is single-threaded and single-process, it uses cooperative multitasking to
+run concurrent code. The way it works is by scheduling [`coroutines`](#11-coroutines),
+concutrrently, but their execution is not inherently concurrent.
+
+> Note: "asynchronous" in Python means that routines have an ability to "pause" its
+> execution while waiting for a result.
+
+
 `asyncio` provides a set of objects that allow:
 - running python [`coroutines`](#11-coroutines) concurrently (when they are wrapped in 
   an [`asyncio.Task`](#12-tasks)) - most important point
@@ -64,6 +76,10 @@ of the official documentation.
 
 ## 1.1 Coroutines
 
+In general terms, a coroutine is nothing more than a function that can pause its
+execution until reaching `return`, and it can pass control to another coroutine
+for some time.
+
 Coroutines are the way functions are defined to run concurrently in Python. Coroutines
 are similar to regular functions, in the way that if they are sent unexecuted, they
 are still a `function` object. But as opposed to functions, if executed, coroutines
@@ -85,16 +101,26 @@ Example of asynchronous "Hello World":
 ```python
 import asyncio
 
-async def hello_world():
+async def hello():
     print("hello")
     await asyncio.sleep(1)
     print("world")
 
-asyncio.run(hello_world())
+async def main():
+    await asyncio.gather(hello(), hello(), hello())
+
+if __name__ == "__main__":
+  asyncio.run(main())
 ```
-- When `asyncio.run(hello_world())` gets executed, the coroutine gets executed: prints
-  "hello", waits one second, then prints "world". This is achieved with
-  `asyncio.sleep(n)`, which will wait n seconds to return None.
+- The above code allows to run three times the `hello` function asynchronously. The
+  `await asyncio.sleep(1)` call will give control back to the event loop for one second,
+  allowing it to execute other tasks (in this case, the execution of the other two
+  `hello` functions).
+
+> Note: `asyncio.sleep(n)` is a coroutine that waits `n` seconds to return `None`
+
+> Note: `asyncio.gather()` takes the coroutines passed as arguments and wraps them
+> into [tasks](#12-tasks) to run them concurrently.
 
 ## 1.2 Tasks
 
@@ -266,10 +292,15 @@ to send and receive data. Check the documentation
 
 # 3 - Queues
 
-`asyncio` queues are designed to work similarly as the ones from the `queue` module.
+`asyncio` queues are designed to work similarly as the ones from the `queue` module,
+with the difference that the consumer can now `await` for an item to arrive in
+the queue.
 `asyncio` adds the functionality of working with coroutines (queues can now be
 awaited). Check the `asyncio` queue section
 [here](https://docs.python.org/3/library/asyncio-queue.html#asyncio-queues).
+
+> Note: `queue.Queue` provides thread safety while `asyncio.Queue` does not, `asyncio`
+> does not need it. It runs in a single thread.
 
 # 4 - `aiojobs`
 
