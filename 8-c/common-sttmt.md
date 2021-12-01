@@ -1,4 +1,4 @@
-# C basics
+# C common statements
 
 # Importing
 
@@ -6,8 +6,18 @@
 #include <package_name.h>
 ```
 
-# Printing
+## Printing
 
 ```c
 printf("Hello");
+```
+
+## Adding a number to a variable
+
+```c
+counter += n
+```
+
+```c
+counter++
 ```
