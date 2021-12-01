@@ -163,4 +163,4 @@ sets up aliases for them
 4. `GROUP BY`: aggregates the remaining data based on the condition (if any `HAVING`
 clause is specified, it is executed afterwards)
 5. `SELECT`: Selects the given columns to display
-6. `ORDRER BY`: orders the output
+6. `ORDER BY`: orders the output
