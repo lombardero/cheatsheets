@@ -20,6 +20,8 @@ Parts covered:
 
 # Part 3: Miscellaneous
 
+- 3.1 [Kubernetes](kubernetes.md)
+
 (Old repository - to be reorganised)
 
 - [Basic concepts](misc/basic-concepts.md)
