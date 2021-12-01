@@ -6,6 +6,7 @@ Resources/
 # Formats
 *.pdf
 *.DS_store
+*.idea
 *.gif
 *.ini
 *.log
