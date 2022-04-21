@@ -27,8 +27,6 @@ docker run -nname my-mongo -d -p 17017:2
 ```
 
 
-
-
 # 1 - Documents
 
 A document is a group of key-value pairs (JSON-like). It is the most unitary item that we can work with in Mongo.

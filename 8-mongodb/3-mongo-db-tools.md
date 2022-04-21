@@ -4,11 +4,7 @@
 ## Importing data
 
 ```sh
-mongoimport --db picnic --collection restaurants --drop --file primer-dataset.json
-
-mongoimport --db picnic --collection movies --drop --file movies.json
-
-mongoimport --db picnic --collection restaurants_big --drop --file restaurants_big.json
+mongoimport --db <db name> --collection <collection name> --drop --file <json file with data>
 ```
 - Options:
   - `--port`: add data to a specific port
