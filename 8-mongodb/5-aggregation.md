@@ -4,7 +4,7 @@ Companies have started moving the complexity from the Database to the applicatio
 
 This applies to the Aggregation framework as well. It is a powerful tool, but should not be overused because it adds complexity in the DB layer.
 
-# Aggregation
+# 1 - Aggregation
 
 The aggregation framework allows us to create data processing pipelines that take collections and generate an output.
 

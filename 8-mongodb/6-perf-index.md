@@ -6,7 +6,7 @@ Indexes in MongoDB are structured files that save pointers to documents in a str
 binary-tree structure. If MongoDB can use an index for a document, it will go to the
 file directly and retrieve that document.
 
-# Explain query plan
+# 1 - Query plans
 
 MongoDB introduces an `explain()` function which will output how the command will be
 executed.
