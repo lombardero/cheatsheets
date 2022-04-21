@@ -7,7 +7,7 @@ Arrays are lists of primitive variables or other objects.
 ```Javascript
 const new_array = ['hello', 123, [1,2,3]]
 ```
-Note: reference value types such as arrays can be modified even if they are declared through a `const` statement. This is due to the fact that what is 'constant', is the pointer to a location on the Heap where the data is stored. The pointer will never change, but what is stored in the Heap can be.
+> Note: reference value types such as arrays can be modified even if they are declared through a `const` statement. This is due to the fact that what is 'constant', is the pointer to a location on the Heap where the data is stored. The pointer will never change, but what is stored in the Heap can be.
 
 #### Array methods
 - `<array>.map(function);` iterates through `<array>`, and creates a new array (the original `<array>` remains unchanged), applying the `function` inserted element-wise (if no function is inserted: `<array>.map()`)

@@ -1,11 +1,12 @@
 # Cheatsheet registry
 
-This repository contains some of the guides for myself I have built in my journey from
-civil engineeing (almost not knowing how to open a text file in 2018) to working
-as a developer. The repository assumes no background and in many cases gives a
-sufficient explanation to understand concepts.
+This repository contains miscellaneous software development cheatsheets
+collected in the journey towards software development.
 
-Here is the content list.
+
+Here is the content list:
+
+# Technologies
 
 0. [Unix commands](0-unix/README.md)
 1. [Python](1-python/README.md) 
@@ -21,3 +22,7 @@ Here is the content list.
 11. [Swift](11-swift/0-swift-basics.md)
 12. R
 13. [Regex](13-regex/README.md)
+
+# Software development principles
+
+- [Design patterns](design-patterns/README.md)

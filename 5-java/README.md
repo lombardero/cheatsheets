@@ -9,5 +9,8 @@ The Java cheatsheets follow a quite linear path, starting from a very basic leve
 - [Java logic statements](1-2-java-sttmt.md) : `if`, `for`
 - [Java OOP basics](1-3-java-oop.md)
 
+## Other features
+
+- [Java functional interfaces](2-1-java-funct-int.md)
 
 Bonus: [Common Java statements](common-java-statmts.md)

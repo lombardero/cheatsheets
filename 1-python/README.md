@@ -56,6 +56,7 @@ Bonus: random [Python tricks](1-1-python-concepts/python-tricks.md)
 - [`aiohttp`: asynchronous server](1-3-web-servers/aiohttp.md)
 - [`flask`](1-3-web-servers/0.1-flask/1%20-%20Flask%20basics.ipynb) (jupyter notebook)
 - [The `SQLAlchemy` ORM](1-3-web-servers/0.1-flask/sqlalchemy.md)
+- [FastAPI](1-3-web-servers/fast-api.md)
 
 # 4 - Data science
 

@@ -64,15 +64,19 @@ var obj = {
 - `a || b`:  computes a OR by
 
 ### Defining variables
+
 Defining a variable in Javascript will allocate a slot in the Stack to store the value of the variable directly (if variable is primitive) or a pointer to a Heap location (if variable is of reference type). We do so through the `var` statement, as shown below
+
+> Note: from JavaScript 6 onwards, the `let` - `const` syntax is preferred, to let the user define how that variable should be used explicitly (local vs constant)
 
 The basic syntax to define a variable in Javascript is:
 ```Javascript 
 var variable_name = 'variable_value';
 ```
 
-### Defining local variables
-`let` will work very similarly as `var`, but will define a variable locally, in the scope of a block (`{...}`) instead of globally.
+### Local variables
+
+`let` will work very similarly as `var`, but will define a variable locally, in the scope of a block (`{...}`) instead of globally. Use `let` for variables that will change.
 
 Syntax:
 ```Javascript 
@@ -80,12 +84,15 @@ let local_variable_name = 'i_am_a_local_variable';
 ```
 
 ### Defining constants
+
 Global constants will be accessible in the whole code (even inside functions), and are used to be explicit about what we plan to do with variables defined. `const` should be used for any variable that will not change throughout our script: if we try to change the value initially set to a constant, we will get an error. Note that the convention states that global constant names are in caps, and use underscores as separations.
 
 The basic syntax to define a Global variable in Javascript is:
 ```Javascript 
 const GLOBAL_CONSTANT = 'variable_value';
 ```
+
+> Note: trying to re-assign a `const` variable will throw a `TypeError`
 
 ### Importing modules
 Javacript uses the `require()` keyword to import modules or libraries. We can import JS pre-built modules or files we have created.
