@@ -77,3 +77,60 @@ public class MyClass {
 
 > Note: all instance variables (defined in the context of the class) are accessible
 > through the `this` keyword.
+
+# 2 - Inheritance
+
+## 2.1 Interfaces and abstract classes
+
+### Interfaces
+
+Interfaces in Java are conceptually equivalent to `ABC` (Abstract Base Classes) in python,
+which define a class skeleton with empty methods. They are used to define a base interface,
+and are useful in software development design.
+
+Example:
+
+```java
+interface SoundBehavior {
+  public void sound(); // abstract method - does not have a body
+}
+
+// "Quack" implements the "SoundBehavior" interface.
+class Quack implements SoundBehavior {
+
+  @Override
+  public void sound() {
+    System.out.println("Quack!");
+  }
+}
+
+// "Animal" adds the functionality of performing the sound.
+class Animal {
+    SoundBehavior soundBehavior;
+
+  public void performQuack() {
+    soundBehavior.sound();
+  }
+}
+
+// Implementation of "Quack" creates a type of animal.
+class Duck extends Animal {
+
+    public Duck() {
+        soundBehavior = new Quack();
+    }
+}
+```
+
+> Note: the `@Override` operator informs the compiler the method is being overriden.
+
+### Abstract classes
+
+The `abstract` keyword is a non-access modifyer for classes and methods. They are used to
+declare classes and methods that are intended to be extended. This means:
+- `abstract` classes cannot be instantiated
+- `abstract` methods do not contain a body
+
+Additionally:
+- `abstract` classes or methods cannot be declared `private`, `final` or `static`
+

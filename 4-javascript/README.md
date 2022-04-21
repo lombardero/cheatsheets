@@ -15,3 +15,7 @@ Here is a summary of the contents:
 - [the `node.js` fundamentals](0.1-nodejs/1-nodejs-basics.md)
 - [`npm` and installing packages](0.1-nodejs/2-third-party-packages.md)
 - [`express.js`](0.1-nodejs/3-express.md)
+
+## [React](2-react/README.md)
+
+- [`react.js` basics](2-react/react-basics.md)
