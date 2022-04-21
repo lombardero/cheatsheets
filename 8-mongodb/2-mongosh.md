@@ -1,6 +1,6 @@
-# Mongo
+# Mongo Shell
 
-#
+# 0 - Setup
 
 To work with mongo, we need to install:
 - Mongo CLI: `mongosh`
@@ -14,7 +14,7 @@ $ mongosh
 
 This will enable to open the database
 
-## Mongo shell commands
+# 1 - Mongo shell commands
 
 ```mongo
 > show dbs;
@@ -31,11 +31,11 @@ This will enable to open the database
 ```
 - Once a database is selected, this command shows the available collections on that database
 
-# Running commands in the database
+## Running commands in the database
 
 When inside a database (after using `use <database name>`): `db` is a special vairable which enables us to interact with the database.
 
-# Querying with `find`
+## Querying with `find`
 
 ```
 > db.<collection>.findOne()
@@ -228,7 +228,7 @@ Getting one element of a list in the results is not straight-forward. We need to
 > db.collections.find(<query>, {"second_list_element": {$arrayElementAt ["list_field": 1])
 ```
 
-# Updating data
+# 2 - Updating data
 
 ## Updating regular fields
 
@@ -262,7 +262,7 @@ Removing a new fild (needs an empty query)
 > db.students.updateMany({}, { $pop: { grades : -1 } } )
 ```
 
-# Inserting fields
+# 3 - Inserting fields
 
 Same as `INSERT INTO`:
 ```

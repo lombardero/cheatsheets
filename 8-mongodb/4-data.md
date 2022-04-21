@@ -1,6 +1,6 @@
 # MongoDB Data patterns
 
-# Building the data model
+# 0 - Data model guidelines
 
 Things to think when creating a MongoDB data model:
 
@@ -12,7 +12,7 @@ Things to think when creating a MongoDB data model:
 
 > Mongo has a 16MB limit for documents
 
-# Data relations in MongoDB
+# 1 - Data relations in MongoDB
 
 ## One-to-one relationship
 
@@ -60,7 +60,7 @@ For this relationship, we can have the data embedded on the "one" side as a list
 
 For a many-to-many, the most frequent way to do it is to link the data on both sides as a list of foreign keys.
 
-# Patterns
+# 2 - Patterns
 
 Data patterns used in MongoDB databases.
 
