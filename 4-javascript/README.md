@@ -7,8 +7,10 @@ Here is a summary of the contents:
 ## JS basics
 
 - [The very basics](1-js-basics.md)
+- [Functions in JS](2-functions.md)
 - [Objests in javascript](2-objects-js.md)
 - [Asynchronous code in javascript](3-async-code-in-js.md)
+- 
 
 ## Node.js
 
