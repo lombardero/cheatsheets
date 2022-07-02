@@ -221,6 +221,8 @@ return (
 - Never change the state of an object outside of it. Keep state close to logic! Use a method to do that!
 - Do not use Checked Exceptions in Java
 - Avoid `return;`, `throws`, `break;`, `continue;`
+- Do not use Optionals as parameters for functions! Only as return values
+- Do not use booleans as parameters enabling/disabling code for functions either!
 
 ### Immutability
 
