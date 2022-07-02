@@ -13,4 +13,11 @@ The Java cheatsheets follow a quite linear path, starting from a very basic leve
 
 - [Java functional interfaces](2-1-java-funct-int.md)
 
+## Advanced libraries
+
+- [JFR Unit](3-1-jfr-unit.md)
+
+## Libraries
+
+
 Bonus: [Common Java statements](common-java-statmts.md)
