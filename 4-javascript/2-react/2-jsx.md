@@ -7,6 +7,15 @@ the browser.
 
 > Note: JSX code can only have one single root elemet (`<div></div>` section)
 
+## What is JSX?
+
+JSX is simply a syntax within React. Behind the scenes, a `React` object is called (that is why
+in the past it had to be imported), and JSX is interpreted by it and then translated to
+actual HTML (which is what we can see in the browser)
+
+> Behind the scenes, React calls `React.createElement()` recursively, parsing all JSX
+> code to create the HTML.
+
 ## Using CSS in JSX
 
 To use a CSS style, instead of using `class="CSS-class"` in the XML divion, JSX uses

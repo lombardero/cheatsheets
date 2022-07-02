@@ -30,6 +30,10 @@ The `/public` folder:
 
 > Note: it is considered good practice to have one component by file.
  
+ ## Folders
+
+ It is good practice to create sub-folders for components. A generic `UI` folder could be
+ created, for example, for generic UI components and feature-specific ones.
 
 ## CSS code
 
