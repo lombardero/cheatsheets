@@ -1,5 +1,18 @@
 # Security in Spring
-
+- [Security in Spring](#security-in-spring)
+- [0 - Security basics](#0---security-basics)
+  - [Authentication vs Authorization](#authentication-vs-authorization)
+  - [Types of authentication](#types-of-authentication)
+  - [Cookies & Keycloak](#cookies--keycloak)
+- [1 - Spring security](#1---spring-security)
+  - [1.1 Basic authentication](#11-basic-authentication)
+    - [Legacy setup](#legacy-setup)
+    - [Enhanced setup](#enhanced-setup)
+    - [From Roles to Authorities](#from-roles-to-authorities)
+  - [1.2 Spring security architecture](#12-spring-security-architecture)
+  - [1.3 Other features](#13-other-features)
+  - [Extracting the user details from request](#extracting-the-user-details-from-request)
+  - [Disabling functionalities for given roles](#disabling-functionalities-for-given-roles)
 # 0 - Security basics
 
 Ways of authenticating a request:
@@ -31,7 +44,9 @@ Cookies make sure your session keeps active. The browser keeps some cookies, but
 
 # 1 - Spring security
 
-## 1.1 Legacy setup
+## 1.1 Basic authentication
+
+### Legacy setup
 
 Spring has an `HttpSecurity` object enabling to set up security; this is how authentication used to be set up, but it SHOULD NOT BE USED as it is very error-prone! We often forget to update the URLs in this part when we change them (opening them to unwanted users).
 ```java
@@ -53,7 +68,7 @@ protected void configure(HttpSecurity http) throws Exception {
 
 > :exclamation: The top-most used security breach issue is when backends still expose actions (usually via endpoints) that are hidden disabled in the fronted (still accessible via `cURL` or Postman)
 
-## 1.2 Enhanced setup
+### Enhanced setup
 
 Spring allows us to keep the role annotation close to the function that uses it via the `@Secured` annotation! We can authorize methods or classes with specific roles! Less error-prone.
 
@@ -64,7 +79,7 @@ public void someAuthorizedMethod() {};
 
 > :thought_balloon: This setup still has a challenge, it does not scale well with number of roles. This setup will make us repeat ourselves
 
-## 1.3 From Roles to Authorities
+### From Roles to Authorities
 
 Feature-based authority: we flip the problem. Instead of listing the roles that can access an action in the code, we define the actions -called "Authorities"- that each user can perform.
 
@@ -78,12 +93,13 @@ public enum UserRole {
 }
 ```
 
-
-
 > :information_source: In this setup, Authentication works by sending authority tokens in the headers.
 
+## 1.2 Spring security architecture
 
+Spring's security works by a superposition of [filters](https://docs.spring.io/spring-security/reference/servlet/architecture.html), which means **order is important**!
 
+## 1.3 Other features
 
 ## Extracting the user details from request
 

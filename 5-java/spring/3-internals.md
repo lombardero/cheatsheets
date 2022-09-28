@@ -1,5 +1,20 @@
 # Spring Internals
 
+- [Spring Internals](#spring-internals)
+- [Injecting internals](#injecting-internals)
+  - [Caching](#caching)
+    - [When to use caching](#when-to-use-caching)
+    - [Event listeners](#event-listeners)
+- [Transactions](#transactions)
+  - [When are transactions needed](#when-are-transactions-needed)
+  - [`@Transactional` on a method](#transactional-on-a-method)
+  - [Behind-the-scenes of transactions](#behind-the-scenes-of-transactions)
+    - [Exceptions in transactions](#exceptions-in-transactions)
+    - [Starting a transaction from a failed transaction](#starting-a-transaction-from-a-failed-transaction)
+  - [After-transaction hooks](#after-transaction-hooks)
+  - [Transactional events](#transactional-events)
+
+
 # Injecting internals
 
 

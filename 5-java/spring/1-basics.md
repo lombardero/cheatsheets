@@ -1,10 +1,14 @@
 # Spring concepts
 
-
 Spring is a framework, not a library, as you do not control it, it controls you! It controls the way you must write your application.
 
 Spring was born to avoid needing to declare all the objects your code uses, in order to reduce boilerplate code. It injects dependencies; the main thing you need to do as developer is to wire the dependencies together.
 
+- [Spring concepts](#spring-concepts)
+  - [Learning spring](#learning-spring)
+  - [Sping Annotations](#sping-annotations)
+  - [How does it work](#how-does-it-work)
+  - [Spring weaknesses](#spring-weaknesses)
 ## Learning spring 
 
 Leaning spring:
