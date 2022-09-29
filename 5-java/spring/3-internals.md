@@ -1,11 +1,10 @@
 # Spring Internals
 
 - [Spring Internals](#spring-internals)
-- [Injecting internals](#injecting-internals)
-  - [Caching](#caching)
-    - [When to use caching](#when-to-use-caching)
-    - [Event listeners](#event-listeners)
-- [Transactions](#transactions)
+- [1 - Caching](#1---caching)
+  - [Types of Caching](#types-of-caching)
+  - [When to use caching](#when-to-use-caching)
+- [2 - Transactions](#2---transactions)
   - [When are transactions needed](#when-are-transactions-needed)
   - [`@Transactional` on a method](#transactional-on-a-method)
   - [Behind-the-scenes of transactions](#behind-the-scenes-of-transactions)
@@ -13,23 +12,10 @@
     - [Starting a transaction from a failed transaction](#starting-a-transaction-from-a-failed-transaction)
   - [After-transaction hooks](#after-transaction-hooks)
   - [Transactional events](#transactional-events)
+  - [Debugging transactions](#debugging-transactions)
 
 
-# Injecting internals
-
-
-When classes are injected in another class in Spring, the actual class is _not_ actually injected. In the background, Spring creates a subclass of the injected one using the `CGLib` library, and injecting a _proxy_ to the class instead of the reference to the class.
-- Because o this, `@Service` classes cannot be `final`, because they will be implicitly sub-classed by the framework.
-- Spring caches method calls implicitly
-
-
-Whenever you do not understand ho Spring does something, remember: it is a Proxy!
-- `@Cacheable`
-- 
-
-> :exclamation: In Spring, only calls from _different_ classes are proxied!
-
-## Caching
+# 1 - Caching
 
 In Spring, anything returned by a method is cached, that might cause problems, for example, if we save something to the DB and want to retrieve it with a method (might retreive a previously cached value). 
 
@@ -43,7 +29,12 @@ public void createTeacher(TeacherDto dto) {...}
 ```
 - This code will only work with `allEntries = true` flag (which blows up the entire `"all-teachers"` cache map)
 
-### When to use caching
+## Types of Caching
+
+Two ways of caching:
+1. Let Spring manage it with `@Cacheable`
+2. Do it yourself with a `CacheManager` class (you build it)
+## When to use caching
 
 Questions before to ask before caching data:
 - Does the data change? NO: Cache
@@ -51,7 +42,7 @@ Questions before to ask before caching data:
     - How often does it change? (Lot of cache trashing?)
     - Can we find out when it changed?
       - YES
-        - a) the changes go through the application. Happy path :point_left: use `@CacheEvict`
+        - a) the changes go through the application. Happy path :point_right: use `@CacheEvict`
         - b) can we listen to events? (register event which does `@CacheEvict`)
       - NO
         - Unhappy path, question: for how long can I lye to my users? (Use a timer to evict cache)
@@ -69,12 +60,8 @@ Questions before to ask before caching data:
 > 2. Use a `redis` database for distributed caching
 > 3. Build your own synchronization protocol :skull:
 
-### Event listeners
 
-When a bean publishing an event is loaded, all the listeners of that event are detected and loaded by Spring. By default, event listeners run in the same thread.
-
-
-# Transactions
+# 2 - Transactions
 
 A transaction must be ACID:
 - Atomic: "all-or-nothing" either all INSERT/UPDATE/DELETE succeed, or none. It can succeed on its entirety, or fail, not partially.
@@ -135,8 +122,14 @@ If we want to start a transaction when our transaction fails (for example, when 
 
 ## After-transaction hooks
 
-This feature enables to execute some code (such as communicating the transaction was successful), after the transaction succeeds.
+This feature enables to execute some code (such as communicating the transaction was successful), after the transaction succeeds. Use `@TransactionalEventListener(AFTER_COMMIT)` for this, to do cleanup
 
 ## Transactional events
 
 We can also perform this functionality as after-transaction hooks with `@TransactionalEventListener(phase = TransationPhase.AFTER_COMMIT`; the listener will only listen to the event if the transaction was successful. For this, the event emitter must be inside of a transaction.
+
+## Debugging transactions
+
+How to find out when a transaction started?
+- Check for the first `@Transactional` annotation in the code
+- Use `p6spy` and check logging

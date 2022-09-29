@@ -1,5 +1,9 @@
 # REST APIs with Spring
-
+- [REST APIs with Spring](#rest-apis-with-spring)
+  - [Rest Controller](#rest-controller)
+    - [Validating user input](#validating-user-input)
+    - [Creating a search endpoint](#creating-a-search-endpoint)
+    - [Passing a body](#passing-a-body)
 ## Rest Controller
 
 The `@RestController` will handle all requests sent to the `@RequestMapping("url")`, example syntax:

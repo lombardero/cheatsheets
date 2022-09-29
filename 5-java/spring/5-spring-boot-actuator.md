@@ -1,6 +1,11 @@
 # Spring Boot actuator
 
-Overview of what is it :point_left: [here](https://www.baeldung.com/spring-boot-actuators).
+- [Spring Boot actuator](#spring-boot-actuator)
+- [Configuration](#configuration)
+  - [Enable spring boot actuator](#enable-spring-boot-actuator)
+  - [Configuring ports](#configuring-ports)
+
+Overview of what is it :point_right: [here](https://www.baeldung.com/spring-boot-actuators).
 
 Spring-boot adds production-ready features to the applications, such as:
 - [Changing log level at runtime](https://www.baeldung.com/spring-boot-changing-log-level-at-runtime)

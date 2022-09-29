@@ -1,29 +1,68 @@
 # Injections
 
+- [Injections](#injections)
+- [0 - Injection](#0---injection)
+  - [0.1 Injecting in Spring](#01-injecting-in-spring)
+  - [0.2 Injection types](#02-injection-types)
+    - [Method injection](#method-injection)
+    - [Constructor injection](#constructor-injection)
+- [1 - Beans](#1---beans)
+    - [Singleton by default](#singleton-by-default)
+    - [Prototype beans](#prototype-beans)
+    - [Post-construct](#post-construct)
+    - [Accessing all beans](#accessing-all-beans)
+      - [Use-case 1: bean verification](#use-case-1-bean-verification)
+      - [Use-case 2: debugging](#use-case-2-debugging)
+- [2 - Configuration](#2---configuration)
+  - [2.1 Injecting values](#21-injecting-values)
+  - [2.2 Configuration files](#22-configuration-files)
+    - [Organizing configuration](#organizing-configuration)
+    - [Checking configuration](#checking-configuration)
+  - [2.3 Profiles](#23-profiles)
+- [3 - Auto-wiring](#3---auto-wiring)
+- [4 - Importing](#4---importing)
+- [5 - Events](#5---events)
+  - [Event listeners](#event-listeners)
+
 Follow [this](https://github.com/victorrentea/spring).
 
 How dependency injections work using Spring. As mentioned in the intro, Spring uses annotations to wire the code together.
 
-# 0 - Injection types
+# 0 - Injection
 
+## 0.1 Injecting in Spring
+
+
+When classes are injected in another class in Spring, the actual class is _not_ actually injected. In the background, Spring creates a subclass of the injected one using the `CGLib` library, and injecting a _proxy_ to the class instead of the reference to the class.
+- Because o this, `@Service` classes cannot be `final`, because they will be implicitly sub-classed by the framework.
+- Spring caches method calls implicitly
+
+
+Whenever you do not understand ho Spring does something, remember: it is a Proxy!
+- `@Cacheable`
+- 
+
+> :exclamation: In Spring, only calls from _different_ classes are proxied!
+
+## 0.2 Injection types
 ### Method injection
 
 
-
 ### Constructor injection
+
 
 # 1 - Beans
 
 Beans are ways of configuring classes in Spring. The `@Bean` annotation is used in methods which:
 - Will do some configuration (perhaps instantiate an object with some parameters)
-- Return it to the Spring context :point_left: now it is available for other classes within spring.
+- Return it to the Spring context :point_right: now it is available for other classes within spring.
 
 Practical usage:
 - Classes that must be pre-configured to run the code
 - Add in the Spring context a reference to a class that must be available
 
 Beans are automatically injected when used by in another part of the code:
-- Spring uses the class type and the bean name (method name) to wire the code. If you define an argument with a given type and the same name as a bean :point_left: Spring injects the Bean
+- Spring uses the class type and the bean name (method name) to wire the code. If you define an argument with a given type and the same name as a bean :point_right: Spring injects the Bean
 - If two beans created have the same type, it will try matching the name to inject it
 - We can also use the `@Primary` annotation to tell Spring which bean has preference
 
@@ -62,7 +101,7 @@ For debugging purposes, we might want to see all beans in our code (or all beans
 @Configuration
 public class SearchForMyBean {
     @Bean
-    public BeanPostprocessor method() {
+    public BeanPostrocessor method() {
 
         return new BeanPostProcessor() {
 
@@ -143,3 +182,37 @@ Profiles enable to run the code in different ways, with different configs. For e
 
 # 3 - Auto-wiring
 
+# 4 - Importing
+
+Question: how to import an object from another library and use it in Spring to inject in other parts of our code?
+- We need to create a bean with that class in a configuration
+
+Example class we want to use in our code:
+```java
+// Third party code.
+public class ThirdPartyClass {
+    private Spring field1;
+    private String field2;
+
+    public void usefulMethod() {};
+}
+
+// In our code, we need to add configuration.
+@Cofiguration
+public class MyConfig {
+
+    @Bean
+    @ConfigurationProperties(prefix = "third-party") // Enables to autodetect the fields of the class, and make them configurable
+    public ThirdPartyClass third() { return new ThirdPartyClass() }
+}
+
+// We can now use this class in our code.
+```
+- Use `@ConfigurationProperties(prefix = "third-party")` to enable setting the -for ex- `third-party.field1=one` in the config
+
+
+# 5 - Events
+
+## Event listeners
+
+When a bean publishing an event is loaded, all the listeners of that event are detected and loaded by Spring. By default, event listeners run in the same thread.
