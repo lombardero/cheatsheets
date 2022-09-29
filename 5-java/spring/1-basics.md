@@ -1,21 +1,22 @@
 # Spring concepts
 
-Spring is a framework, not a library, as you do not control it, it controls you! It controls the way you must write your application.
-
-Spring was born to avoid needing to declare all the objects your code uses, in order to reduce boilerplate code. It injects dependencies; the main thing you need to do as developer is to wire the dependencies together.
-
 - [Spring concepts](#spring-concepts)
   - [Learning spring](#learning-spring)
   - [Sping Annotations](#sping-annotations)
   - [How does it work](#how-does-it-work)
   - [Spring weaknesses](#spring-weaknesses)
+
+Spring is a framework, not a library, as you do not control it, it controls you! It controls the way you must write your application.
+
+Spring was born to avoid needing to declare all the objects your code uses, in order to reduce boilerplate code. It injects dependencies; the main thing you need to do as developer is to wire the dependencies together.
+
 ## Learning spring 
 
 Leaning spring:
 - Spring in action (book)
 - Udemy for spring certification
 - baledung.com
-- Lighter version of the Spring docs :point_left: [here](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/).
+- Lighter version of the Spring docs :point_right: [here](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/).
 - [Eugenp tutorials](https://github.com/eugenp/tutorials)
 - Best way of learning spring: remove annotations from your code, and try re-adding them all Googling
 
@@ -49,4 +50,4 @@ Spring works by instantiating a base class `SpringBootApplication`, whose sub-cl
 ## Spring weaknesses
 - Long startup time (20-40 seconds) vs Quarkus (everything is at compile-time + native image > executable code with startup time in <1second : fast elastic scale up). In Spring, elastic scale up is slower (has a boot time of 30 seconds)
 - Everything happens at runtime (proxies): which makes is slightly less performant, a very long startup time, and ugly stack traces
-- Implicit magic: marketing :point_left: "look how easy it is! Integrate with Kafka in 40 minutes"
+- Implicit magic: marketing :point_right: "look how easy it is! Integrate with Kafka in 40 minutes"

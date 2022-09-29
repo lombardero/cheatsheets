@@ -12,12 +12,16 @@ The Java cheatsheets follow a quite linear path, starting from a very basic leve
 ## Other features
 
 - [Java functional interfaces](2-1-java-funct-int.md)
+- [Observability in Java](4-observability.md)
 
 ## Advanced libraries
 
 - [JFR Unit](3-1-jfr-unit.md)
 
+## Frameworks
+- [:leaves: Spring](spring/README.md)
+
 ## Libraries
 
-
 Bonus: [Common Java statements](common-java-statmts.md)
+

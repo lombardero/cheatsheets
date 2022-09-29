@@ -257,7 +257,7 @@ public void lookIntoFolder() {
 ```
 
 Use-cases:
-- Clear local cache: not the best use-case because there can be collisions (delete cache that was just created and is needed) Better: use timestamps for entry and remove automatically (example :point_left: [Ehcache arch](https://www.ehcache.org/documentation/2.7/configuration/data-life.html))
+- Clear local cache: not the best use-case because there can be collisions (delete cache that was just created and is needed) Better: use timestamps for entry and remove automatically (example :point_right: [Ehcache arch](https://www.ehcache.org/documentation/2.7/configuration/data-life.html))
 - Retention policy in the DB (ex: every 10 min, delete data older than 1h ago)
 - Pull some data from other service
 - Alive checks: "health" checks for external API; for apps under our control, we use Spring Boot Actuator!
