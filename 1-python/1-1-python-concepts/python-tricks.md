@@ -7,5 +7,5 @@ Miscellanneous list of useful tricks to use in Python.
 ```python
 [element.function() for element in list]
 ```
-- Applies `function()` to each element on the list
 
+- Applies `function()` to each element on the list

@@ -14,6 +14,7 @@ Parts covered:
 - 1.3 [Building images](docker-images.md)
 
 - 1.4 [Persisting data with volumes](docker-volumes.md)
+
 # Part 2: Docker compose
 
 - 2.1 [Docker compose](docker-compose.md)

@@ -26,6 +26,7 @@ Consumer<String> printToConsole = myString -> System.out.println(myString);
 // Using the consumer.
 printToConsole.accept("gump!")
 ```
+
 - Defines a `printToConsole` consumer that will print to the console any string it receives.
 
 ## 1.2 Combining consumers
@@ -66,7 +67,6 @@ Supplier<Double> randomValueSupplier = () -> Math.random();
 // Getting a new random value from the supplier.
 Double randomValue = randomValueSupplier.get()
 ```
+
 - The Supplier defines the logic, and now the Supplier API enables to use the logic
   without modifying the code using it.
-
-

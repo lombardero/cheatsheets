@@ -12,6 +12,7 @@ To initalise a variable in Java, we need two things: a type and a name for it.
 ```java
 ObjectName variableName;
 ```
+
 - The variable `variableName` of the type `ObjectName` is now initialised and can be
   accessed by future statements.
 
@@ -22,6 +23,7 @@ Optionally, we can set the variable to some initial value, for example:
 ```java
 int variableName = 0;
 ```
+
 - Sets `variableName` to zero
 
 > Note: from Java 10 onwards, we can use `var` to dynamically define the variable type
@@ -34,6 +36,7 @@ be initialised. They require the `new` keyword, which will call the constructor 
 to initialise the object.
 
 For example, to define an `ArrayList` we will need to use:
+
 ```java
 ArrayList<Object> variableName = new ArrayList<Object>();
 ```
@@ -43,6 +46,7 @@ ArrayList<Object> variableName = new ArrayList<Object>();
 ## 2.0 Boolean conditions
 
 The basic boolean conditions supported by Java:
+
 - `!<boolean>`: returns the opposite (`!` equals "not")
 - `<boolean> && <boolean>`: returns the logical "AND" of both boolean
 - `<boolean> || <boolean>`: returns the logical "OR" of both boolean
@@ -91,6 +95,7 @@ for (int i = startValue; i < endValue; i++) {
     // Some computation.
 }
 ```
+
 - The loop will iterate for `i` from `startValue` to `endValue` (not included),
   considering steps of `1` (`i++`)
 

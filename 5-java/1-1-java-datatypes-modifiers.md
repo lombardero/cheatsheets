@@ -1,20 +1,17 @@
 # Data types, access modifiers
 
-
 # 1 - Data types
 
 ## 1.1 Primitive data types
 
-Primitive data types are "basic" data types in Java. They are not wrapped in an object,
-rather, they are simple types of data that will be directly kept in memory. Java also
-supports a wrapper class for each of these data types (i.e. `Integer` for `int`), with
-additional features.
+Primitive data types are "basic" data types in Java. They are not wrapped in an object, rather, they are simple types of data that will be directly kept in memory. Java also supports a wrapper class for each of these data types (i.e. `Integer` for `int`), with additional features.
 
 There are eight primitive data types in Java.
 
 ### Integer types
 
 Java supports four types of signed integers, each using a different memory size:
+
 - `byte`: 8-bit integer using a byte of memory (ranges from -128 to 127).
 - `short`: 16-bit signed integer (ranging from -32768 to 32767).
 - `int`: 32-bit signed integer (ranging from -2147483648 to 214748364 - if the max
@@ -35,6 +32,7 @@ Java supports four types of signed integers, each using a different memory size:
 ### Floating point numbers
 
 Java supports natively two types of floating point numbers:
+
 - `double`: "double precision" number and the default floating point data type used
   by Java, it takes 64-bits of memory. Has a larger precision and range than `float`.
   Ranges from 4.9E-324 to 1.7976931348623157E+308. A `D` can be used to define a
@@ -46,7 +44,6 @@ Java supports natively two types of floating point numbers:
   ```java
   long myFloatValue = 100F;
   ```
-
 
 - `boolean`
 - `char`
@@ -67,11 +64,13 @@ byte myByte = (byte) (myInteger);
 
 When functions or class methods are defined, we need to specify two mandatory pieces of
 information, and some optional ones:
+
 1. The accessibility (`private` vs `public`)
 2. The return type (Does the function return something? If so, what object or data type?)
 3. (Optional) Is the function static? (Does it depend of the state of the outer class?)
 
 The syntax to define a function in Java:
+
 ```java
 //<access modifier> <return type> <function name> (<args>) {}
 public void myFunction (str functionInput){
@@ -87,6 +86,5 @@ public void myFunction (str functionInput){
 ## 2.2 Return type
 
 `void` - Datatype
-
 
 ## 2.3 Static functions

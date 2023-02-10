@@ -20,6 +20,7 @@ def some_function():
 ```
 
 Before Python 3.7, the `pdb` module needed to be imported.
+
 ```py
 import pdb
 
@@ -37,20 +38,24 @@ executed) or control the execution through the CLI.
 ### Querying data
 
 Show what is being executed:
+
 - `w` ("where"): Show current stack trace
 - `l` ("list"): Show source code being executed. Will output the lines of the source
   code pointing with a `->` the one after which the computation was halted.
 
 Show variables:
+
 - `a` ("args"): Show all currently defined arguments of the current function
 - `pp <variable_name>` ("pretty print"): show any object currently in memory
 
 Play around:
+
 - `!<statement>`: execute any Python statement (run functions, etc.)
 
 ### Control the code execution
 
 Execute statements:
+
 - `s` ("step"): execute next statement (will enter other contexts such as functions if
   called, and only run the first statement of that context).
 - `n` ("next"): exevcute all statements (even complete functions) until following line
@@ -60,4 +65,5 @@ Execute statements:
 - `c` ("continue"): go to the next break point we set up (works well in loops)
 
 Ask for help:
+
 - `h` ("help"): will show all available commands.

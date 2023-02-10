@@ -14,13 +14,13 @@ Building blocks:
   - `\W`: Not a word character
   - `\s`: Whitespace (space, tab, newline)
   - `\S`: Not a whitespace
-- Quantifiers
+- Quantifiers:
   - `*`: 0 or more of previous matchers
   - `+`: 1 or more of the previous matchers
   - `?`: 0 or 1 of the previous matchers
   - `{n}`: Matches `n` of the previous matchers
   - `{n,m}`: Matches a min of `n` and a max of `m` of the previous matchers
-- Boundaries
+- Boundaries:
   - `\b`: Word boundary (ex: seach words starting with "Ma": `\bMa`, also works `nuel/b`)
   - `\B`: Not a word boundary
   - `^`: Beginning of a string
@@ -31,4 +31,10 @@ Building blocks:
   of numbers can do `[1-7]` for numbers 1 to 7, and `[a-z]` for lower letters from a to z
   - `[^ ]`: Matches characters not in brackets
   - `(|)`: either or (ex: `(r|s)` `r` or `s`)
+- Groups: capture input
+  - `()`: captures the value inside the parenthesis (ex: `"My name is (.*)."` would capture `"Paul"` inside `"My name is Paul."`)
+
+> :bulb: Use `grep -E` or `egrep -r` to use regexes to find
+
+> :sparkles: Check [debuggex.com](https://www.debuggex.com/) to debug regular expressions 
 
