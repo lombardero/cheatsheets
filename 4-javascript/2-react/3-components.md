@@ -16,6 +16,12 @@ Components in react are just a composition of HTML, CSS & JavaScript enabling to
 a particular element in a UI. HTML to get the structure, JavaScript so they can react
 to user inputs, CSS so they look good.
 
+> :exclamation: Always put the state (variables) of the component _inside_ of the component itself. The syntax is:
+> ```tsx
+> const [someState, setSomeState] = useState("initial state");
+>```
+
+
 ## Declarative approach
 
 React uses a declarative approach, which means that you should define and "end state" and the set of conditions in which such state should be displayed.

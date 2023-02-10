@@ -15,7 +15,7 @@ type EventsFilterProps = {};
 
 export const EventsFilter: React.FC<EventsFilterProps> = () => {
   // State:
-  const [isFreeEntryChecked];
+  const [isFreeEntryChecked, setIsFreeEntryChecked] = useState("");
 
   // component:
   return (
