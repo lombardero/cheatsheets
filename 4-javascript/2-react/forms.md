@@ -5,7 +5,13 @@ Forms can be:
 - Uncontrolled: state of the element is kept within it.
 - Controlled: react keeps the state
 
-## Uncontrolled forms
+# Uncontrolled forms
+
+Parameters:
+
+- `value`: what is displayed
+- `onChange`: triggered for every change (such adding an additional letter)
+- `onSubmit`: what happens when the user submits (we can use this to display warnings, such as "e-mail expects format X")
 
 This is actually the recommended approach. What happens in this approach is that we need to synchronize React with the state of the form. We do that by creating some state, and triggering its change on the `onChange` trigger of the form, such as:
 

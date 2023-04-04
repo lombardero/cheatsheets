@@ -17,10 +17,10 @@ a particular element in a UI. HTML to get the structure, JavaScript so they can 
 to user inputs, CSS so they look good.
 
 > :exclamation: Always put the state (variables) of the component _inside_ of the component itself. The syntax is:
+>
 > ```tsx
 > const [someState, setSomeState] = useState("initial state");
->```
-
+> ```
 
 ## Declarative approach
 
