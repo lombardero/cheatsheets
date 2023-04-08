@@ -54,4 +54,14 @@ Default import:
 import guitarPlayer from './lennon.js'
 ```
 
+## Patterns
 
+In orde to keep imports less verbose, we can define an `index.ts` file inside a folder (e.g. `types/`), which imports everything from its sub-files:
+```ts
+export * from '../EventTypes'
+```
+
+Then, to import all types we can do
+```ts
+import { Type1, Type2, Type3 } from '../types'
+```

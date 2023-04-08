@@ -12,7 +12,7 @@ record ProductCount(String productName, int items) {
 }
 
 // Use it now on the code instead of a Tuple
-List <ProductCount> value = 
+List <ProductCount> value =
 String pl = value.stream()
     .map(pc -> pc.items() + " of " + pc.productName())
     .collect(joining(", "));

@@ -2,6 +2,7 @@
 
 An object in Java has two major characteristics: a state, and its behavior. A Class
 is a blueprint for an object, which is composed by:
+
 - The information it will be able to store (variables)
 - The computation or behavior it will be able to have (methods)
 
@@ -10,6 +11,7 @@ is a blueprint for an object, which is composed by:
 ## 1.1 - Creating and instantiating a class
 
 We can define a class in Java with the below syntax:
+
 ```java
 public class Car {
 
@@ -18,6 +20,7 @@ public class Car {
     private String owner;
 }
 ```
+
 - This defines a new class `Car`, which will be accessible from other modules (for
   example, the `Main` class).
 
@@ -29,6 +32,7 @@ public class Car {
 > as the Java class (with a `.java` extension), which by convention is written `InCamelCase`.
 
 Now, we can define an instance of the class (for example, in the `Main` file):
+
 ```java
 public class Main {
     public static void main(String[] args) {
@@ -46,6 +50,7 @@ building a class. This method will be run automatically when the file is run. In
 this function is called `main()` (works as Python's `__init__`).
 
 Example of a `HelloWorld` class with a `main()` method printing "Hello world":
+
 ```Java
 public class HelloWorld {
     public static void main(String[] args){
@@ -63,6 +68,7 @@ The strength of classes is enabled through defining methods, which are functiona
 attached to that class.
 
 We can define methods with the below syntax:
+
 ```java
 public class MyClass {
 
@@ -73,6 +79,7 @@ public class MyClass {
     }
 }
 ```
+
 - Defining a class method that sets the internal value of `some_variable`
 
 > Note: all instance variables (defined in the context of the class) are accessible
@@ -128,9 +135,10 @@ class Duck extends Animal {
 
 The `abstract` keyword is a non-access modifyer for classes and methods. They are used to
 declare classes and methods that are intended to be extended. This means:
+
 - `abstract` classes cannot be instantiated
 - `abstract` methods do not contain a body
 
 Additionally:
-- `abstract` classes or methods cannot be declared `private`, `final` or `static`
 
+- `abstract` classes or methods cannot be declared `private`, `final` or `static`

@@ -5,14 +5,15 @@ The `JfrUnit` library enables to do performance regression testing on Java appli
 > The problem: it is hard to make performance-based regression testing because such tests depend on the environment they are run
 
 To sort that problem, `JfrUnit` measures stable metrics such as:
+
 - memory
 - threads open
 - I/O bytes open by different components such as the DB, bytes per event, API invocation
 
-> The way it `JfrUnit` works is by setting assertions by code calls such as: 
+> The way it `JfrUnit` works is by setting assertions by code calls such as:
+>
 > - this API call should not overcome 500 bytes of read/write I/O per request
 > - this DB I/O event should not overcome 500 bytes of read/write I/O bytes
-
 
 ```java
 @JfrEventTest
@@ -33,6 +34,7 @@ public class JftTest {
     }
 }
 ```
+
 - Example of a `JfrUnit` test that checks the garbage collection is called, and
 
 ## Flight recorder

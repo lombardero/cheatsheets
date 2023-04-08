@@ -8,9 +8,11 @@ Here is a summary of the contents:
 
 - [The very basics](1-js-basics.md)
 - [Functions in JS](2-functions.md)
-- [Objests in javascript](2-objects-js.md)
+- [Objects in javascript](4-objects-js.md)
 - [Asynchronous code in javascript](3-async-code-in-js.md)
-- 
+- [Importing](5-importing.md)
+- [Package managers](6-package-mngrs.md)
+- [Linters](7-linters.md)
 
 ## Node.js
 
@@ -21,3 +23,7 @@ Here is a summary of the contents:
 ## [React](2-react/README.md)
 
 - [`react.js` basics](2-react/react-basics.md)
+
+## [Angular](3-angular/README.md)
+
+- 
