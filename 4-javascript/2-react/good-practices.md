@@ -10,3 +10,4 @@ const MyComponent = (props) => {
     );
 };
 ```
+- Calling `<something>Handler` functions called by the UI components like buttons
