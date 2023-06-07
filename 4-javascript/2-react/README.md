@@ -6,9 +6,23 @@
 
 # Basics
 
-1. [React basics](react-basics.md)
-2. [JSX](2-jsx.md)
-3. [Components](3-components.md)
-4. [File organization](4-react-project.md)
+- [React basics](1-react-basics.md)
+- [JSX](2-jsx.md)
+- [Components](3-components.md)
+- [File organization](4-react-project.md)
+- [Material UI](5-material-ui.md)
 
-# Reacting to events
+# Not so basics
+
+- [React good practices](good-practices.md)
+- [React to events](react-events.md)
+
+
+# More
+
+- [React internals](react-internals.md)
+- [Managing state](managing-state.md)
+- [Interacting with backend](backend-data.md)
+- [Routing](routing.md)
+- [Testing](testing.md)
+- [Forms](forms.md)

@@ -11,4 +11,10 @@ For example, when we press a button that updates some count, React knows that it
 - The element showing the count
 - The state of the counter
 
-All the remaining components are untouched
+All the remaining components are untouched.
+
+# State
+
+JSX components are evaluated by React as functions (which return other components or JSX elements), these functions are called recursively until all the DOM tree is formed. This is run at the start -when the App is loaded.
+
+To trigger re-evaluations of that DOM, React works with [State](managing-state.md). We can use `useState` to trigger re-rendering of components once `setState` is called.

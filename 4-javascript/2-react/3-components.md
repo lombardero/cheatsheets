@@ -48,8 +48,7 @@ function App() {
 
 # Props
 
-"Props" are variables we can pass to Components as arguments. We can pass as many
-key-value pairs as we want in the code calling the component. Inside the component,
+"Props" are variables we can pass to Components as arguments. We can pass as many key-value pairs as we want in the code calling the component. Inside the component,
 these attributes will be passed as a dictionnary of arguments.
 
 > This can be used to reuse components
